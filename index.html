@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PorcySys — Sistema Integral de Gestión Porcina</title>
+  <meta name="description"
+    content="Sistema integral de gestión porcina. Operativo y financiero en una sola plataforma." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="#" class="nav-logo"><img src="./assets/logo.png" alt="PorcySys" /></a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#problema" data-i18n="nav_problema">Problema</a>
+        <a href="#allinone" data-i18n="nav_allinone">Todo en uno</a>
+        <a href="#agente" data-i18n="nav_agente">Agente IA</a>
+        <a href="#modulos" data-i18n="nav_modulos">Módulos</a>
+        <a href="#reportes" data-i18n="nav_reportes">Reportes</a>
+        <a href="#planes" data-i18n="nav_planes">Planes</a>
+      </div>
+      <div class="lang-sw" id="langSw">
+        <span class="active" data-lang="ES">ES</span>
+        <span data-lang="EN">EN</span>
+        <span data-lang="PT">PT</span>
+      </div>
+      <button class="btn-primary" data-i18n="cta_schedule">Agendar llamada →</button>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="hero">
+    <img class="hero-bg" src="./assets/hero-bg.jpg" alt="" />
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-card">
+
+      <h1 data-i18n-html="hero_h1">Tu granja <em>bajo control,</em> en una sola pantalla.</h1>
+      <p class="hero-sub" data-i18n="hero_sub">Sistema integral de gestión porcina — operativo y financiero, conectado
+        en tiempo real desde el galpón hasta la oficina.</p>
+      <div class="hero-btns">
+        <button class="btn-primary lg" data-i18n="cta_schedule">Agendar llamada →</button>
+        <button class="btn-ghost lg" data-i18n="hero_demo">Ver demo</button>
+      </div>
+      <div class="hero-checks">
+        <span data-i18n="hero_check1">✓ Implementación incluida</span>
+        <span data-i18n="hero_check2">✓ ES · EN · PT</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TRUSTED BY ══════════════════════════════════════════ -->
+  <section class="trusted">
+    <div class="eyebrow trusted-label" data-i18n="trusted_label">Confían en PorcySys productores en 12 países</div>
+    <div class="trusted-logos">
+      <span>K de Belo</span>
+    </div>
+  </section>
+
+  <!-- ══ PROBLEM ═══════════════════════════════════════════════ -->
+  <section class="problem" id="problema">
+    <div class="section-header-center">
+      <div class="eyebrow" data-i18n="problem_eyebrow">Antes vs después</div>
+      <h2 data-i18n-html="problem_h2">Si reconoces alguno de estos problemas, <em>tenemos buenas noticias.</em></h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num">1</div>
+        <h3 data-i18n="p1_title">Planillas que nadie actualiza</h3>
+        <p data-i18n="p1_desc">Excel se rompe, los registros se pierden y al final del año nadie sabe qué pasó
+          realmente.</p>
+        <div class="problem-solved">
+          <span class="problem-solved-icon">✓</span>
+          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">2</div>
+        <h3 data-i18n="p2_title">No saber cuánto cuesta cada kilo</h3>
+        <p data-i18n="p2_desc">Sin trazabilidad fina de alimento, sanidad y mano de obra, vendes sin saber si ganas o
+          pierdes.</p>
+        <div class="problem-solved">
+          <span class="problem-solved-icon">✓</span>
+          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">3</div>
+        <h3 data-i18n="p3_title">Decisiones a ojo de buen cubero</h3>
+        <p data-i18n="p3_desc">Cambiar de alimento, ajustar destetes, planear ventas — todo basado en intuición, sin
+          datos que respalden.</p>
+        <div class="problem-solved">
+          <span class="problem-solved-icon">✓</span>
+          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ALL-IN-ONE ════════════════════════════════════════════ -->
+  <section class="allinone" id="allinone">
+    <div class="allinone-inner">
+      <!-- Left copy -->
+      <div>
+        <div class="eyebrow" data-i18n="aio_eyebrow">Todo en uno · diferencial</div>
+        <h2 data-i18n-html="aio_h2">Lo financiero y lo operativo, <em>en el mismo sistema.</em></h2>
+        <p class="allinone-p" data-i18n-html="aio_p1">La mayoría de los sistemas porcinos del mercado son
+          <strong>o</strong> zootécnicos <strong>o</strong> contables. Hay que mantener dos bases de datos, dos
+          planillas y esperar que cuadren.
+        </p>
+        <p class="allinone-p" data-i18n-html="aio_p2">En PorcySys cada movimiento del galpón impacta directo en los
+          números: un cambio de alimento <span class="mono" style="font-size:14px;color:var(--ink)">→</span> ajusta el
+          costo por kilo. Una venta <span class="mono" style="font-size:14px;color:var(--ink)">→</span> reduce el
+          inventario y suma al margen.</p>
+        <div class="allinone-badges">
+          <div class="allinone-badge"><span class="badge-num">1</span><span data-i18n="aio_b1">Una sola base de
+              datos</span></div>
+          <div class="allinone-badge"><span class="badge-num">2</span><span data-i18n="aio_b2">Cero doble carga</span>
+          </div>
+          <div class="allinone-badge"><span class="badge-num">3</span><span data-i18n="aio_b3">Costo real, no
+              estimado</span></div>
+        </div>
+      </div>
+      <!-- Right diagram -->
+      <div>
+        <div class="syscols">
+          <div class="syscol">
+            <div class="syscol-head">
+              <div class="syscol-icon" style="background:var(--terra)">◐</div>
+              <div>
+                <div class="syscol-title" data-i18n="aio_ops">Operativo</div>
+                <div class="syscol-sub" data-i18n="aio_ops_sub">Zootécnico · galpón</div>
+              </div>
+            </div>
+            <div class="syscol-body">
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_heads">Cabezas activas</span><span
+                  class="syscol-row-val mono">1,842<span class="syscol-row-unit">cab.</span></span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_litters">Camadas en
+                  curso</span><span class="syscol-row-val mono">37</span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_conv">Conversión alim.</span><span
+                  class="syscol-row-val mono">2.61<span class="syscol-row-unit">kg/kg</span></span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_mort">Mortalidad sem.</span><span
+                  class="syscol-row-val mono">1.8%</span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_feed">Consumo
+                  balanceado</span><span class="syscol-row-val mono">24.6<span
+                    class="syscol-row-unit">t/sem</span></span></div>
+            </div>
+          </div>
+          <div class="syscol">
+            <div class="syscol-head">
+              <div class="syscol-icon" style="background:var(--olive)">◑</div>
+              <div>
+                <div class="syscol-title" data-i18n="aio_fin">Financiero</div>
+                <div class="syscol-sub" data-i18n="aio_fin_sub">Contable · oficina</div>
+              </div>
+            </div>
+            <div class="syscol-body">
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_income">Ingresos del
+                  mes</span><span class="syscol-row-val mono">$184,320</span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_cost">Costo por kg
+                  vivo</span><span class="syscol-row-val mono">$1.42<span class="syscol-row-unit">/kg</span></span>
+              </div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_margin">Margen bruto</span><span
+                  class="syscol-row-val mono">23%</span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_ar">Cuentas por cobrar</span><span
+                  class="syscol-row-val mono">$42,800</span></div>
+              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_stock">Stock
+                  valorizado</span><span class="syscol-row-val mono">$96,140</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Merge arrow -->
+        <div class="merge-conn">
+          <svg width="120" height="44" viewBox="0 0 120 44" aria-hidden="true">
+            <path d="M 18 0 Q 18 22, 60 22" stroke="var(--terra)" stroke-width="1.5" fill="none" />
+            <path d="M 102 0 Q 102 22, 60 22" stroke="var(--olive)" stroke-width="1.5" fill="none" />
+            <path d="M 60 22 V 40" stroke="var(--ink)" stroke-width="1.5" fill="none" />
+            <path d="M 55 35 L 60 42 L 65 35" stroke="var(--ink)" stroke-width="1.5" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <!-- Merged platform card -->
+        <div class="merge-result">
+          <div class="merge-left">
+            <div class="merge-icon">●</div>
+            <div>
+              <div class="merge-lbl">PorcySys</div>
+              <div class="merge-name" data-i18n="aio_merged">Una sola plataforma</div>
+            </div>
+          </div>
+          <div class="merge-stats">
+            <div>
+              <div class="merge-stat-lbl" data-i18n="aio_ops_short">Operativo</div>
+              <div class="merge-stat-val mono">1,842 <span style="opacity:.6;font-size:11px">cab.</span></div>
+            </div>
+            <div class="merge-divider"></div>
+            <div>
+              <div class="merge-stat-lbl" data-i18n="aio_fin_short">Financiero</div>
+              <div class="merge-stat-val mono">$1.42<span style="opacity:.6;font-size:11px">/kg</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AI AGENT ══════════════════════════════════════════════ -->
+  <section class="ai-section" id="agente">
+    <div class="ai-inner">
+      <!-- Left copy -->
+      <div>
+        <div class="ai-eyebrow eyebrow">
+          <span class="ai-eyebrow-dot"></span>
+          <span data-i18n="ai_eyebrow">Incluido · Agente IA</span>
+        </div>
+        <h2 data-i18n-html="ai_h2">Pregúntale a tu granja, <em>te responde.</em></h2>
+        <p class="ai-p" data-i18n-html="ai_p">Un agente con acceso a <strong>toda la información del sistema</strong> —
+          inventario, alimentación, sanidad, costos, ventas, históricos. Le preguntas en español y te responde con datos
+          reales, no con generalidades.</p>
+        <div class="ai-features">
+          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
+            <div>
+              <div class="ai-feat-title" data-i18n="ai_f1t">Sin SQL, sin reportes</div>
+              <div class="ai-feat-desc" data-i18n="ai_f1d">Háblale como a un encargado que conoce toda la granja.</div>
+            </div>
+          </div>
+          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
+            <div>
+              <div class="ai-feat-title" data-i18n="ai_f2t">Cita las fuentes</div>
+              <div class="ai-feat-desc" data-i18n="ai_f2d">Cada número viene con su lote, fecha y registro.</div>
+            </div>
+          </div>
+          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
+            <div>
+              <div class="ai-feat-title" data-i18n="ai_f3t">Sugiere acciones</div>
+              <div class="ai-feat-desc" data-i18n="ai_f3d">Detecta desvíos y propone qué ajustar.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-tabs" id="aiTabs">
+          <button class="ai-tab active" data-turn="0" data-i18n="ai_tab0">¿Qué lote rinde más?</button>
+          <button class="ai-tab" data-turn="1" data-i18n="ai_tab1">Stock crítico</button>
+          <button class="ai-tab" data-turn="2" data-i18n="ai_tab2">Margen del mes</button>
+        </div>
+      </div>
+      <!-- Right chat mock -->
+      <div class="chat-mock">
+        <div class="chat-head">
+          <div class="chat-head-l">
+            <div class="chat-av">✦</div>
+            <div>
+              <div class="chat-name" data-i18n="chat_name">Asistente PorcySys</div>
+              <div class="chat-status"><span class="chat-dot"></span><span data-i18n="chat_status">Conectado a Granja
+                  San Pedro · 1,842 cab.</span></div>
+            </div>
+          </div>
+          <span class="chat-ver mono" data-i18n="chat_ver">v2 · español</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <!-- injected by JS -->
+        </div>
+        <div class="chat-input-bar">
+          <div class="chat-input-fake" data-i18n="chat_placeholder">Pregúntale lo que quieras a tu granja…</div>
+          <button class="chat-send">↑</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MODULES ═══════════════════════════════════════════════ -->
+  <section class="modules" id="modulos">
+    <div class="section-header-center">
+      <div class="eyebrow" data-i18n="mod_eyebrow">Módulos integrados</div>
+      <h2 data-i18n-html="mod_h2">Seis módulos. <em>Una sola plataforma.</em></h2>
+    </div>
+    <div class="modules-grid">
+      <div class="modules-list" id="modList">
+        <button class="mod-btn active" data-mod="0">
+          <div class="mod-btn-inner"><span class="mod-num">01</span><span class="mod-name"
+              data-i18n="mod0_name">Inventario de animales</span></div><span class="mod-arrow">→</span>
+        </button>
+        <button class="mod-btn" data-mod="1">
+          <div class="mod-btn-inner"><span class="mod-num">02</span><span class="mod-name" data-i18n="mod1_name">Ciclo
+              de vida completo</span></div>
+        </button>
+        <button class="mod-btn" data-mod="2">
+          <div class="mod-btn-inner"><span class="mod-num">03</span><span class="mod-name"
+              data-i18n="mod2_name">Alimentación y consumo</span></div>
+        </button>
+        <button class="mod-btn" data-mod="3">
+          <div class="mod-btn-inner"><span class="mod-num">04</span><span class="mod-name"
+              data-i18n="mod3_name">Reportes y analítica</span></div>
+        </button>
+        <button class="mod-btn" data-mod="4">
+          <div class="mod-btn-inner"><span class="mod-num">05</span><span class="mod-name" data-i18n="mod4_name">Costos
+              y rentabilidad</span></div>
+        </button>
+        <button class="mod-btn" data-mod="5">
+          <div class="mod-btn-inner"><span class="mod-num">06</span><span class="mod-name"
+              data-i18n="mod5_name">Multi-granja, multi-usuario</span></div>
+        </button>
+      </div>
+      <div class="mod-detail" id="modDetail"><!-- injected by JS --></div>
+    </div>
+  </section>
+
+  <!-- ══ REPORTS GALLERY ════════════════════════════════════════ -->
+  <section class="reports" id="reportes">
+    <div style="max-width:1240px;margin:0 auto">
+      <div class="reports-top">
+        <div class="reports-top-left">
+          <div class="eyebrow" data-i18n="rep_eyebrow">Reportes y analítica</div>
+          <h2 data-i18n-html="rep_h2">Cada decisión, <em>con un número detrás.</em></h2>
+          <p data-i18n="rep_sub">40+ reportes integrados. Zootécnicos, sanitarios y financieros — todos con datos en
+            vivo del sistema. Exportables a PDF.</p>
+        </div>
+        <div class="reports-chips">
+          <span class="rchip active" data-i18n="rchip0">Zootécnico</span>
+          <span class="rchip" data-i18n="rchip1">Sanitario</span>
+          <span class="rchip" data-i18n="rchip2">Financiero</span>
+          <span class="rchip" data-i18n="rchip3">Inventario</span>
+          <span class="rchip" data-i18n="rchip4">Multi-granja</span>
+          <span class="rchip" data-i18n="rchip5">Personalizados</span>
+        </div>
+      </div>
+      <!-- Report cards -->
+      <div class="reports-cols">
+        <!-- Card 1: Line chart -->
+        <div class="rcard">
+          <div class="rcard-head">
+            <div class="rcard-type mono" data-i18n="rc1_type">R-01 · ZOOTÉCNICO</div>
+            <h3 class="rcard-title" data-i18n="rc1_title">Curva de peso · 12 sem.</h3>
+            <span class="rcard-sub" data-i18n="rc1_sub">Engorde, destete y lechones</span>
+          </div>
+          <div class="rcard-body" style="min-height:200px">
+            <svg id="lineChart" viewBox="0 0 400 170" style="width:100%;height:100%" preserveAspectRatio="none"></svg>
+          </div>
+          <div class="rcard-foot"><span data-i18n="rc1_meta">3 series · 12 puntos</span><span class="mono">↓ PDF</span>
+          </div>
+        </div>
+        <!-- Card 2: Donut -->
+        <div class="rcard">
+          <div class="rcard-head">
+            <div class="rcard-type mono" data-i18n="rc2_type">R-07 · FINANCIERO</div>
+            <h3 class="rcard-title" data-i18n="rc2_title">Distribución de costos</h3>
+            <span class="rcard-sub" data-i18n="rc2_sub">$/kg vivo · mes en curso</span>
+          </div>
+          <div class="rcard-body" style="align-items:center;justify-content:center;gap:16px;flex-direction:column">
+            <div style="display:flex;align-items:center;gap:16px">
+              <div class="donut-wrap" style="width:140px;height:140px">
+                <svg id="donutChart" width="140" height="140" viewBox="0 0 140 140"
+                  style="transform:rotate(-90deg)"></svg>
+                <div class="donut-center">
+                  <span class="donut-num">$1.42</span>
+                  <span class="donut-sub" data-i18n="donut_sub">por kg</span>
+                </div>
+              </div>
+              <div class="donut-legend" id="donutLegend"></div>
+            </div>
+          </div>
+          <div class="rcard-foot"><span data-i18n="rc2_meta">4 categorías</span><span class="mono">↓ PDF</span></div>
+        </div>
+        <!-- Card 3: Bars -->
+        <div class="rcard">
+          <div class="rcard-head">
+            <div class="rcard-type mono" data-i18n="rc3_type">R-13 · COMPARATIVO</div>
+            <h3 class="rcard-title" data-i18n="rc3_title">Conversión por lote</h3>
+            <span class="rcard-sub" data-i18n="rc3_sub">kg consumidos / kg ganados</span>
+          </div>
+          <div class="rcard-body" style="justify-content:center">
+            <div class="rbars" id="repBars"></div>
+          </div>
+          <div class="rcard-foot"><span data-i18n="rc3_meta">5 lotes activos</span><span class="mono">↓ PDF</span></div>
+        </div>
+      </div>
+      <!-- Strip -->
+      <div class="reports-strip">
+        <div class="strip-stats">
+          <div class="strip-stat">
+            <div class="strip-stat-num">+40</div>
+            <div class="strip-stat-lbl" data-i18n="strip_r">reportes integrados</div>
+          </div>
+          <div class="strip-stat">
+            <div class="strip-stat-num">6</div>
+            <div class="strip-stat-lbl" data-i18n="strip_c">categorías</div>
+          </div>
+          <div class="strip-stat">
+            <div class="strip-stat-num">PDF</div>
+            <div class="strip-stat-lbl" data-i18n="strip_e">exportes nativos</div>
+          </div>
+        </div>
+        <span class="strip-note" data-i18n="strip_note">Tiempo real · multi-granja · histórico ilimitado</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PRICING ═══════════════════════════════════════════════ -->
+  <section class="pricing" id="planes">
+    <div class="pricing-header">
+      <div class="eyebrow" data-i18n="price_eyebrow">Planes</div>
+      <h2 data-i18n-html="price_h2">Tres tamaños, <em>un solo precio claro.</em></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="pcard">
+        <div class="pcard-name" data-i18n="p0_name">Productor</div>
+        <div class="pcard-desc" data-i18n="p0_desc">Hasta 200 cabezas</div>
+        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
+        <div class="pcard-feat" data-i18n="p0_f1">· Inventario</div>
+        <div class="pcard-feat" data-i18n="p0_f2">· Ciclo de vida</div>
+        <div class="pcard-feat" data-i18n="p0_f3">· Reportes básicos</div>
+        <div class="pcard-feat" data-i18n="p0_f4">· 1 usuario</div>
+        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
+      </div>
+      <div class="pcard hl">
+        <div class="pcard-name" data-i18n="p1_name">Granja</div>
+        <div class="pcard-desc" data-i18n="p1_desc">200 – 1,000 cabezas</div>
+        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
+        <div class="pcard-feat" data-i18n="p1_f1">· Todo Productor +</div>
+        <div class="pcard-feat" data-i18n="p1_f2">· Alimentación + sanidad</div>
+        <div class="pcard-feat" data-i18n="p1_f3">· Costos y rentabilidad</div>
+        <div class="pcard-feat" data-i18n="p1_f4">· Hasta 5 usuarios</div>
+        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
+      </div>
+      <div class="pcard">
+        <div class="pcard-name" data-i18n="p2_name">Operación</div>
+        <div class="pcard-desc" data-i18n="p2_desc">1,000+ cabezas</div>
+        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
+        <div class="pcard-feat" data-i18n="p2_f1">· Todo Granja +</div>
+        <div class="pcard-feat" data-i18n="p2_f2">· Multi-granja</div>
+        <div class="pcard-feat" data-i18n="p2_f3">· API + integraciones</div>
+        <div class="pcard-feat" data-i18n="p2_f4">· Usuarios ilimitados</div>
+        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA + CONTACT FORM ═══════════════════════════════════ -->
+  <section class="contact-section" id="contacto">
+    <!-- Headline de impacto -->
+    <div class="contact-headline">
+      <div class="eyebrow contact-eyebrow" data-i18n="form_eyebrow">Contacto</div>
+      <h2 data-i18n-html="cta_h2">Te lo mostramos en <em>30 minutos.</em></h2>
+      <p data-i18n="cta_p">Demo personalizada con datos similares a los de tu granja. Sin presión.</p>
+    </div>
+    <!-- Dos columnas: copy + formulario -->
+    <div class="contact-inner">
+      <div class="contact-left">
+        <h3 data-i18n-html="form_h2">¿Hablamos sobre <em>tu operación?</em></h3>
+        <p data-i18n="form_sub">Cuéntanos sobre tu operación y te mostramos cómo PorcySys se adapta a tu granja.</p>
+        <div class="contact-features">
+          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat1">Demo
+              personalizada sin costo</span></div>
+          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat2">Atención
+              personalizada en cada paso</span></div>
+          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat3">Sin compromiso de
+              compra</span></div>
+        </div>
+      </div>
+      <div class="contact-right">
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="f_name" data-i18n="form_label_name">Nombre</label>
+              <input class="form-input" id="f_name" name="name" type="text" required
+                data-i18n-placeholder="form_ph_name" placeholder="Tu nombre" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="f_email" data-i18n="form_label_email">Correo electrónico</label>
+              <input class="form-input" id="f_email" name="email" type="email" required
+                data-i18n-placeholder="form_ph_email" placeholder="tu@correo.com" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_farm" data-i18n="form_label_farm">Nombre de la granja o empresa</label>
+            <input class="form-input" id="f_farm" name="farm" type="text" data-i18n-placeholder="form_ph_farm"
+              placeholder="Granja San Pedro" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_size" data-i18n="form_label_size">Tamaño de operación</label>
+            <select class="form-input form-select" id="f_size" name="size">
+              <option value="" data-i18n="form_size_default">Selecciona una opción</option>
+              <option value="small" data-i18n="form_size_small">Pequeño (10–100 cerdas)</option>
+              <option value="medium" data-i18n="form_size_medium">Mediano (100–500 cerdas)</option>
+              <option value="large" data-i18n="form_size_large">Grande (500+ cerdas)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_msg" data-i18n="form_label_msg">Mensaje <span class="form-optional"
+                data-i18n="form_optional">(opcional)</span></label>
+            <textarea class="form-input form-textarea" id="f_msg" name="message" rows="3"
+              data-i18n-placeholder="form_ph_msg" placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
+          </div>
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+          <button type="submit" class="btn-primary lg form-submit" id="formSubmit">
+            <span id="formBtnText" data-i18n="form_submit">Enviar mensaje →</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-logo"><img src="./assets/logo.png" alt="PorcySys" /></div>
+    <p data-i18n="footer_p">Sistema integral de gestión porcina. Disponible en Español, English &amp; Português.</p>
+  </footer>
+
+  <script>
+    /* ══ CONFIG ═══════════════════════════════════════════════════
+       Cambia estas variables para controlar qué secciones se muestran.
+    ════════════════════════════════════════════════════════════════ */
+    const CONFIG = {
+      showPricing: false,
+      web3formsKey: '445e047f-d4a8-47e5-8184-62a012d03987',
+    };
+
+    /* ══ i18n — cargado desde locales/*.json ════════════════════ */
+    const LOCALES = {};
+    let lang = 'ES';
+    let activeMod = 0, activeAI = 0;
+
+    async function loadLocales() {
+      const langs = ['ES', 'EN', 'PT'];
+      await Promise.all(langs.map(async l => {
+        const res = await fetch(`./locales/${l.toLowerCase()}.json`);
+        LOCALES[l] = await res.json();
+      }));
+    }
+
+    /* ══ APPLY TRANSLATIONS ════════════════════════════════════ */
+    function applyLang(l) {
+      lang = l;
+      const tr = LOCALES[l];
+      if (!tr) return;
+      document.documentElement.lang = l.toLowerCase();
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = tr[el.dataset.i18n];
+        if (v !== undefined) el.textContent = v;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const v = tr[el.dataset.i18nHtml];
+        if (v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const v = tr[el.dataset.i18nPlaceholder];
+        if (v !== undefined) el.placeholder = v;
+      });
+      document.querySelectorAll('select [data-i18n]').forEach(el => {
+        const v = tr[el.dataset.i18n];
+        if (v !== undefined) el.textContent = v;
+      });
+      document.querySelectorAll('[data-mod]').forEach(btn => {
+        const span = btn.querySelector('.mod-name');
+        if (span) span.textContent = tr.mods[parseInt(btn.dataset.mod)].title;
+      });
+      document.querySelectorAll('#aiTabs .ai-tab').forEach((btn, i) => {
+        btn.textContent = tr['ai_tab' + i] || btn.textContent;
+      });
+      document.querySelectorAll('#langSw span').forEach(sp =>
+        sp.classList.toggle('active', sp.dataset.lang === l)
+      );
+      renderModule(activeMod);
+      renderChat(activeAI);
+      renderDonut();
+    }
+
+    /* ══ MODULE DETAIL ════════════════════════════════════════ */
+    const MOD_KEYS = ['inventario', 'ciclo', 'alimento', 'reportes', 'costos', 'multi'];
+
+    function renderModule(idx) {
+      activeMod = idx;
+      const tr = LOCALES[lang];
+      const m = tr.mods[idx];
+      const key = MOD_KEYS[idx];
+      document.getElementById('modDetail').innerHTML = `
+    <div class="mod-detail-num mono">MÓDULO 0${idx + 1}</div>
+    <h3>${m.title}</h3>
+    <p>${m.desc}</p>
+    <div class="mod-preview">${modulePreview(key, tr)}</div>
+  `;
+      document.querySelectorAll('[data-mod]').forEach(btn => {
+        const i = parseInt(btn.dataset.mod);
+        btn.classList.toggle('active', i === idx);
+        const arrow = btn.querySelector('.mod-arrow');
+        if (i === idx) { if (!arrow) { const sp = document.createElement('span'); sp.className = 'mod-arrow'; sp.textContent = '→'; btn.appendChild(sp); } }
+        else { if (arrow) arrow.remove(); }
+      });
+    }
+
+    function modulePreview(key, tr) {
+      const terra = '#5C7A3A', olive = '#A87340', tsoft = '#A8B97D', cream = '#F4EFE2';
+      if (key === 'inventario') {
+        return `<div class="prev-grid">${Array.from({ length: 56 }, (_, i) => `<div class="prev-grid-cell" style="background:${i % 11 === 3 ? tsoft : i % 7 === 0 ? olive : cream}"></div>`).join('')}</div>`;
+      }
+      if (key === 'ciclo') {
+        const stages = tr.cycle_stages;
+        const days = [0, 21, 28, 70, 130, 165];
+        const colors = [olive, olive, olive, tsoft, tsoft, terra];
+        return `<div class="prev-cycle">${stages.map((s, i) => `<div class="prev-cycle-row"><span class="prev-cycle-dot" style="background:${colors[i]}">${i + 1}</span><span class="prev-cycle-name">${s}</span><span class="prev-cycle-day mono">${days[i]}d</span></div>`).join('')}</div>`;
+      }
+      if (key === 'alimento') {
+        const names = tr.feed_stages;
+        const vals = [78, 92, 45, 64];
+        return `<div class="prev-bars">${names.map((n, i) => `<div class="prev-bar-wrap"><div class="prev-bar-labels"><span>${n}</span><span class="mono" style="color:${vals[i] < 50 ? terra : 'var(--ink-mute)'}">${vals[i]}%</span></div><div class="prev-bar-track"><div class="prev-bar-fill" style="width:${vals[i]}%;background:${vals[i] < 50 ? terra : olive}"></div></div></div>`).join('')}</div>`;
+      }
+      if (key === 'reportes') {
+        return `<svg viewBox="0 0 400 160" style="width:100%;height:100%" preserveAspectRatio="none">${lineSVG(400, 160, terra, olive)}</svg>`;
+      }
+      if (key === 'costos') {
+        return `<div class="prev-cost"><div class="prev-cost-label">${tr.cost_label}</div><div class="prev-cost-num">$1.42<span class="prev-cost-sub">/kg</span></div><div class="prev-cost-meta"><span style="color:var(--olive)">${tr.down_label}</span><span style="color:var(--ink-mute)">${tr.margin_label}</span></div></div>`;
+      }
+      return `<div class="prev-multi">${tr.farm_names.map((g, i) => `<div class="prev-multi-card"><span class="prev-multi-name">${g}</span><div><div class="prev-multi-num mono">${[684, 412, 746][i]}</div><div class="prev-multi-unit">${tr.head_label}</div></div></div>`).join('')}</div>`;
+    }
+
+    /* ══ AI CHAT ════════════════════════════════════════════════ */
+    function renderChat(idx) {
+      activeAI = idx;
+      const turn = LOCALES[lang].ai_turns[idx];
+      const isBar = idx === 1;
+      const dataRows = isBar
+        ? turn.rows.map((r, i) => `<div class="chat-bar-row"><div class="chat-bar-labels"><span>${r[0]}</span><span class="mono">${r[1]}</span></div><div class="chat-bar-track"><div class="chat-bar-fill" style="width:${[18, 32, 48][i]}%;background:var(--terra)"></div></div></div>`).join('')
+        : turn.rows.map(r => `<div class="chat-data-row"><span>${r[0]}</span><span class="mono">${r[1]}</span></div>`).join('');
+      document.getElementById('chatBody').innerHTML = `
+    <div class="chat-user"><div class="chat-bubble">${turn.q}</div></div>
+    <div class="chat-tool"><span class="chat-tool-icon mono">⟳</span><span class="mono" style="font-size:11px">${turn.tool}</span></div>
+    <div class="chat-ai">
+      <span class="chat-ai-av">✦</span>
+      <div class="chat-ai-body">
+        <div class="chat-ai-text">${turn.a}</div>
+        <div class="chat-data-card">
+          <div class="chat-data-title">${turn.card_title}</div>
+          ${dataRows}
+        </div>
+        <div class="chat-sources">${turn.sources.map(s => `<span class="chat-source mono">↗ ${s}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+      document.querySelectorAll('#aiTabs .ai-tab').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+    }
+
+    /* ══ CHARTS ════════════════════════════════════════════════ */
+    function lineSVG(w, h, accent, olive) {
+      const pad = 10, n = 12;
+      const xs = Array.from({ length: n }, (_, i) => pad + (i * (w - pad * 2)) / (n - 1));
+      const v1 = [22, 28, 34, 41, 49, 58, 66, 74, 81, 89, 96, 104], v2 = [8, 11, 15, 19, 24, 28, 33, 36, 38, 40, 42, 44];
+      const max = 110, y = v => h - pad - (v / max) * (h - pad * 2);
+      const path = vals => { let d = `M ${xs[0]} ${y(vals[0])}`; for (let i = 1; i < vals.length; i++) { const cx = (xs[i - 1] + xs[i]) / 2; d += ` Q ${cx} ${y(vals[i - 1])}, ${cx} ${(y(vals[i - 1]) + y(vals[i])) / 2} T ${xs[i]} ${y(vals[i])}`; } return d; };
+      const grid = [0, 1, 2, 3].map(i => `<line x1="${pad}" x2="${w - pad}" y1="${pad + i * ((h - pad * 2) / 3)}" y2="${pad + i * ((h - pad * 2) / 3)}" stroke="rgba(35,41,26,0.07)" stroke-width="1"/>`).join('');
+      const p1 = path(v1), p2 = path(v2);
+      return `${grid}<path d="${p1} L ${xs[n - 1]} ${h - pad} L ${xs[0]} ${h - pad} Z" fill="${accent}" opacity=".08"/><path d="${p2}" fill="none" stroke="${olive}" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/><path d="${p1}" fill="none" stroke="${accent}" stroke-width="2" stroke-linecap="round"/>`;
+    }
+
+    function renderLineChart() {
+      const svg = document.getElementById('lineChart');
+      if (svg) svg.innerHTML = lineSVG(400, 170, '#5C7A3A', '#A87340');
+    }
+
+    function renderDonut() {
+      const svg = document.getElementById('donutChart');
+      const legend = document.getElementById('donutLegend');
+      if (!svg || !legend) return;
+      const size = 140, r = size / 2 - 12, c = 2 * Math.PI * r;
+      const colors = ['#5C7A3A', '#A87340', '#A8B97D', '#C99A6E'];
+      const vals = [58, 18, 14, 10];
+      const total = vals.reduce((a, v) => a + v, 0);
+      let off = 0, paths = '';
+      vals.forEach((v, i) => { const len = (v / total) * c; paths += `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${colors[i]}" stroke-width="14" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}"/>`; off += len; });
+      svg.innerHTML = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="rgba(35,41,26,0.07)" stroke-width="14"/>${paths}`;
+      const lbls = (LOCALES[lang] || {}).donut_legend || ['Alimento', 'Sanidad', 'M. obra', 'Otros'];
+      legend.innerHTML = vals.map((v, i) => `<div class="donut-row"><span class="donut-swatch" style="background:${colors[i]}"></span><span class="donut-row-label">${lbls[i]}</span><span class="donut-row-val mono">${v}%</span></div>`).join('');
+    }
+
+    function renderRepBars() {
+      const el = document.getElementById('repBars');
+      if (!el) return;
+      const rows = [{ l: 'A-04 · Galpón 2', v: 2.48, c: '#5C7A3A' }, { l: 'B-12 · Galpón 1', v: 2.71, c: '#5C7A3A' }, { l: 'C-08 · Galpón 3', v: 2.84, c: '#A87340' }, { l: 'D-02 · Galpón 2', v: 2.59, c: '#5C7A3A' }, { l: 'E-15 · Galpón 1', v: 2.95, c: '#A87340' }];
+      const max = Math.max(...rows.map(r => r.v)) * 1.1;
+      el.innerHTML = rows.map(r => `<div class="rbar-wrap"><div class="rbar-labels"><span>${r.l}</span><span class="mono">${r.v}</span></div><div class="rbar-track"><div class="rbar-fill" style="width:${(r.v / max) * 100}%;background:${r.c}"></div></div></div>`).join('');
+    }
+
+    /* ══ INIT ═══════════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadLocales();
+
+      document.querySelectorAll('#langSw span').forEach(sp =>
+        sp.addEventListener('click', () => applyLang(sp.dataset.lang))
+      );
+
+      // Todos los botones de CTA principal llevan al formulario
+      document.querySelectorAll('[data-i18n="cta_schedule"]').forEach(btn =>
+        btn.addEventListener('click', () =>
+          document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' })
+        )
+      );
+      document.querySelectorAll('[data-mod]').forEach(btn =>
+        btn.addEventListener('click', () => renderModule(parseInt(btn.dataset.mod)))
+      );
+      document.querySelectorAll('#aiTabs .ai-tab').forEach(btn =>
+        btn.addEventListener('click', () => renderChat(parseInt(btn.dataset.turn)))
+      );
+
+      // Sección de planes
+      const pricingSection = document.getElementById('planes');
+      const pricingNavLink = document.querySelector('a[href="#planes"]');
+      if (!CONFIG.showPricing) {
+        if (pricingSection) pricingSection.style.display = 'none';
+        if (pricingNavLink) pricingNavLink.style.display = 'none';
+      }
+
+      // Formulario de contacto — Web3Forms
+      const form = document.getElementById('contactForm');
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const tr = LOCALES[lang] || {};
+          const btn = document.getElementById('formSubmit');
+          const btnText = document.getElementById('formBtnText');
+          const status = document.getElementById('formStatus');
+
+          btn.disabled = true;
+          btnText.textContent = tr.form_sending || 'Enviando…';
+          status.className = 'form-status';
+          status.textContent = '';
+
+          const data = new FormData(form);
+          data.append('access_key', CONFIG.web3formsKey);
+          data.append('subject', `PorcySys — Contacto desde la landing (${lang})`);
+          data.append('from_name', 'PorcySys Landing');
+
+          try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              body: data,
+            });
+            const json = await res.json();
+            if (json.success) {
+              status.className = 'form-status form-status--ok';
+              status.textContent = tr.form_ok || '¡Mensaje enviado! Te contactaremos pronto.';
+              form.reset();
+            } else {
+              throw new Error(json.message || 'error');
+            }
+          } catch {
+            status.className = 'form-status form-status--err';
+            status.textContent = tr.form_err || 'Ocurrió un error. Intenta de nuevo o escríbenos directamente.';
+          } finally {
+            btn.disabled = false;
+            btnText.textContent = tr.form_submit || 'Enviar mensaje →';
+          }
+        });
+      }
+
+      applyLang('ES');
+      renderLineChart();
+      renderRepBars();
+    });
+  </script>
+</body>
+
+</html>

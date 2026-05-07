@@ -1,0 +1,288 @@
+{
+  "nav_problema": "Problem",
+  "nav_allinone": "All-in-one",
+  "nav_agente": "AI Agent",
+  "nav_modulos": "Modules",
+  "nav_reportes": "Reports",
+  "nav_planes": "Plans",
+  "cta_schedule": "Contact us →",
+  "hero_badge": "180 farms · 420k heads in production",
+  "hero_h1": "Your farm <em>under control,</em> on one screen.",
+  "hero_sub": "Comprehensive pig farm management system — operational and financial, connected in real time from the barn to the office.",
+  "hero_demo": "Watch demo",
+  "hero_check1": "✓ Onboarding included",
+  "hero_check2": "✓ ES · EN · PT",
+  "hero_check3": "✓ Mobile app",
+  "trusted_label": "Trusted by producers across 12 countries",
+  "problem_eyebrow": "Before vs after",
+  "problem_h2": "If any of these sound familiar, <em>we have good news.</em>",
+  "p1_title": "Spreadsheets nobody updates",
+  "p1_desc": "200 – 1,000 head",
+  "p2_title": "Not knowing each kilo's cost",
+  "p2_desc": "1,000+ head",
+  "p3_title": "Gut-feel decisions",
+  "p3_desc": "Changing feed, adjusting weanings, planning sales — all based on intuition with no data to back it up.",
+  "problem_solved": "Solved with PorcySys",
+  "aio_eyebrow": "All-in-one · differentiator",
+  "aio_h2": "Financial and operational management, <em>in one system.</em>",
+  "aio_p1": "Most pig management systems on the market are <strong>either</strong> zootechnical <strong>or</strong> accounting software. You end up maintaining two databases and hoping they match.",
+  "aio_p2": "In PorcySys every barn event directly impacts your numbers: a feed change <span class=\"mono\" style=\"font-size:14px;color:var(--ink)\">→</span> adjusts cost per live kg. A sale <span class=\"mono\" style=\"font-size:14px;color:var(--ink)\">→</span> reduces inventory and adds to the margin.",
+  "aio_b1": "Single database",
+  "aio_b2": "Zero double entry",
+  "aio_b3": "Real cost, not estimated",
+  "aio_ops": "Operational",
+  "aio_ops_sub": "Zootechnical · barn",
+  "aio_fin": "Financial",
+  "aio_fin_sub": "Accounting · office",
+  "aio_r_heads": "Active head count",
+  "aio_r_litters": "Ongoing litters",
+  "aio_r_conv": "Feed conversion",
+  "aio_r_mort": "Weekly mortality",
+  "aio_r_feed": "Feed consumption",
+  "aio_r_income": "Monthly revenue",
+  "aio_r_cost": "Cost per live kg",
+  "aio_r_margin": "Gross margin",
+  "aio_r_ar": "Accounts receivable",
+  "aio_r_stock": "Valued inventory",
+  "aio_merged": "One single platform",
+  "aio_ops_short": "Operational",
+  "aio_fin_short": "Financial",
+  "ai_eyebrow": "Included · AI Agent",
+  "ai_h2": "Ask your farm, <em>it answers.</em>",
+  "ai_p": "An agent with access to <strong>all system data</strong> — inventory, feed, health, costs, sales, history. Ask in your language and get real answers, not generalities.",
+  "ai_f1t": "No SQL, no reports",
+  "ai_f1d": "Talk to it like a farmhand who knows the whole operation.",
+  "ai_f2t": "Cites sources",
+  "ai_f2d": "Every number comes with its batch, date and record.",
+  "ai_f3t": "Suggests actions",
+  "ai_f3d": "Detects deviations and proposes what to adjust.",
+  "ai_tab0": "Which batch performs best?",
+  "ai_tab1": "Critical stock",
+  "ai_tab2": "Month's margin",
+  "chat_name": "PorcySys Assistant",
+  "chat_status": "Connected to San Pedro Farm · 1,842 head",
+  "chat_ver": "v2 · english",
+  "chat_placeholder": "Ask your farm anything…",
+  "mod_eyebrow": "Integrated modules",
+  "mod_h2": "Six modules. <em>One single platform.</em>",
+  "mod0_name": "Animal inventory",
+  "mod1_name": "Full life cycle",
+  "mod2_name": "Feed & consumption",
+  "mod3_name": "Reports & analytics",
+  "mod4_name": "Costs & profitability",
+  "mod5_name": "Multi-farm, multi-user",
+  "rep_eyebrow": "Reports & analytics",
+  "rep_h2": "Every decision, <em>backed by a number.</em>",
+  "rep_sub": "40+ built-in reports. Zootechnical, health and financial — all with live system data. Exportable to PDF.",
+  "rchip0": "Zootechnical",
+  "rchip1": "Health",
+  "rchip2": "Financial",
+  "rchip3": "Inventory",
+  "rchip4": "Multi-farm",
+  "rchip5": "Custom",
+  "rc1_type": "R-01 · ZOOTECHNICAL",
+  "rc1_title": "Weight curve · 12 wks.",
+  "rc1_sub": "Fattening, weaning & piglets",
+  "rc1_meta": "3 series · 12 data points",
+  "rc2_type": "R-07 · FINANCIAL",
+  "rc2_title": "Cost distribution",
+  "rc2_sub": "$/live kg · current month",
+  "rc2_meta": "4 categories",
+  "rc3_type": "R-13 · COMPARATIVE",
+  "rc3_title": "Feed conversion by batch",
+  "rc3_sub": "kg consumed / kg gained",
+  "rc3_meta": "5 active batches",
+  "donut_sub": "per kg",
+  "donut_legend": [
+    "Feed",
+    "Health",
+    "Labor",
+    "Other"
+  ],
+  "strip_r": "built-in reports",
+  "strip_c": "categories",
+  "strip_e": "native exports",
+  "strip_note": "Real-time · multi-farm · unlimited history",
+  "price_eyebrow": "Plans",
+  "price_h2": "Three sizes, <em>one clear price.</em>",
+  "p0_name": "Producer",
+  "p0_desc": "Up to 200 head",
+  "p0_f1": "· Inventory",
+  "p0_f2": "· Life cycle",
+  "p0_f3": "· Basic reports",
+  "p0_f4": "· 1 user",
+  "p1_name": "Farm",
+  "p1_f1": "· All Producer +",
+  "p1_f2": "· Feed + health",
+  "p1_f3": "· Costs & profitability",
+  "p1_f4": "· Up to 5 users",
+  "p2_name": "Operation",
+  "p2_f1": "· All Farm +",
+  "p2_f2": "· Multi-farm",
+  "p2_f3": "· API + integrations",
+  "p2_f4": "· Unlimited users",
+  "price_cta": "Get a quote",
+  "price_btn": "Talk to sales →",
+  "cta_h2": "We'll show you in <em>30 minutes.</em>",
+  "cta_p": "Personalized demo with data similar to your farm. No pressure.",
+  "footer_p": "Comprehensive pig farm management system. Available in Español, English & Português.",
+  "cycle_stages": [
+    "Birth",
+    "Nursing",
+    "Weaning",
+    "Nursery",
+    "Fattening",
+    "Sale"
+  ],
+  "feed_stages": [
+    "Starter",
+    "Grower",
+    "Finisher",
+    "Breeders"
+  ],
+  "farm_names": [
+    "San Pedro",
+    "Las Marías",
+    "El Roble"
+  ],
+  "head_label": "head",
+  "cost_label": "Cost per live kg · last 6 months",
+  "margin_label": "Margin 23%",
+  "down_label": "▼ 8% vs prior Q",
+  "mods": [
+    {
+      "title": "Animal inventory",
+      "desc": "Individual or batch animals, with identification, age, weight and location. Move between barns in one click.",
+      "stat": "1,842 head"
+    },
+    {
+      "title": "Full life cycle",
+      "desc": "From birth to sale. Records litters, weanings, stage transitions and exits with per-animal traceability.",
+      "stat": "0 → 130 kg"
+    },
+    {
+      "title": "Feed & consumption",
+      "desc": "Controls rations by stage, actual vs projected consumption and feed stock. Alerts when something deviates.",
+      "stat": "2.61 kg/kg"
+    },
+    {
+      "title": "Reports & analytics",
+      "desc": "Zootechnical indicators, operational KPIs and PDF exports. Comparisons between batches, barns and periods.",
+      "stat": "40+ reports"
+    },
+    {
+      "title": "Costs & profitability",
+      "desc": "Cost per produced kg, margin per batch, expenses by category. Know in real time which pig turns a profit.",
+      "stat": "$/live kg"
+    },
+    {
+      "title": "Multi-farm, multi-user",
+      "desc": "One account for all your production units, with role-based permissions. The manager sees theirs, the owner sees all.",
+      "stat": "∞ farms"
+    }
+  ],
+  "ai_turns": [
+    {
+      "q": "Which batch is performing best this quarter and why?",
+      "tool": "querying · life_cycle + costs · 3 active batches",
+      "a": "Batch A-04 (Barn 2) is performing best. It has the best feed conversion and the lowest cost per kg.",
+      "card_title": "Comparison · current Q",
+      "rows": [
+        [
+          "A-04 · Barn 2",
+          "$1.31/kg · 2.48 FCR"
+        ],
+        [
+          "B-12 · Barn 1",
+          "$1.46/kg · 2.71 FCR"
+        ],
+        [
+          "C-08 · Barn 3",
+          "$1.58/kg · 2.84 FCR"
+        ]
+      ],
+      "sources": [
+        "life_cycle",
+        "feed_consumption",
+        "batch_costs"
+      ]
+    },
+    {
+      "q": "Is any stock about to run out?",
+      "tool": "querying · feed_inventory + health",
+      "a": "Yes, there are three items in the critical zone. Listed by estimated days of coverage at current consumption:",
+      "card_title": "Items with < 7 days coverage",
+      "rows": [
+        [
+          "Starter · Silo 1",
+          "320 kg · 2 d"
+        ],
+        [
+          "PRRS Vaccine",
+          "14 doses · 4 d"
+        ],
+        [
+          "Grower · Silo 3",
+          "1.8 t · 6 d"
+        ]
+      ],
+      "sources": [
+        "feed_inventory",
+        "health_plan"
+      ]
+    },
+    {
+      "q": "We closed the month — how did the margin compare to last month?",
+      "tool": "querying · costs + sales · April 2026",
+      "a": "Gross margin closed at 23%, two points above last month (21%). Main driver was an 8% drop in feed cost.",
+      "card_title": "April 2026 summary",
+      "rows": [
+        [
+          "Revenue",
+          "$184,320"
+        ],
+        [
+          "Total cost",
+          "$141,926"
+        ],
+        [
+          "Gross margin",
+          "$42,394 · 23%"
+        ],
+        [
+          "Δ vs March",
+          "+$5,140 · +2 pts"
+        ]
+      ],
+      "sources": [
+        "sales",
+        "direct_costs",
+        "overhead"
+      ]
+    }
+  ],
+  "form_eyebrow": "Contact",
+  "form_h2": "Let's talk about <em>your operation.</em>",
+  "form_sub": "Tell us about your operation and we'll show you how PorcySys fits your farm.",
+  "form_feat1": "Free personalized demo",
+  "form_feat2": "Personalized support at every step",
+  "form_feat3": "No purchase commitment",
+  "form_label_name": "Name",
+  "form_ph_name": "Your name",
+  "form_label_email": "Email address",
+  "form_ph_email": "you@email.com",
+  "form_label_farm": "Farm or company name",
+  "form_ph_farm": "San Pedro Farm",
+  "form_label_size": "Operation size",
+  "form_size_default": "Select an option",
+  "form_size_small": "Small (10–100 sows)",
+  "form_size_medium": "Medium (100–500 sows)",
+  "form_size_large": "Large (500+ sows)",
+  "form_label_msg": "Message",
+  "form_optional": "(optional)",
+  "form_ph_msg": "Tell us how we can help…",
+  "form_submit": "Send message →",
+  "form_sending": "Sending…",
+  "form_ok": "Message sent! We'll be in touch soon.",
+  "form_err": "Something went wrong. Please try again or contact us directly."
+}

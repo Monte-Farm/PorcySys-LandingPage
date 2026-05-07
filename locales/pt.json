@@ -1,0 +1,288 @@
+{
+  "nav_problema": "Problema",
+  "nav_allinone": "Tudo em um",
+  "nav_agente": "Agente IA",
+  "nav_modulos": "Módulos",
+  "nav_reportes": "Relatórios",
+  "nav_planes": "Planos",
+  "cta_schedule": "Fale conosco →",
+  "hero_badge": "180 fazendas · 420k cabeças em produção",
+  "hero_h1": "Sua granja <em>sob controle,</em> em uma só tela.",
+  "hero_sub": "Sistema integral de gestão suinícola — operacional e financeiro, conectado em tempo real do galpão ao escritório.",
+  "hero_demo": "Ver demo",
+  "hero_check1": "✓ Implantação incluída",
+  "hero_check2": "✓ ES · EN · PT",
+  "hero_check3": "✓ App móvel",
+  "trusted_label": "Produtores de 12 países confiam na PorcySys",
+  "problem_eyebrow": "Antes vs depois",
+  "problem_h2": "Se você reconhece algum desses problemas, <em>temos boas notícias.</em>",
+  "p1_title": "Planilhas que ninguém atualiza",
+  "p1_desc": "200 – 1.000 cabeças",
+  "p2_title": "Não saber quanto custa cada quilo",
+  "p2_desc": "1.000+ cabeças",
+  "p3_title": "Decisões no olho",
+  "p3_desc": "Mudar ração, ajustar desmames, planejar vendas — tudo baseado em intuição, sem dados para embasar.",
+  "problem_solved": "Resolvido com PorcySys",
+  "aio_eyebrow": "Tudo em um · diferencial",
+  "aio_h2": "O financeiro e o operacional, <em>no mesmo sistema.</em>",
+  "aio_p1": "A maioria dos sistemas suinícolas do mercado são <strong>ou</strong> zootécnicos <strong>ou</strong> contábeis. Você precisa manter dois bancos de dados e torcer para que coincidam.",
+  "aio_p2": "Na PorcySys, cada movimentação do galpão impacta diretamente nos números: uma mudança de ração <span class=\"mono\" style=\"font-size:14px;color:var(--ink)\">→</span> ajusta o custo por kg vivo. Uma venda <span class=\"mono\" style=\"font-size:14px;color:var(--ink)\">→</span> reduz o estoque e soma à margem.",
+  "aio_b1": "Um único banco de dados",
+  "aio_b2": "Zero lançamento duplo",
+  "aio_b3": "Custo real, não estimado",
+  "aio_ops": "Operacional",
+  "aio_ops_sub": "Zootécnico · galpão",
+  "aio_fin": "Financeiro",
+  "aio_fin_sub": "Contábil · escritório",
+  "aio_r_heads": "Cabeças ativas",
+  "aio_r_litters": "Leitegadas em curso",
+  "aio_r_conv": "Conversão alim.",
+  "aio_r_mort": "Mortalidade sem.",
+  "aio_r_feed": "Consumo de ração",
+  "aio_r_income": "Receita do mês",
+  "aio_r_cost": "Custo por kg vivo",
+  "aio_r_margin": "Margem bruta",
+  "aio_r_ar": "Contas a receber",
+  "aio_r_stock": "Estoque valorizado",
+  "aio_merged": "Uma única plataforma",
+  "aio_ops_short": "Operacional",
+  "aio_fin_short": "Financeiro",
+  "ai_eyebrow": "Incluso · Agente IA",
+  "ai_h2": "Pergunte à sua granja, <em>ela responde.</em>",
+  "ai_p": "Um agente com acesso a <strong>toda a informação do sistema</strong> — inventário, alimentação, saúde, custos, vendas, históricos. Pergunte em português e receba respostas com dados reais.",
+  "ai_f1t": "Sem SQL, sem relatórios",
+  "ai_f1d": "Fale com ele como com um encarregado que conhece toda a granja.",
+  "ai_f2t": "Cita as fontes",
+  "ai_f2d": "Cada número vem com seu lote, data e registro.",
+  "ai_f3t": "Sugere ações",
+  "ai_f3d": "Detecta desvios e propõe o que ajustar.",
+  "ai_tab0": "Qual lote rende mais?",
+  "ai_tab1": "Estoque crítico",
+  "ai_tab2": "Margem do mês",
+  "chat_name": "Assistente PorcySys",
+  "chat_status": "Conectado à Granja São Pedro · 1.842 cab.",
+  "chat_ver": "v2 · português",
+  "chat_placeholder": "Pergunte o que quiser à sua granja…",
+  "mod_eyebrow": "Módulos integrados",
+  "mod_h2": "Seis módulos. <em>Uma única plataforma.</em>",
+  "mod0_name": "Inventário de animais",
+  "mod1_name": "Ciclo de vida completo",
+  "mod2_name": "Alimentação e consumo",
+  "mod3_name": "Relatórios e analítica",
+  "mod4_name": "Custos e rentabilidade",
+  "mod5_name": "Multi-fazenda, multi-usuário",
+  "rep_eyebrow": "Relatórios e analítica",
+  "rep_h2": "Cada decisão, <em>com um número por trás.</em>",
+  "rep_sub": "40+ relatórios integrados. Zootécnicos, sanitários e financeiros — todos com dados em tempo real. Exportáveis para PDF.",
+  "rchip0": "Zootécnico",
+  "rchip1": "Sanitário",
+  "rchip2": "Financeiro",
+  "rchip3": "Inventário",
+  "rchip4": "Multi-fazenda",
+  "rchip5": "Personalizados",
+  "rc1_type": "R-01 · ZOOTÉCNICO",
+  "rc1_title": "Curva de peso · 12 sem.",
+  "rc1_sub": "Engorda, desmame e leitões",
+  "rc1_meta": "3 séries · 12 pontos",
+  "rc2_type": "R-07 · FINANCEIRO",
+  "rc2_title": "Distribuição de custos",
+  "rc2_sub": "$/kg vivo · mês atual",
+  "rc2_meta": "4 categorias",
+  "rc3_type": "R-13 · COMPARATIVO",
+  "rc3_title": "Conversão por lote",
+  "rc3_sub": "kg consumidos / kg ganhos",
+  "rc3_meta": "5 lotes ativos",
+  "donut_sub": "por kg",
+  "donut_legend": [
+    "Ração",
+    "Sanidade",
+    "Mão obra",
+    "Outros"
+  ],
+  "strip_r": "relatórios integrados",
+  "strip_c": "categorias",
+  "strip_e": "exportações nativas",
+  "strip_note": "Tempo real · multi-fazenda · histórico ilimitado",
+  "price_eyebrow": "Planos",
+  "price_h2": "Três tamanhos, <em>um preço claro.</em>",
+  "p0_name": "Produtor",
+  "p0_desc": "Até 200 cabeças",
+  "p0_f1": "· Inventário",
+  "p0_f2": "· Ciclo de vida",
+  "p0_f3": "· Relatórios básicos",
+  "p0_f4": "· 1 usuário",
+  "p1_name": "Fazenda",
+  "p1_f1": "· Tudo Produtor +",
+  "p1_f2": "· Alimentação + sanidade",
+  "p1_f3": "· Custos e rentabilidade",
+  "p1_f4": "· Até 5 usuários",
+  "p2_name": "Operação",
+  "p2_f1": "· Tudo Fazenda +",
+  "p2_f2": "· Multi-fazenda",
+  "p2_f3": "· API + integrações",
+  "p2_f4": "· Usuários ilimitados",
+  "price_cta": "Solicitar cotação",
+  "price_btn": "Falar com vendas →",
+  "cta_h2": "Mostramos em <em>30 minutos.</em>",
+  "cta_p": "Demo personalizada com dados parecidos com os da sua granja. Sem pressão.",
+  "footer_p": "Sistema integral de gestão suinícola. Disponível em Español, English & Português.",
+  "cycle_stages": [
+    "Nascimento",
+    "Lactação",
+    "Desmame",
+    "Recria",
+    "Engorda",
+    "Venda"
+  ],
+  "feed_stages": [
+    "Pré-inicial",
+    "Crescimento",
+    "Engorda",
+    "Reprodutoras"
+  ],
+  "farm_names": [
+    "São Pedro",
+    "Las Marías",
+    "El Roble"
+  ],
+  "head_label": "cabeças",
+  "cost_label": "Custo por kg vivo · últimos 6 meses",
+  "margin_label": "Margem 23%",
+  "down_label": "▼ 8% vs T anterior",
+  "mods": [
+    {
+      "title": "Inventário de animais",
+      "desc": "Cabeças individuais ou por lote, com identificação, idade, peso e localização. Movimentos entre galpões em um clique.",
+      "stat": "1.842 cab."
+    },
+    {
+      "title": "Ciclo de vida completo",
+      "desc": "Do nascimento à venda. Registra leitegadas, desmames, transições de fase e saídas com rastreabilidade por animal.",
+      "stat": "0 → 130 kg"
+    },
+    {
+      "title": "Alimentação e consumo",
+      "desc": "Controla rações por fase, consumo real x projetado e estoque de ração. Alertas quando algo se desvia.",
+      "stat": "2.61 kg/kg"
+    },
+    {
+      "title": "Relatórios e analítica",
+      "desc": "Indicadores zootécnicos, KPIs operacionais e exportação para PDF. Comparativos entre lotes, galpões e períodos.",
+      "stat": "40+ relatórios"
+    },
+    {
+      "title": "Custos e rentabilidade",
+      "desc": "Custo por quilo produzido, margem por lote, despesas por categoria. Saiba em tempo real qual porco dá lucro.",
+      "stat": "$/kg vivo"
+    },
+    {
+      "title": "Multi-fazenda, multi-usuário",
+      "desc": "Uma conta para todas as suas unidades produtivas, com permissões por papel. O encarregado vê o seu, o dono vê tudo.",
+      "stat": "∞ fazendas"
+    }
+  ],
+  "ai_turns": [
+    {
+      "q": "Qual lote está rendendo melhor neste trimestre e por quê?",
+      "tool": "consultando · ciclo_de_vida + custos · 3 lotes ativos",
+      "a": "O lote A-04 (Galpão 2) é o que melhor rende. Tem a melhor conversão alimentar e o menor custo por kg.",
+      "card_title": "Comparativo · T atual",
+      "rows": [
+        [
+          "A-04 · Galpão 2",
+          "$1,31/kg · 2,48 CA"
+        ],
+        [
+          "B-12 · Galpão 1",
+          "$1,46/kg · 2,71 CA"
+        ],
+        [
+          "C-08 · Galpão 3",
+          "$1,58/kg · 2,84 CA"
+        ]
+      ],
+      "sources": [
+        "ciclo_vida",
+        "consumo_racao",
+        "custos_lote"
+      ]
+    },
+    {
+      "q": "Tem algum estoque prestes a acabar?",
+      "tool": "consultando · estoque_racao + sanidade",
+      "a": "Sim, há três itens na zona crítica. Listados por dias estimados de cobertura:",
+      "card_title": "Itens com < 7 dias de cobertura",
+      "rows": [
+        [
+          "Pré-inicial · Silo 1",
+          "320 kg · 2 d"
+        ],
+        [
+          "Vacina PRRS",
+          "14 doses · 4 d"
+        ],
+        [
+          "Crescimento · Silo 3",
+          "1,8 t · 6 d"
+        ]
+      ],
+      "sources": [
+        "estoque_racao",
+        "plano_sanitario"
+      ]
+    },
+    {
+      "q": "Fechamos o mês — como ficou a margem vs o mês passado?",
+      "tool": "consultando · custos + vendas · abril 2026",
+      "a": "O fechamento foi com margem bruta de 23%, dois pontos acima do mês anterior (21%). O fator principal foi uma queda de 8% no custo da ração.",
+      "card_title": "Resumo abril 2026",
+      "rows": [
+        [
+          "Receita",
+          "$184.320"
+        ],
+        [
+          "Custo total",
+          "$141.926"
+        ],
+        [
+          "Margem bruta",
+          "$42.394 · 23%"
+        ],
+        [
+          "Δ vs março",
+          "+$5.140 · +2 pts"
+        ]
+      ],
+      "sources": [
+        "vendas",
+        "custos_diretos",
+        "despesas_gerais"
+      ]
+    }
+  ],
+  "form_eyebrow": "Contato",
+  "form_h2": "Vamos falar sobre <em>sua operação?</em>",
+  "form_sub": "Conte-nos sobre sua operação e mostramos como a PorcySys se adapta à sua granja.",
+  "form_feat1": "Demo personalizada sem custo",
+  "form_feat2": "Suporte personalizado em cada etapa",
+  "form_feat3": "Sem compromisso de compra",
+  "form_label_name": "Nome",
+  "form_ph_name": "Seu nome",
+  "form_label_email": "E-mail",
+  "form_ph_email": "voce@email.com",
+  "form_label_farm": "Nome da granja ou empresa",
+  "form_ph_farm": "Granja São Pedro",
+  "form_label_size": "Tamanho da operação",
+  "form_size_default": "Selecione uma opção",
+  "form_size_small": "Pequeno (10–100 matrizes)",
+  "form_size_medium": "Médio (100–500 matrizes)",
+  "form_size_large": "Grande (500+ matrizes)",
+  "form_label_msg": "Mensagem",
+  "form_optional": "(opcional)",
+  "form_ph_msg": "Conte como podemos ajudar…",
+  "form_submit": "Enviar mensagem →",
+  "form_sending": "Enviando…",
+  "form_ok": "Mensagem enviada! Entraremos em contato em breve.",
+  "form_err": "Ocorreu um erro. Tente novamente ou nos contate diretamente."
+}
