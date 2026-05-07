@@ -588,6 +588,46 @@ button { font-family: inherit; cursor: pointer; }
   .footer { padding: 36px 32px; }
 }
 
+/* ── Tablet (769px – 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Nav: ocultar links largos, mostrar hamburguesa */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-cta { display: none; }
+
+  /* Hero: card más compacta pero sigue en overlay */
+  .hero-card { max-width: 420px; padding: 28px 30px 24px; }
+  .hero h1 { font-size: 36px; }
+
+  /* All-in-one: columna única */
+  .allinone-inner { grid-template-columns: 1fr; gap: 48px; }
+  .allinone h2 { font-size: 40px; }
+  .allinone-p { max-width: 100%; }
+  .syscols { grid-template-columns: 1fr 1fr; }
+
+  /* AI Agent: columna única */
+  .ai-inner { grid-template-columns: 1fr; gap: 48px; }
+  .ai-section h2 { font-size: 40px; }
+  .ai-section .ai-p { max-width: 100%; }
+  .chat-mock { max-width: 600px; }
+
+  /* Módulos: columna única */
+  .modules-grid { grid-template-columns: 1fr; }
+  .mod-detail { min-height: auto; }
+
+  /* Reports: 2 columnas en vez de 3 */
+  .reports-cols { grid-template-columns: repeat(2, 1fr); }
+  .reports-top-left h2 { font-size: 40px; }
+
+  /* Pricing: 1 columna centrada */
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+  .pricing-grid .pcard:last-child { grid-column: 1 / -1; max-width: 340px; margin: 0 auto; width: 100%; }
+
+  /* Contact */
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 32px 64px; }
+  .contact-headline h2 { font-size: 40px; }
+}
+
 /* ── Mobile (≤ 768px) ── */
 @media (max-width: 768px) {
   /* Nav — hamburger */
