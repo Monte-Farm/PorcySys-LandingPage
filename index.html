@@ -1,804 +1,726 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PorcySys — Sistema Integral de Gestión Porcina</title>
-  <meta name="description"
-    content="Sistema integral de gestión porcina. Operativo y financiero en una sola plataforma." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./style.css" />
-</head>
+<meta charset="utf-8" />
+<title>PorcySys — Sistema Porcino</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0c0612;
+    --bg-2:#15091a;
+    --surface:#1a0c22;
+    --surface-2:#22102c;
+    --line:#2a1638;
+    --line-2:#3a1f4a;
+    --ink:#f4eef6;
+    --ink-dim:#b9a9c4;
+    --ink-mute:#8a7a96;
+    --pink:#ec1a5c;
+    --pink-2:#ff3d7a;
+    --pink-glow:rgba(236,26,92,.45);
+    --pink-soft:rgba(236,26,92,.12);
+    --green:#2dd47e;
+    --blue:#3b82f6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* ───── Nav ───── */
+  .nav{position:sticky;top:0;z-index:30;background:rgba(12,6,18,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
+  .nav-inner{display:flex;align-items:center;gap:32px;padding:18px 0}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:radial-gradient(circle at 30% 30%, rgba(236,26,92,.4), transparent 70%)}
+  .logo-mark svg{filter:drop-shadow(0 0 6px var(--pink-glow))}
+  .logo-text{display:flex;flex-direction:column;line-height:1}
+  .logo-text b{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em}
+  .logo-text b span{color:var(--pink)}
+  .logo-text small{font-size:9px;letter-spacing:.32em;color:var(--ink-mute);margin-top:4px;font-weight:600}
+
+  .nav-links{display:flex;gap:36px;margin-left:48px}
+  .nav-links a{font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--ink-dim);position:relative;padding:6px 0;text-transform:uppercase}
+  .nav-links a.on{color:var(--ink)}
+  .nav-links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--pink);border-radius:2px}
+  .nav-cta{margin-left:auto}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease}
+  .btn-primary{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;box-shadow:0 10px 30px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 34px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+  .btn-ghost:hover{border-color:var(--pink);color:var(--pink-2)}
+  .btn .arr{width:18px;height:18px;display:inline-grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.18)}
+  .btn .arr svg{display:block}
+
+  /* ───── Hero ───── */
+  .hero{position:relative;padding:60px 0 40px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 80% 30%, rgba(236,26,92,.18), transparent 60%);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;position:relative}
+  .eyebrow-rule{display:flex;align-items:center;gap:14px;color:var(--ink-mute);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
+  .eyebrow-rule::before{content:"";width:48px;height:1px;background:var(--pink)}
+  h1{font-family:Manrope,sans-serif;font-weight:800;font-size:68px;line-height:.98;letter-spacing:-.02em;margin:0 0 12px}
+  h1 .accent{color:var(--pink);text-shadow:0 0 30px rgba(236,26,92,.4)}
+  h1 .rule{display:inline-block;width:64px;height:3px;background:var(--pink);vertical-align:middle;margin:0 0 18px 14px;border-radius:2px}
+  .hero-sub{font-size:18px;line-height:1.55;color:var(--ink-dim);max-width:520px;margin:24px 0 36px}
+  .hero-sub b{color:var(--ink);font-weight:600}
+  .hero-sub .em{color:var(--pink-2);font-weight:600}
+
+  .feat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:560px;margin:30px 0 36px}
+  .feat{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .feat-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:rgba(236,26,92,.08);border:1px solid rgba(236,26,92,.18)}
+  .feat-icon svg{filter:drop-shadow(0 0 4px var(--pink-glow))}
+  .feat-label{font-family:Manrope,sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;color:var(--ink);line-height:1.25;text-transform:uppercase}
+
+  .hero-actions{display:flex;gap:14px;align-items:center}
+  .play{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line-2);display:grid;place-items:center}
+
+  /* Hero image */
+  .hero-art{position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:#1a0a14;isolation:isolate}
+  .hero-art .ring{position:absolute;inset:8%;border-radius:50%;border:2px solid var(--pink);box-shadow:0 0 40px var(--pink),inset 0 0 30px rgba(236,26,92,.2);z-index:2;pointer-events:none}
+  .hero-art .ring::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(236,26,92,.25);filter:blur(2px)}
+  .hero-art .sparks{position:absolute;inset:0;background:
+      radial-gradient(2px 2px at 20% 30%, var(--pink-2), transparent 60%),
+      radial-gradient(1px 1px at 70% 18%, #fff, transparent 60%),
+      radial-gradient(2px 2px at 86% 60%, var(--pink), transparent 60%),
+      radial-gradient(1px 1px at 32% 80%, #fff, transparent 60%);
+      opacity:.7;z-index:3}
+  .ph-pig{position:absolute;inset:0;display:grid;place-items:center;font-family:JetBrains Mono,monospace;font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.18em;
+    background:
+      repeating-linear-gradient(135deg, rgba(236,26,92,.06) 0 8px, transparent 8px 16px),
+      radial-gradient(70% 60% at 60% 50%, rgba(236,26,92,.18), transparent 70%),
+      linear-gradient(180deg,#1d0a18,#0c0612);
+    z-index:1}
+  .ph-pig span{padding:8px 12px;border:1px dashed rgba(255,255,255,.18);border-radius:6px;background:rgba(0,0,0,.35)}
+
+  .badge-card{position:absolute;right:18px;bottom:18px;background:linear-gradient(135deg, rgba(60,18,40,.9), rgba(20,8,28,.9));border:1px solid var(--line-2);border-radius:18px;padding:14px 20px 14px 14px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(8px);z-index:4;max-width:340px}
+  .badge-card .ico{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle, rgba(236,26,92,.5), rgba(236,26,92,.1));display:grid;place-items:center;border:1px solid rgba(236,26,92,.4)}
+  .badge-card h4{font-family:Manrope,sans-serif;font-size:14px;margin:0 0 2px;letter-spacing:.04em;line-height:1.2}
+  .badge-card p{margin:0;font-size:10px;color:var(--pink-2);letter-spacing:.18em;font-weight:700;text-transform:uppercase}
+
+  /* ───── Sections ───── */
+  .section{padding:90px 0;position:relative}
+  .section-eyebrow{font-family:Manrope,sans-serif;font-weight:700;font-size:11px;letter-spacing:.32em;color:var(--pink);text-transform:uppercase;margin-bottom:10px}
+  h2{font-family:Manrope,sans-serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.01em;margin:0 0 18px}
+  .lead{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:420px}
+  .lead b{color:var(--ink);font-weight:600}
+
+  .biz{display:grid;grid-template-columns:.9fr 1.3fr;gap:60px;align-items:center}
+  .checks{margin:30px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+  .checks li{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-dim)}
+  .check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;flex:0 0 auto;background:rgba(236,26,92,.08)}
+
+  /* Dashboard mockup */
+  .dash-stage{position:relative}
+  .laptop{position:relative;background:linear-gradient(180deg,#1a0d24,#0e0617);border:1px solid var(--line-2);border-radius:14px 14px 18px 18px;padding:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+  .laptop::after{content:"";display:block;height:14px;margin:10px -28px -22px;background:linear-gradient(180deg,#1a0d24,#0a040f);border-radius:0 0 22px 22px;border:1px solid var(--line);border-top:0}
+  .dash{background:#0e0617;border-radius:8px;overflow:hidden;display:grid;grid-template-columns:170px 1fr;min-height:380px;border:1px solid var(--line)}
+  .dash-side{background:#11071a;border-right:1px solid var(--line);padding:14px 12px;display:flex;flex-direction:column;gap:14px}
+  .dash-logo{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .dash-logo svg{filter:drop-shadow(0 0 4px var(--pink-glow))}
+  .dash-logo b{font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.04em}
+  .dash-logo b span{color:var(--pink)}
+  .dash-nav{display:flex;flex-direction:column;gap:2px}
+  .dash-nav a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--ink-dim)}
+  .dash-nav a.on{background:rgba(236,26,92,.12);color:#fff;border-left:2px solid var(--pink)}
+  .dash-nav .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+
+  .dash-main{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+  .dash-top{display:flex;justify-content:space-between;align-items:center}
+  .dash-top h5{font-size:11px;margin:0;letter-spacing:.1em;color:var(--ink-dim);text-transform:uppercase}
+  .dash-top .who{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--ink-mute)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .kpi{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+  .kpi-l{font-size:8px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+  .kpi-v{font-family:Manrope,sans-serif;font-size:18px;font-weight:700}
+  .kpi-d{font-size:8px;color:var(--green);float:right;margin-top:-13px}
+  .charts{display:grid;grid-template-columns:1.6fr 1fr;gap:8px}
+  .card{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:10px}
+  .card h6{font-size:9px;margin:0 0 8px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase}
+  .chart-line{position:relative;height:96px}
+  .chart-line svg{width:100%;height:100%}
+  .donut{display:flex;align-items:center;gap:10px}
+  .donut svg{flex:0 0 auto}
+  .legend{display:flex;flex-direction:column;gap:4px;font-size:8px;color:var(--ink-dim);width:100%}
+  .legend .row{display:flex;align-items:center;gap:5px;justify-content:space-between}
+  .legend .row .l{display:flex;align-items:center;gap:5px}
+  .legend .sw{width:7px;height:7px;border-radius:2px}
+  .top-table{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:10px}
+  .top-table .row{display:grid;grid-template-columns:90px 1fr 28px;gap:8px;align-items:center;padding:3px 0;font-size:9px;color:var(--ink-dim)}
+  .bar{height:5px;background:#241432;border-radius:3px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-2))}
+
+  /* Phone */
+  .phone{position:absolute;left:-50px;top:60px;width:188px;background:#0c0612;border:6px solid #1c0e26;border-radius:24px;padding:8px;box-shadow:0 25px 40px -10px rgba(0,0,0,.7);z-index:2}
+  .phone-screen{background:#11071a;border-radius:16px;overflow:hidden;padding:10px;border:1px solid var(--line)}
+  .phone .nb{display:flex;justify-content:space-between;font-size:7px;color:var(--ink-mute);margin-bottom:6px}
+  .phone h6{font-size:10px;margin:0 0 6px;display:flex;align-items:center;justify-content:space-between}
+  .phone-img{aspect-ratio:16/10;border-radius:6px;background:repeating-linear-gradient(135deg,rgba(236,26,92,.1) 0 6px,transparent 6px 12px),#2a1230;display:grid;place-items:center;color:rgba(255,255,255,.4);font-size:8px;font-family:JetBrains Mono,monospace;margin-bottom:8px}
+  .phone .pb{font-size:8px;font-weight:700;margin-bottom:6px}
+  .phone .li{display:flex;justify-content:space-between;font-size:8px;padding:3px 0;border-bottom:1px dashed var(--line);color:var(--ink-dim)}
+  .phone .li b{color:var(--ink);font-weight:600}
+  .phone .pbtn{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;font-size:9px;font-weight:700;padding:6px 0;border-radius:5px;text-align:center;margin-top:8px;letter-spacing:.06em}
+
+  /* ───── Benefits ───── */
+  .benefits{background:linear-gradient(180deg,#100620,#0c0612);border:1px solid var(--line);border-radius:18px;padding:34px 0;display:grid;grid-template-columns:repeat(4,1fr) 1.1fr;align-items:center;overflow:hidden;position:relative}
+  .benefit{padding:0 22px;text-align:center;border-right:1px solid var(--line)}
+  .benefit:nth-last-child(2){border-right:0}
+  .b-ico{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;margin:0 auto 14px;background:rgba(236,26,92,.06);box-shadow:0 0 22px -6px var(--pink-glow), inset 0 0 12px rgba(236,26,92,.12)}
+  .benefit h4{font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.16em;margin:0 0 8px;text-transform:uppercase}
+  .benefit p{font-size:12px;color:var(--ink-dim);line-height:1.5;margin:0}
+  .benefit-art{position:relative;height:180px;border-radius:10px;margin-right:24px;overflow:hidden;background:#170820}
+  .benefit-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95) contrast(1.02)}
+  .benefit-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,6,18,.7) 0%,rgba(12,6,18,.15) 30%,transparent 60%);pointer-events:none}
+
+  /* ───── Financial section ───── */
+  .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .fin-card{background:linear-gradient(180deg,#170822,#0e0617);border:1px solid var(--line-2);border-radius:18px;padding:24px;box-shadow:0 30px 60px -30px rgba(236,26,92,.3)}
+  .fin-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .fin-card-top h5{font-family:Manrope,sans-serif;font-size:14px;margin:0;letter-spacing:.04em}
+  .fin-pill{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--green);background:rgba(45,212,126,.12);padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  .fin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+  .fin-stat{background:#11071a;border:1px solid var(--line);border-radius:10px;padding:12px}
+  .fin-stat .l{font-size:10px;color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .fin-stat .v{font-family:Manrope,sans-serif;font-size:22px;font-weight:700}
+  .fin-stat .v small{font-size:13px;color:var(--ink-dim);margin-left:2px;font-weight:500}
+  .fin-stat .d{font-size:10px;color:var(--green);font-weight:600;margin-top:2px}
+  .fin-stat .d.neg{color:var(--pink-2)}
+
+  .fin-bars{background:#11071a;border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+  .fin-bars-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .fin-bars-top h6{font-size:11px;margin:0;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+  .fin-bars-top span{font-size:10px;color:var(--ink-mute)}
+  .bars-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;height:90px;align-items:end}
+  .bcol{display:flex;flex-direction:column;gap:2px;align-items:center;height:100%;justify-content:flex-end}
+  .bcol .b1{width:100%;background:linear-gradient(180deg,var(--pink-2),var(--pink));border-radius:3px 3px 0 0}
+  .bcol .b2{width:100%;background:rgba(255,255,255,.16);border-radius:3px 3px 0 0}
+  .bcol .lbl{font-size:9px;color:var(--ink-mute);margin-top:6px}
+
+  .fin-tx{display:flex;flex-direction:column;gap:8px}
+  .fin-tx-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12px}
+  .fin-tx-row:last-child{border:0}
+  .fin-tx-row .ico{width:32px;height:32px;border-radius:8px;background:rgba(236,26,92,.1);display:grid;place-items:center;flex:0 0 auto}
+  .fin-tx-row .ico.in{background:rgba(45,212,126,.12)}
+  .fin-tx-row .meta{flex:1;display:flex;flex-direction:column;gap:2px}
+  .fin-tx-row .meta b{font-size:12px;font-weight:600;color:var(--ink)}
+  .fin-tx-row .meta span{font-size:10px;color:var(--ink-mute)}
+  .fin-tx-row .amt{font-family:Manrope,sans-serif;font-weight:700;font-size:13px}
+  .fin-tx-row .amt.in{color:var(--green)}
+  .fin-tx-row .amt.out{color:var(--pink-2)}
+
+  .fin-features{margin:30px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .fin-features li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink-dim);line-height:1.4}
+  .fin-features li b{color:var(--ink);font-weight:600;display:block;font-size:13px;margin-bottom:2px}
+
+  /* ───── AI Assistant ───── */
+  .ai-section{background:radial-gradient(80% 60% at 30% 50%, rgba(236,26,92,.12), transparent 60%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .ai-chat{background:#0e0617;border:1px solid var(--line-2);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(236,26,92,.4)}
+  .ai-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:#170822}
+  .ai-avatar{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--pink-2),var(--pink) 60%, #5a0a23);display:grid;place-items:center;box-shadow:0 0 18px var(--pink-glow);position:relative}
+  .ai-avatar::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--green);bottom:0;right:0;border:2px solid #170822}
+  .ai-head h5{font-family:Manrope,sans-serif;font-size:14px;margin:0;letter-spacing:.02em}
+  .ai-head p{margin:0;font-size:10px;color:var(--green);letter-spacing:.1em;font-weight:600;text-transform:uppercase}
+  .ai-head .menu{margin-left:auto;color:var(--ink-mute);font-size:18px;letter-spacing:.1em}
+  .ai-body{padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-height:340px}
+  .msg{max-width:85%;font-size:13px;line-height:1.5;padding:12px 14px;border-radius:14px}
+  .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;border-bottom-right-radius:4px;box-shadow:0 8px 22px -8px var(--pink-glow)}
+  .msg.bot{align-self:flex-start;background:#170822;color:var(--ink);border:1px solid var(--line-2);border-bottom-left-radius:4px}
+  .msg.bot .mini-stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2)}
+  .msg.bot .mini-stat div{font-size:11px;color:var(--ink-dim)}
+  .msg.bot .mini-stat b{display:block;font-family:Manrope,sans-serif;font-size:18px;color:var(--ink);font-weight:700;margin-bottom:2px}
+  .msg.bot .mini-stat b span{color:var(--green);font-size:11px;margin-left:4px;font-weight:600}
+  .typing{align-self:flex-start;display:flex;align-items:center;gap:6px;padding:12px 14px;background:#170822;border:1px solid var(--line-2);border-radius:14px;border-bottom-left-radius:4px}
+  .typing span{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:bp 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}
+  .typing span:nth-child(3){animation-delay:.4s}
+  @keyframes bp{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+
+  .ai-input{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line);background:#11071a}
+  .ai-input input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-size:13px;font-family:inherit;padding:8px}
+  .ai-input input::placeholder{color:var(--ink-mute)}
+  .send{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-2));display:grid;place-items:center;border:0;cursor:pointer;box-shadow:0 6px 18px -4px var(--pink-glow)}
+
+  .ai-prompts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .ai-prompts span{font-size:11px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-dim);background:rgba(236,26,92,.04)}
+  .ai-prompts span::before{content:"❝ ";color:var(--pink-2)}
+
+  .ai-features{margin-top:30px;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px}
+  .ai-features li{display:flex;gap:14px;align-items:flex-start}
+  .ai-features li .ico{width:42px;height:42px;border-radius:10px;background:rgba(236,26,92,.1);border:1px solid rgba(236,26,92,.2);display:grid;place-items:center;flex:0 0 auto}
+  .ai-features li b{display:block;font-family:Manrope,sans-serif;font-size:14px;font-weight:700;margin-bottom:4px}
+  .ai-features li p{margin:0;font-size:13px;color:var(--ink-dim);line-height:1.5}
+
+  /* ───── CTA Stats ───── */
+  .cta-banner{background:linear-gradient(135deg,#2a0a1f 0%, #1a0820 50%, #0e0617 100%);border:1px solid var(--line-2);border-radius:22px;padding:36px 40px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.4fr;gap:30px;align-items:center;position:relative;overflow:hidden}
+  .cta-banner::before{content:"";position:absolute;left:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, var(--pink-soft), transparent 70%);pointer-events:none}
+  .cta-left{display:flex;align-items:center;gap:18px}
+  .cta-circle{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--pink);background:rgba(236,26,92,.06);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 0 24px -6px var(--pink-glow)}
+  .cta-text h3{font-family:Manrope,sans-serif;font-size:20px;margin:0 0 8px;line-height:1.1}
+  .cta-text h3 span{color:var(--pink)}
+  .cta-text p{margin:0;font-size:12px;color:var(--ink-dim);line-height:1.5}
+  .cta-stat{text-align:center}
+  .cta-stat b{display:block;font-family:Manrope,sans-serif;font-size:34px;font-weight:800;line-height:1}
+  .cta-stat span{display:block;margin-top:6px;font-size:10px;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
+  .cta-actions{text-align:right}
+  .cta-actions small{display:block;margin-top:10px;font-size:11px;color:var(--ink-mute)}
+
+  /* ───── Logos ───── */
+  .logos h6{text-align:center;font-family:Manrope,sans-serif;letter-spacing:.32em;font-size:12px;color:var(--pink-2);margin:0 0 32px;text-transform:uppercase}
+  .logo-row{display:grid;grid-template-columns:repeat(6,1fr);gap:30px;align-items:center}
+  .logo-row .l{height:64px;display:grid;place-items:center;color:rgba(255,255,255,.55);font-family:Manrope,sans-serif;font-weight:700;font-size:14px;text-align:center;line-height:1.1;letter-spacing:.04em}
+  .logo-row .l small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:9px;color:rgba(255,255,255,.35);letter-spacing:.16em;margin-top:4px;text-transform:uppercase}
+  .logo-row .l em{font-style:italic;font-family:'Manrope',serif;font-weight:600}
+
+  /* ───── Footer ───── */
+  .foot{border-top:1px solid var(--line);padding:20px 0 30px;display:grid;grid-template-columns:repeat(4,auto) 1fr;gap:30px;align-items:center;font-size:13px;color:var(--ink-dim)}
+  .foot-item{display:flex;align-items:center;gap:8px}
+  .foot-item svg{filter:drop-shadow(0 0 3px var(--pink-glow))}
+  .foot-contact{justify-self:end;display:flex;align-items:center;gap:10px}
+  .foot-contact .wa{width:38px;height:38px;border-radius:50%;background:#25d366;display:grid;place-items:center}
+  .foot-contact b{font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.02em}
+  .foot-contact small{display:block;font-size:11px;color:var(--ink-mute)}
+
+  @media(max-width:1024px){
+    .hero-grid,.biz,.fin-grid,.ai-grid,.cta-banner{grid-template-columns:1fr}
+    .phone{position:static;margin:0 auto 18px}
+    h1{font-size:54px}
+  }
+</style>
+</head>
 <body>
 
-  <!-- ══ NAV ══════════════════════════════════════════════════ -->
-  <nav class="nav">
-    <a href="#" class="nav-logo"><img src="./assets/logo.png" alt="PorcySys" /></a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="#problema" data-i18n="nav_problema">Problema</a>
-        <a href="#allinone" data-i18n="nav_allinone">Todo en uno</a>
-        <a href="#agente" data-i18n="nav_agente">Agente IA</a>
-        <a href="#modulos" data-i18n="nav_modulos">Módulos</a>
-        <a href="#reportes" data-i18n="nav_reportes">Reportes</a>
-        <a href="#planes" data-i18n="nav_planes">Planes</a>
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M9 18c0-4 3-7 7-7 2 0 3.5.6 5 1.6.7-.5 1.6-.6 2.4-.4l.6-2.5 2 .8-1 2.6c.4.5.6 1.1.6 1.7 0 .8-.4 1.5-1 2 .2.6.4 1.3.4 2.2 0 4-3 7-7 7-2.5 0-3.5-.4-5.5-2-1.5 1.4-2 2-3.5 2-1.5 0-2-1-1-2 .6-.6 1-1.4 1-2.5 0-.5-.1-1.1-.3-1.7L9 18z" stroke="#ec1a5c" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/>
+          <path d="M20 19.5h2" stroke="#ec1a5c" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
       </div>
-      <div class="lang-sw" id="langSw">
-        <span class="active" data-lang="ES">ES</span>
-        <span data-lang="EN">EN</span>
-        <span data-lang="PT">PT</span>
-      </div>
-      <button class="btn-primary nav-cta" data-i18n="cta_schedule">Agendar llamada →</button>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="logo-text"><b>PORCY<span>SYS</span></b><small>SISTEMA PORCINO</small></div>
     </div>
-  </nav>
-  <!-- Mobile menu drawer -->
-  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
-    <a href="#problema" data-i18n="nav_problema">Problema</a>
-    <a href="#allinone" data-i18n="nav_allinone">Todo en uno</a>
-    <a href="#agente" data-i18n="nav_agente">Agente IA</a>
-    <a href="#modulos" data-i18n="nav_modulos">Módulos</a>
-    <a href="#reportes" data-i18n="nav_reportes">Reportes</a>
-    <a href="#planes" data-i18n="nav_planes">Planes</a>
-    <button class="btn-primary lg" style="margin-top:8px;width:100%;justify-content:center" data-i18n="cta_schedule">Agendar llamada →</button>
+    <div class="nav-links">
+      <a href="#" class="on">Inicio</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#precios">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <button class="btn btn-primary">Solicitar Demo</button>
+    </div>
   </div>
+</nav>
 
-  <!-- ══ HERO ══════════════════════════════════════════════════ -->
-  <section class="hero">
-    <img class="hero-bg" src="./assets/hero-bg.jpg" alt="" />
-    <div class="hero-vignette" aria-hidden="true"></div>
-    <div class="hero-card">
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>EL CONTROL TOTAL<br/>DE TU<span class="rule"></span><br/><span class="accent">GRANJA PORCINA</span></h1>
+      <p class="hero-sub">Software inteligente para una producción más <span class="em">eficiente</span>, <span class="em">rentable</span> y <span class="em">sostenible</span>.</p>
 
-      <h1 data-i18n-html="hero_h1">Tu granja <em>bajo control,</em> en una sola pantalla.</h1>
-      <p class="hero-sub" data-i18n="hero_sub">Sistema integral de gestión porcina — operativo y financiero, conectado
-        en tiempo real desde el galpón hasta la oficina.</p>
-      <div class="hero-btns">
-        <button class="btn-primary lg" data-i18n="cta_schedule">Agendar llamada →</button>
-        <button class="btn-ghost lg" data-i18n="hero_demo">Ver demo</button>
-      </div>
-      <div class="hero-checks">
-        <span data-i18n="hero_check1">✓ Implementación incluida</span>
-        <span data-i18n="hero_check2">✓ ES · EN · PT</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TRUSTED BY ══════════════════════════════════════════ -->
-  <section class="trusted">
-    <div class="eyebrow trusted-label" data-i18n="trusted_label">Confían en PorcySys productores en 12 países</div>
-    <div class="trusted-logos">
-      <span>K de Belo</span>
-    </div>
-  </section>
-
-  <!-- ══ PROBLEM ═══════════════════════════════════════════════ -->
-  <section class="problem" id="problema">
-    <div class="section-header-center">
-      <div class="eyebrow" data-i18n="problem_eyebrow">Antes vs después</div>
-      <h2 data-i18n-html="problem_h2">Si reconoces alguno de estos problemas, <em>tenemos buenas noticias.</em></h2>
-    </div>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <div class="problem-num">1</div>
-        <h3 data-i18n="p1_title">Planillas que nadie actualiza</h3>
-        <p data-i18n="p1_desc">Excel se rompe, los registros se pierden y al final del año nadie sabe qué pasó
-          realmente.</p>
-        <div class="problem-solved">
-          <span class="problem-solved-icon">✓</span>
-          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
+      <div class="feat-row">
+        <div class="feat">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><circle cx="12" cy="14" r="1.4" fill="#ec1a5c"/></svg>
+          </div>
+          <div class="feat-label">Control<br/>Total</div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M4 4v16h16"/><path d="M7 14l4-4 3 3 5-6"/><circle cx="11" cy="10" r="1.2" fill="#ec1a5c"/></svg>
+          </div>
+          <div class="feat-label">Decisiones<br/>Inteligentes</div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M12 7V5M10 5h4"/><path d="M9 13l2 2 4-4"/></svg>
+          </div>
+          <div class="feat-label">Más<br/>Rentabilidad</div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M5 14c0-3.5 3-6.5 7-6.5 1.5 0 2.6.4 3.6 1l1-1 .5 2.4c.6.5 1 1.2 1 2 0 .5-.2 1-.5 1.4.2.5.4 1 .4 1.7 0 3-2.5 5.5-5.5 5.5-1.6 0-2.4-.3-3.5-1.2-.8.7-1.3 1.2-2 1.2-.6 0-.9-.5-.5-1 .3-.4.5-.8.5-1.5 0-.4-.1-.8-.2-1.1L5 14z"/><circle cx="14" cy="13" r=".7" fill="#ec1a5c"/></svg>
+          </div>
+          <div class="feat-label">Bienestar<br/>Animal</div>
         </div>
       </div>
-      <div class="problem-card">
-        <div class="problem-num">2</div>
-        <h3 data-i18n="p2_title">No saber cuánto cuesta cada kilo</h3>
-        <p data-i18n="p2_desc">Sin trazabilidad fina de alimento, sanidad y mano de obra, vendes sin saber si ganas o
-          pierdes.</p>
-        <div class="problem-solved">
-          <span class="problem-solved-icon">✓</span>
-          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
-        </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary">Solicitar Demo Gratis <span class="arr"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="2"><path d="M2 5h6M5 2l3 3-3 3"/></svg></span></button>
+        <button class="btn btn-ghost"><span class="play"><svg width="10" height="12" viewBox="0 0 10 12" fill="#fff"><path d="M0 0v12l10-6z"/></svg></span> Ver video</button>
       </div>
-      <div class="problem-card">
-        <div class="problem-num">3</div>
-        <h3 data-i18n="p3_title">Decisiones a ojo de buen cubero</h3>
-        <p data-i18n="p3_desc">Cambiar de alimento, ajustar destetes, planear ventas — todo basado en intuición, sin
-          datos que respalden.</p>
-        <div class="problem-solved">
-          <span class="problem-solved-icon">✓</span>
-          <span data-i18n="problem_solved">Resuelto con PorcySys</span>
+    </div>
+
+    <div class="hero-art">
+      <div class="ph-pig"><span>[ HERO PHOTO · pig portrait · 1:1 ]</span></div>
+      <div class="ring"></div>
+      <div class="sparks"></div>
+      <div class="badge-card">
+        <div class="ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3d7a" stroke-width="1.8"><path d="M4 18l4-5 3 3 5-7 4 5"/><path d="M16 9h4v4"/></svg>
+        </div>
+        <div>
+          <h4>MÁS CONTROL<br/>MEJORES RESULTADOS</h4>
+          <p>Granjas más rentables</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- ══ ALL-IN-ONE ════════════════════════════════════════════ -->
-  <section class="allinone" id="allinone">
-    <div class="allinone-inner">
-      <!-- Left copy -->
-      <div>
-        <div class="eyebrow" data-i18n="aio_eyebrow">Todo en uno · diferencial</div>
-        <h2 data-i18n-html="aio_h2">Lo financiero y lo operativo, <em>en el mismo sistema.</em></h2>
-        <p class="allinone-p" data-i18n-html="aio_p1">La mayoría de los sistemas porcinos del mercado son
-          <strong>o</strong> zootécnicos <strong>o</strong> contables. Hay que mantener dos bases de datos, dos
-          planillas y esperar que cuadren.
-        </p>
-        <p class="allinone-p" data-i18n-html="aio_p2">En PorcySys cada movimiento del galpón impacta directo en los
-          números: un cambio de alimento <span class="mono" style="font-size:14px;color:var(--ink)">→</span> ajusta el
-          costo por kilo. Una venta <span class="mono" style="font-size:14px;color:var(--ink)">→</span> reduce el
-          inventario y suma al margen.</p>
-        <div class="allinone-badges">
-          <div class="allinone-badge"><span class="badge-num">1</span><span data-i18n="aio_b1">Una sola base de
-              datos</span></div>
-          <div class="allinone-badge"><span class="badge-num">2</span><span data-i18n="aio_b2">Cero doble carga</span>
-          </div>
-          <div class="allinone-badge"><span class="badge-num">3</span><span data-i18n="aio_b3">Costo real, no
-              estimado</span></div>
-        </div>
-      </div>
-      <!-- Right diagram -->
-      <div>
-        <div class="syscols">
-          <div class="syscol">
-            <div class="syscol-head">
-              <div class="syscol-icon" style="background:var(--terra)">◐</div>
-              <div>
-                <div class="syscol-title" data-i18n="aio_ops">Operativo</div>
-                <div class="syscol-sub" data-i18n="aio_ops_sub">Zootécnico · galpón</div>
-              </div>
-            </div>
-            <div class="syscol-body">
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_heads">Cabezas activas</span><span
-                  class="syscol-row-val mono">1,842<span class="syscol-row-unit">cab.</span></span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_litters">Camadas en
-                  curso</span><span class="syscol-row-val mono">37</span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_conv">Conversión alim.</span><span
-                  class="syscol-row-val mono">2.61<span class="syscol-row-unit">kg/kg</span></span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_mort">Mortalidad sem.</span><span
-                  class="syscol-row-val mono">1.8%</span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_feed">Consumo
-                  balanceado</span><span class="syscol-row-val mono">24.6<span
-                    class="syscol-row-unit">t/sem</span></span></div>
-            </div>
-          </div>
-          <div class="syscol">
-            <div class="syscol-head">
-              <div class="syscol-icon" style="background:var(--olive)">◑</div>
-              <div>
-                <div class="syscol-title" data-i18n="aio_fin">Financiero</div>
-                <div class="syscol-sub" data-i18n="aio_fin_sub">Contable · oficina</div>
-              </div>
-            </div>
-            <div class="syscol-body">
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_income">Ingresos del
-                  mes</span><span class="syscol-row-val mono">$184,320</span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_cost">Costo por kg
-                  vivo</span><span class="syscol-row-val mono">$1.42<span class="syscol-row-unit">/kg</span></span>
-              </div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_margin">Margen bruto</span><span
-                  class="syscol-row-val mono">23%</span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_ar">Cuentas por cobrar</span><span
-                  class="syscol-row-val mono">$42,800</span></div>
-              <div class="syscol-row"><span class="syscol-row-label" data-i18n="aio_r_stock">Stock
-                  valorizado</span><span class="syscol-row-val mono">$96,140</span></div>
-            </div>
-          </div>
-        </div>
-        <!-- Merge arrow -->
-        <div class="merge-conn">
-          <svg width="120" height="44" viewBox="0 0 120 44" aria-hidden="true">
-            <path d="M 18 0 Q 18 22, 60 22" stroke="var(--terra)" stroke-width="1.5" fill="none" />
-            <path d="M 102 0 Q 102 22, 60 22" stroke="var(--olive)" stroke-width="1.5" fill="none" />
-            <path d="M 60 22 V 40" stroke="var(--ink)" stroke-width="1.5" fill="none" />
-            <path d="M 55 35 L 60 42 L 65 35" stroke="var(--ink)" stroke-width="1.5" fill="none" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </div>
-        <!-- Merged platform card -->
-        <div class="merge-result">
-          <div class="merge-left">
-            <div class="merge-icon">●</div>
-            <div>
-              <div class="merge-lbl">PorcySys</div>
-              <div class="merge-name" data-i18n="aio_merged">Una sola plataforma</div>
-            </div>
-          </div>
-          <div class="merge-stats">
-            <div>
-              <div class="merge-stat-lbl" data-i18n="aio_ops_short">Operativo</div>
-              <div class="merge-stat-val mono">1,842 <span style="opacity:.6;font-size:11px">cab.</span></div>
-            </div>
-            <div class="merge-divider"></div>
-            <div>
-              <div class="merge-stat-lbl" data-i18n="aio_fin_short">Financiero</div>
-              <div class="merge-stat-val mono">$1.42<span style="opacity:.6;font-size:11px">/kg</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- ══════════ TODO TU NEGOCIO ══════════ -->
+<section class="section" id="funciones">
+  <div class="wrap biz">
+    <div>
+      <div class="section-eyebrow">Todo tu negocio</div>
+      <h2>EN UN SOLO SISTEMA</h2>
+      <p class="lead">Registra, analiza y toma decisiones en tiempo real desde cualquier lugar. <b>Ahorra tiempo, reduce costos</b> y lleva tu granja al siguiente nivel.</p>
+      <ul class="checks">
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Gestión reproductiva</li>
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Control de producción</li>
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Alimentación y consumos</li>
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Sanidad y tratamientos</li>
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Reportes y análisis en tiempo real</li>
+        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Múltiples granjas en una sola plataforma</li>
+      </ul>
     </div>
-  </section>
 
-  <!-- ══ AI AGENT ══════════════════════════════════════════════ -->
-  <section class="ai-section" id="agente">
-    <div class="ai-inner">
-      <!-- Left copy -->
-      <div>
-        <div class="ai-eyebrow eyebrow">
-          <span class="ai-eyebrow-dot"></span>
-          <span data-i18n="ai_eyebrow">Incluido · Agente IA</span>
-        </div>
-        <h2 data-i18n-html="ai_h2">Pregúntale a tu granja, <em>te responde.</em></h2>
-        <p class="ai-p" data-i18n-html="ai_p">Un agente con acceso a <strong>toda la información del sistema</strong> —
-          inventario, alimentación, sanidad, costos, ventas, históricos. Le preguntas en español y te responde con datos
-          reales, no con generalidades.</p>
-        <div class="ai-features">
-          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
-            <div>
-              <div class="ai-feat-title" data-i18n="ai_f1t">Sin SQL, sin reportes</div>
-              <div class="ai-feat-desc" data-i18n="ai_f1d">Háblale como a un encargado que conoce toda la granja.</div>
+    <div class="dash-stage">
+      <div class="laptop">
+        <div class="dash">
+          <aside class="dash-side">
+            <div class="dash-logo">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M9 18c0-4 3-7 7-7 5 0 7 4 7 7 0 4-3 7-7 7-2 0-3-.4-5-2-1 1-1.5 1.4-2.5 1-1-.4-.5-1.5 0-2 .5-.6.5-1.5.5-2z"/><circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/></svg>
+              <b>PORCY<span>SYS</span></b>
             </div>
-          </div>
-          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
-            <div>
-              <div class="ai-feat-title" data-i18n="ai_f2t">Cita las fuentes</div>
-              <div class="ai-feat-desc" data-i18n="ai_f2d">Cada número viene con su lote, fecha y registro.</div>
+            <nav class="dash-nav">
+              <a class="on"><span class="dot" style="color:#ec1a5c"></span>Inicio</a>
+              <a><span class="dot"></span>Reproducción</a>
+              <a><span class="dot"></span>Producción</a>
+              <a><span class="dot"></span>Alimentación</a>
+              <a><span class="dot"></span>Sanidad</a>
+              <a><span class="dot"></span>Reportes</a>
+              <a><span class="dot"></span>Inventario</a>
+              <a><span class="dot"></span>Configuración</a>
+            </nav>
+          </aside>
+          <div class="dash-main">
+            <div class="dash-top">
+              <h5>Resumen general</h5>
+              <span class="who">⚙️ 🔔 ⌂ &nbsp; Bienvenido</span>
             </div>
-          </div>
-          <div class="ai-feat"><span class="ai-feat-icon">✦</span>
-            <div>
-              <div class="ai-feat-title" data-i18n="ai_f3t">Sugiere acciones</div>
-              <div class="ai-feat-desc" data-i18n="ai_f3d">Detecta desvíos y propone qué ajustar.</div>
+            <div class="kpis">
+              <div class="kpi"><div class="kpi-l">Cerdas totales</div><div class="kpi-v">1,250</div></div>
+              <div class="kpi"><div class="kpi-l">Lechones nacidos</div><div class="kpi-v">3,856</div></div>
+              <div class="kpi"><div class="kpi-l">Conversión alimenticia</div><div class="kpi-v">2.45</div></div>
+              <div class="kpi"><div class="kpi-l">Mortalidad</div><div class="kpi-v">4.2%</div><div class="kpi-d">-0.6%</div></div>
             </div>
-          </div>
-        </div>
-        <div class="ai-tabs" id="aiTabs">
-          <button class="ai-tab active" data-turn="0" data-i18n="ai_tab0">¿Qué lote rinde más?</button>
-          <button class="ai-tab" data-turn="1" data-i18n="ai_tab1">Stock crítico</button>
-          <button class="ai-tab" data-turn="2" data-i18n="ai_tab2">Margen del mes</button>
-        </div>
-      </div>
-      <!-- Right chat mock -->
-      <div class="chat-mock">
-        <div class="chat-head">
-          <div class="chat-head-l">
-            <div class="chat-av">✦</div>
-            <div>
-              <div class="chat-name" data-i18n="chat_name">Asistente PorcySys</div>
-              <div class="chat-status"><span class="chat-dot"></span><span data-i18n="chat_status">Conectado a Granja
-                  San Pedro · 1,842 cab.</span></div>
-            </div>
-          </div>
-          <span class="chat-ver mono" data-i18n="chat_ver">v2 · español</span>
-        </div>
-        <div class="chat-body" id="chatBody">
-          <!-- injected by JS -->
-        </div>
-        <div class="chat-input-bar">
-          <div class="chat-input-fake" data-i18n="chat_placeholder">Pregúntale lo que quieras a tu granja…</div>
-          <button class="chat-send">↑</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ MODULES ═══════════════════════════════════════════════ -->
-  <section class="modules" id="modulos">
-    <div class="section-header-center">
-      <div class="eyebrow" data-i18n="mod_eyebrow">Módulos integrados</div>
-      <h2 data-i18n-html="mod_h2">Seis módulos. <em>Una sola plataforma.</em></h2>
-    </div>
-    <div class="modules-grid">
-      <div class="modules-list" id="modList">
-        <button class="mod-btn active" data-mod="0">
-          <div class="mod-btn-inner"><span class="mod-num">01</span><span class="mod-name"
-              data-i18n="mod0_name">Inventario de animales</span></div><span class="mod-arrow">→</span>
-        </button>
-        <button class="mod-btn" data-mod="1">
-          <div class="mod-btn-inner"><span class="mod-num">02</span><span class="mod-name" data-i18n="mod1_name">Ciclo
-              de vida completo</span></div>
-        </button>
-        <button class="mod-btn" data-mod="2">
-          <div class="mod-btn-inner"><span class="mod-num">03</span><span class="mod-name"
-              data-i18n="mod2_name">Alimentación y consumo</span></div>
-        </button>
-        <button class="mod-btn" data-mod="3">
-          <div class="mod-btn-inner"><span class="mod-num">04</span><span class="mod-name"
-              data-i18n="mod3_name">Reportes y analítica</span></div>
-        </button>
-        <button class="mod-btn" data-mod="4">
-          <div class="mod-btn-inner"><span class="mod-num">05</span><span class="mod-name" data-i18n="mod4_name">Costos
-              y rentabilidad</span></div>
-        </button>
-        <button class="mod-btn" data-mod="5">
-          <div class="mod-btn-inner"><span class="mod-num">06</span><span class="mod-name"
-              data-i18n="mod5_name">Multi-granja, multi-usuario</span></div>
-        </button>
-      </div>
-      <div class="mod-detail" id="modDetail"><!-- injected by JS --></div>
-    </div>
-  </section>
-
-  <!-- ══ REPORTS GALLERY ════════════════════════════════════════ -->
-  <section class="reports" id="reportes">
-    <div style="max-width:1240px;margin:0 auto">
-      <div class="reports-top">
-        <div class="reports-top-left">
-          <div class="eyebrow" data-i18n="rep_eyebrow">Reportes y analítica</div>
-          <h2 data-i18n-html="rep_h2">Cada decisión, <em>con un número detrás.</em></h2>
-          <p data-i18n="rep_sub">40+ reportes integrados. Zootécnicos, sanitarios y financieros — todos con datos en
-            vivo del sistema. Exportables a PDF.</p>
-        </div>
-        <div class="reports-chips">
-          <span class="rchip active" data-i18n="rchip0">Zootécnico</span>
-          <span class="rchip" data-i18n="rchip1">Sanitario</span>
-          <span class="rchip" data-i18n="rchip2">Financiero</span>
-          <span class="rchip" data-i18n="rchip3">Inventario</span>
-          <span class="rchip" data-i18n="rchip4">Multi-granja</span>
-          <span class="rchip" data-i18n="rchip5">Personalizados</span>
-        </div>
-      </div>
-      <!-- Report cards -->
-      <div class="reports-cols">
-        <!-- Card 1: Line chart -->
-        <div class="rcard">
-          <div class="rcard-head">
-            <div class="rcard-type mono" data-i18n="rc1_type">R-01 · ZOOTÉCNICO</div>
-            <h3 class="rcard-title" data-i18n="rc1_title">Curva de peso · 12 sem.</h3>
-            <span class="rcard-sub" data-i18n="rc1_sub">Engorde, destete y lechones</span>
-          </div>
-          <div class="rcard-body" style="min-height:200px">
-            <svg id="lineChart" viewBox="0 0 400 170" style="width:100%;height:100%" preserveAspectRatio="none"></svg>
-          </div>
-          <div class="rcard-foot"><span data-i18n="rc1_meta">3 series · 12 puntos</span><span class="mono">↓ PDF</span>
-          </div>
-        </div>
-        <!-- Card 2: Donut -->
-        <div class="rcard">
-          <div class="rcard-head">
-            <div class="rcard-type mono" data-i18n="rc2_type">R-07 · FINANCIERO</div>
-            <h3 class="rcard-title" data-i18n="rc2_title">Distribución de costos</h3>
-            <span class="rcard-sub" data-i18n="rc2_sub">$/kg vivo · mes en curso</span>
-          </div>
-          <div class="rcard-body" style="align-items:center;justify-content:center;gap:16px;flex-direction:column">
-            <div style="display:flex;align-items:center;gap:16px">
-              <div class="donut-wrap" style="width:140px;height:140px">
-                <svg id="donutChart" width="140" height="140" viewBox="0 0 140 140"
-                  style="transform:rotate(-90deg)"></svg>
-                <div class="donut-center">
-                  <span class="donut-num">$1.42</span>
-                  <span class="donut-sub" data-i18n="donut_sub">por kg</span>
+            <div class="charts">
+              <div class="card">
+                <h6>Producción por semana</h6>
+                <div class="chart-line">
+                  <svg viewBox="0 0 320 100" preserveAspectRatio="none">
+                    <defs><linearGradient id="lg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ec1a5c" stop-opacity=".4"/><stop offset="1" stop-color="#ec1a5c" stop-opacity="0"/></linearGradient></defs>
+                    <g stroke="#2a1638" stroke-width=".5"><line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="50" x2="320" y2="50"/><line x1="0" y1="80" x2="320" y2="80"/></g>
+                    <path d="M0 70 L25 60 L50 65 L75 50 L100 55 L125 35 L150 45 L175 25 L200 40 L225 30 L250 50 L275 38 L300 28 L320 30 L320 100 L0 100 Z" fill="url(#lg)"/>
+                    <path d="M0 70 L25 60 L50 65 L75 50 L100 55 L125 35 L150 45 L175 25 L200 40 L225 30 L250 50 L275 38 L300 28 L320 30" fill="none" stroke="#ec1a5c" stroke-width="2"/>
+                  </svg>
                 </div>
               </div>
-              <div class="donut-legend" id="donutLegend"></div>
+              <div class="card">
+                <h6>Estado de pariciones</h6>
+                <div class="donut">
+                  <svg width="68" height="68" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#241432" stroke-width="6"/>
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#ec1a5c" stroke-width="6" stroke-dasharray="58 100" transform="rotate(-90 18 18)"/>
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#3b82f6" stroke-width="6" stroke-dasharray="22 100" stroke-dashoffset="-58" transform="rotate(-90 18 18)"/>
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="#ff3d7a" stroke-width="6" stroke-dasharray="6 100" stroke-dashoffset="-80" transform="rotate(-90 18 18)"/>
+                  </svg>
+                  <div class="legend">
+                    <div class="row"><span class="l"><span class="sw" style="background:#ec1a5c"></span>Confirmadas</span><b>66%</b></div>
+                    <div class="row"><span class="l"><span class="sw" style="background:#3b82f6"></span>En gestación</span><b>25%</b></div>
+                    <div class="row"><span class="l"><span class="sw" style="background:#ff3d7a"></span>Por confirmar</span><b>7%</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="top-table">
+              <h6 style="font-size:9px;margin:0 0 6px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase">Top 5 granjas por productividad</h6>
+              <div class="row"><span>Granja San Pedro</span><div class="bar"><i style="width:95%"></i></div><span>95%</span></div>
+              <div class="row"><span>Granja La Esperanza</span><div class="bar"><i style="width:89%"></i></div><span>89%</span></div>
+              <div class="row"><span>Granja El Roble</span><div class="bar"><i style="width:85%"></i></div><span>85%</span></div>
+              <div class="row"><span>Granja Los Pinos</span><div class="bar"><i style="width:82%"></i></div><span>82%</span></div>
+              <div class="row"><span>Granja Santa Fe</span><div class="bar"><i style="width:78%"></i></div><span>78%</span></div>
             </div>
           </div>
-          <div class="rcard-foot"><span data-i18n="rc2_meta">4 categorías</span><span class="mono">↓ PDF</span></div>
-        </div>
-        <!-- Card 3: Bars -->
-        <div class="rcard">
-          <div class="rcard-head">
-            <div class="rcard-type mono" data-i18n="rc3_type">R-13 · COMPARATIVO</div>
-            <h3 class="rcard-title" data-i18n="rc3_title">Conversión por lote</h3>
-            <span class="rcard-sub" data-i18n="rc3_sub">kg consumidos / kg ganados</span>
-          </div>
-          <div class="rcard-body" style="justify-content:center">
-            <div class="rbars" id="repBars"></div>
-          </div>
-          <div class="rcard-foot"><span data-i18n="rc3_meta">5 lotes activos</span><span class="mono">↓ PDF</span></div>
         </div>
       </div>
-      <!-- Strip -->
-      <div class="reports-strip">
-        <div class="strip-stats">
-          <div class="strip-stat">
-            <div class="strip-stat-num">+40</div>
-            <div class="strip-stat-lbl" data-i18n="strip_r">reportes integrados</div>
-          </div>
-          <div class="strip-stat">
-            <div class="strip-stat-num">6</div>
-            <div class="strip-stat-lbl" data-i18n="strip_c">categorías</div>
-          </div>
-          <div class="strip-stat">
-            <div class="strip-stat-num">PDF</div>
-            <div class="strip-stat-lbl" data-i18n="strip_e">exportes nativos</div>
-          </div>
-        </div>
-        <span class="strip-note" data-i18n="strip_note">Tiempo real · multi-granja · histórico ilimitado</span>
-      </div>
-    </div>
-  </section>
 
-  <!-- ══ PRICING ═══════════════════════════════════════════════ -->
-  <section class="pricing" id="planes">
-    <div class="pricing-header">
-      <div class="eyebrow" data-i18n="price_eyebrow">Planes</div>
-      <h2 data-i18n-html="price_h2">Tres tamaños, <em>un solo precio claro.</em></h2>
-    </div>
-    <div class="pricing-grid">
-      <div class="pcard">
-        <div class="pcard-name" data-i18n="p0_name">Productor</div>
-        <div class="pcard-desc" data-i18n="p0_desc">Hasta 200 cabezas</div>
-        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
-        <div class="pcard-feat" data-i18n="p0_f1">· Inventario</div>
-        <div class="pcard-feat" data-i18n="p0_f2">· Ciclo de vida</div>
-        <div class="pcard-feat" data-i18n="p0_f3">· Reportes básicos</div>
-        <div class="pcard-feat" data-i18n="p0_f4">· 1 usuario</div>
-        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
-      </div>
-      <div class="pcard hl">
-        <div class="pcard-name" data-i18n="p1_name">Granja</div>
-        <div class="pcard-desc" data-i18n="p1_desc">200 – 1,000 cabezas</div>
-        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
-        <div class="pcard-feat" data-i18n="p1_f1">· Todo Productor +</div>
-        <div class="pcard-feat" data-i18n="p1_f2">· Alimentación + sanidad</div>
-        <div class="pcard-feat" data-i18n="p1_f3">· Costos y rentabilidad</div>
-        <div class="pcard-feat" data-i18n="p1_f4">· Hasta 5 usuarios</div>
-        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
-      </div>
-      <div class="pcard">
-        <div class="pcard-name" data-i18n="p2_name">Operación</div>
-        <div class="pcard-desc" data-i18n="p2_desc">1,000+ cabezas</div>
-        <div class="pcard-cta" data-i18n="price_cta">Cotizar</div>
-        <div class="pcard-feat" data-i18n="p2_f1">· Todo Granja +</div>
-        <div class="pcard-feat" data-i18n="p2_f2">· Multi-granja</div>
-        <div class="pcard-feat" data-i18n="p2_f3">· API + integraciones</div>
-        <div class="pcard-feat" data-i18n="p2_f4">· Usuarios ilimitados</div>
-        <button class="pcard-btn" data-i18n="price_btn">Hablar con ventas →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CTA + CONTACT FORM ═══════════════════════════════════ -->
-  <section class="contact-section" id="contacto">
-    <!-- Headline de impacto -->
-    <div class="contact-headline">
-      <div class="eyebrow contact-eyebrow" data-i18n="form_eyebrow">Contacto</div>
-      <h2 data-i18n-html="cta_h2">Te lo mostramos en <em>30 minutos.</em></h2>
-      <p data-i18n="cta_p">Demo personalizada con datos similares a los de tu granja. Sin presión.</p>
-    </div>
-    <!-- Dos columnas: copy + formulario -->
-    <div class="contact-inner">
-      <div class="contact-left">
-        <h3 data-i18n-html="form_h2">¿Hablamos sobre <em>tu operación?</em></h3>
-        <p data-i18n="form_sub">Cuéntanos sobre tu operación y te mostramos cómo PorcySys se adapta a tu granja.</p>
-        <div class="contact-features">
-          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat1">Demo
-              personalizada sin costo</span></div>
-          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat2">Atención
-              personalizada en cada paso</span></div>
-          <div class="contact-feat"><span class="contact-feat-dot"></span><span data-i18n="form_feat3">Sin compromiso de
-              compra</span></div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="nb"><span>9:41</span><span>● ● ●</span></div>
+          <h6>Detalle de parición <span style="color:var(--ink-mute)">⋯</span></h6>
+          <div class="phone-img">[ pig photo ]</div>
+          <div class="pb">Parición #1256</div>
+          <div class="li"><span>Fecha</span><b>14/05/2024</b></div>
+          <div class="li"><span>Cerda</span><b>0256</b></div>
+          <div class="li"><span>Lechones nacidos</span><b>14</b></div>
+          <div class="li"><span>Lechones vivos</span><b>13</b></div>
+          <div class="li"><span>Mortalidad</span><b>1 (7%)</b></div>
+          <div class="li"><span>Peso promedio</span><b>1,45 kg</b></div>
+          <div class="pbtn">VER DETALLES</div>
         </div>
       </div>
-      <div class="contact-right">
-        <form id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-field">
-              <label class="form-label" for="f_name" data-i18n="form_label_name">Nombre</label>
-              <input class="form-input" id="f_name" name="name" type="text" required
-                data-i18n-placeholder="form_ph_name" placeholder="Tu nombre" />
-            </div>
-            <div class="form-field">
-              <label class="form-label" for="f_email" data-i18n="form_label_email">Correo electrónico</label>
-              <input class="form-input" id="f_email" name="email" type="email" required
-                data-i18n-placeholder="form_ph_email" placeholder="tu@correo.com" />
-            </div>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_farm" data-i18n="form_label_farm">Nombre de la granja o empresa</label>
-            <input class="form-input" id="f_farm" name="farm" type="text" data-i18n-placeholder="form_ph_farm"
-              placeholder="Granja San Pedro" />
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_size" data-i18n="form_label_size">Tamaño de operación</label>
-            <select class="form-input form-select" id="f_size" name="size">
-              <option value="" data-i18n="form_size_default">Selecciona una opción</option>
-              <option value="small" data-i18n="form_size_small">Pequeño (10–100 cerdas)</option>
-              <option value="medium" data-i18n="form_size_medium">Mediano (100–500 cerdas)</option>
-              <option value="large" data-i18n="form_size_large">Grande (500+ cerdas)</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_msg" data-i18n="form_label_msg">Mensaje <span class="form-optional"
-                data-i18n="form_optional">(opcional)</span></label>
-            <textarea class="form-input form-textarea" id="f_msg" name="message" rows="3"
-              data-i18n-placeholder="form_ph_msg" placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
-          </div>
-          <div id="formStatus" class="form-status" aria-live="polite"></div>
-          <button type="submit" class="btn-primary lg form-submit" id="formSubmit">
-            <span id="formBtnText" data-i18n="form_submit">Enviar mensaje →</span>
-          </button>
-        </form>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="footer-logo"><img src="./assets/logo.png" alt="PorcySys" /></div>
-    <p data-i18n="footer_p">Sistema integral de gestión porcina. Disponible en Español, English &amp; Português.</p>
-  </footer>
+<!-- ══════════ BENEFITS ══════════ -->
+<section style="padding:0 0 90px" id="beneficios">
+  <div class="wrap">
+    <div class="benefits">
+      <div class="benefit">
+        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M7 18a4 4 0 010-8 5 5 0 019.5-1A4.5 4.5 0 0117 18H7z"/><path d="M11 13v3M9 13h4" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="#ec1a5c"/></svg></div>
+        <h4>Accede desde<br/>cualquier lugar</h4>
+        <p>Tu información siempre contigo en la nube.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg></div>
+        <h4>Datos seguros</h4>
+        <p>Protegemos tu información con altos estándares de seguridad.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 3h6"/></svg></div>
+        <h4>Ahorra tiempo</h4>
+        <p>Automatiza procesos y enfócate en hacer crecer tu negocio.</p>
+      </div>
+      <div class="benefit">
+        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M3 19h18M5 19v-6M9 19V9M13 19v-3M17 19V6"/><path d="M5 9l4-3 4 3 4-5"/></svg></div>
+        <h4>Más rentabilidad</h4>
+        <p>Decisiones basadas en datos para maximizar tus resultados.</p>
+      </div>
+      <div class="benefit-art"><img src="assets/piglets.jpeg" alt="Lechones en granja" /></div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    /* ══ CONFIG ═══════════════════════════════════════════════════
-       Cambia estas variables para controlar qué secciones se muestran.
-    ════════════════════════════════════════════════════════════════ */
-    const CONFIG = {
-      showPricing: false,
-      web3formsKey: '445e047f-d4a8-47e5-8184-62a012d03987',
-    };
+<!-- ══════════ CONTROL FINANCIERO ══════════ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap fin-grid">
+    <div>
+      <div class="section-eyebrow">Nuevo módulo</div>
+      <h2>CONTROL FINANCIERO<br/><span style="color:var(--pink)">INTEGRADO</span></h2>
+      <p class="lead">Tus números productivos y financieros en la <b>misma plataforma</b>. Ingresos, gastos, costo por kilo, márgenes y proyecciones — sin hojas de cálculo, sin estimaciones.</p>
 
-    /* ══ i18n — cargado desde locales/*.json ════════════════════ */
-    const LOCALES = {};
-    let lang = 'ES';
-    let activeMod = 0, activeAI = 0;
+      <ul class="fin-features">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h3"/></svg>
+          <div><b>Ingresos & egresos</b>Registra ventas, alimento, mano de obra y servicios por granja.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><path d="M4 20l5-7 4 4 7-9"/><path d="M14 8h6v6"/></svg>
+          <div><b>Costo por kilo</b>Calcula automáticamente el costo real de producción por animal y lote.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div><b>Flujo de caja</b>Proyecciones a 30, 60 y 90 días con alertas de liquidez.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M8 8h5M8 16h6"/></svg>
+          <div><b>Reportes contables</b>Exporta a Excel o conecta con tu software de contabilidad.</div>
+        </li>
+      </ul>
+    </div>
 
-    async function loadLocales() {
-      const langs = ['ES', 'EN', 'PT'];
-      await Promise.all(langs.map(async l => {
-        const res = await fetch(`./locales/${l.toLowerCase()}.json`);
-        LOCALES[l] = await res.json();
-      }));
-    }
-
-    /* ══ APPLY TRANSLATIONS ════════════════════════════════════ */
-    function applyLang(l) {
-      lang = l;
-      const tr = LOCALES[l];
-      if (!tr) return;
-      document.documentElement.lang = l.toLowerCase();
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const v = tr[el.dataset.i18n];
-        if (v !== undefined) el.textContent = v;
-      });
-      document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const v = tr[el.dataset.i18nHtml];
-        if (v !== undefined) el.innerHTML = v;
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const v = tr[el.dataset.i18nPlaceholder];
-        if (v !== undefined) el.placeholder = v;
-      });
-      document.querySelectorAll('select [data-i18n]').forEach(el => {
-        const v = tr[el.dataset.i18n];
-        if (v !== undefined) el.textContent = v;
-      });
-      document.querySelectorAll('[data-mod]').forEach(btn => {
-        const span = btn.querySelector('.mod-name');
-        if (span) span.textContent = tr.mods[parseInt(btn.dataset.mod)].title;
-      });
-      document.querySelectorAll('#aiTabs .ai-tab').forEach((btn, i) => {
-        btn.textContent = tr['ai_tab' + i] || btn.textContent;
-      });
-      document.querySelectorAll('#langSw span').forEach(sp =>
-        sp.classList.toggle('active', sp.dataset.lang === l)
-      );
-      document.querySelectorAll('.nav-drawer [data-i18n]').forEach(el => {
-        const v = tr[el.dataset.i18n];
-        if (v !== undefined) el.textContent = v;
-      });
-      renderModule(activeMod);
-      renderChat(activeAI);
-      renderDonut();
-    }
-
-    /* ══ MODULE DETAIL ════════════════════════════════════════ */
-    const MOD_KEYS = ['inventario', 'ciclo', 'alimento', 'reportes', 'costos', 'multi'];
-
-    function renderModule(idx) {
-      activeMod = idx;
-      const tr = LOCALES[lang];
-      const m = tr.mods[idx];
-      const key = MOD_KEYS[idx];
-      document.getElementById('modDetail').innerHTML = `
-    <div class="mod-detail-num mono">MÓDULO 0${idx + 1}</div>
-    <h3>${m.title}</h3>
-    <p>${m.desc}</p>
-    <div class="mod-preview">${modulePreview(key, tr)}</div>
-  `;
-      document.querySelectorAll('[data-mod]').forEach(btn => {
-        const i = parseInt(btn.dataset.mod);
-        btn.classList.toggle('active', i === idx);
-        const arrow = btn.querySelector('.mod-arrow');
-        if (i === idx) { if (!arrow) { const sp = document.createElement('span'); sp.className = 'mod-arrow'; sp.textContent = '→'; btn.appendChild(sp); } }
-        else { if (arrow) arrow.remove(); }
-      });
-    }
-
-    function modulePreview(key, tr) {
-      const terra = '#5C7A3A', olive = '#A87340', tsoft = '#A8B97D', cream = '#F4EFE2';
-      if (key === 'inventario') {
-        return `<div class="prev-grid">${Array.from({ length: 56 }, (_, i) => `<div class="prev-grid-cell" style="background:${i % 11 === 3 ? tsoft : i % 7 === 0 ? olive : cream}"></div>`).join('')}</div>`;
-      }
-      if (key === 'ciclo') {
-        const stages = tr.cycle_stages;
-        const days = [0, 21, 28, 70, 130, 165];
-        const colors = [olive, olive, olive, tsoft, tsoft, terra];
-        return `<div class="prev-cycle">${stages.map((s, i) => `<div class="prev-cycle-row"><span class="prev-cycle-dot" style="background:${colors[i]}">${i + 1}</span><span class="prev-cycle-name">${s}</span><span class="prev-cycle-day mono">${days[i]}d</span></div>`).join('')}</div>`;
-      }
-      if (key === 'alimento') {
-        const names = tr.feed_stages;
-        const vals = [78, 92, 45, 64];
-        return `<div class="prev-bars">${names.map((n, i) => `<div class="prev-bar-wrap"><div class="prev-bar-labels"><span>${n}</span><span class="mono" style="color:${vals[i] < 50 ? terra : 'var(--ink-mute)'}">${vals[i]}%</span></div><div class="prev-bar-track"><div class="prev-bar-fill" style="width:${vals[i]}%;background:${vals[i] < 50 ? terra : olive}"></div></div></div>`).join('')}</div>`;
-      }
-      if (key === 'reportes') {
-        return `<svg viewBox="0 0 400 160" style="width:100%;height:100%" preserveAspectRatio="none">${lineSVG(400, 160, terra, olive)}</svg>`;
-      }
-      if (key === 'costos') {
-        return `<div class="prev-cost"><div class="prev-cost-label">${tr.cost_label}</div><div class="prev-cost-num">$1.42<span class="prev-cost-sub">/kg</span></div><div class="prev-cost-meta"><span style="color:var(--olive)">${tr.down_label}</span><span style="color:var(--ink-mute)">${tr.margin_label}</span></div></div>`;
-      }
-      return `<div class="prev-multi">${tr.farm_names.map((g, i) => `<div class="prev-multi-card"><span class="prev-multi-name">${g}</span><div><div class="prev-multi-num mono">${[684, 412, 746][i]}</div><div class="prev-multi-unit">${tr.head_label}</div></div></div>`).join('')}</div>`;
-    }
-
-    /* ══ AI CHAT ════════════════════════════════════════════════ */
-    function renderChat(idx) {
-      activeAI = idx;
-      const turn = LOCALES[lang].ai_turns[idx];
-      const isBar = idx === 1;
-      const dataRows = isBar
-        ? turn.rows.map((r, i) => `<div class="chat-bar-row"><div class="chat-bar-labels"><span>${r[0]}</span><span class="mono">${r[1]}</span></div><div class="chat-bar-track"><div class="chat-bar-fill" style="width:${[18, 32, 48][i]}%;background:var(--terra)"></div></div></div>`).join('')
-        : turn.rows.map(r => `<div class="chat-data-row"><span>${r[0]}</span><span class="mono">${r[1]}</span></div>`).join('');
-      document.getElementById('chatBody').innerHTML = `
-    <div class="chat-user"><div class="chat-bubble">${turn.q}</div></div>
-    <div class="chat-tool"><span class="chat-tool-icon mono">⟳</span><span class="mono" style="font-size:11px">${turn.tool}</span></div>
-    <div class="chat-ai">
-      <span class="chat-ai-av">✦</span>
-      <div class="chat-ai-body">
-        <div class="chat-ai-text">${turn.a}</div>
-        <div class="chat-data-card">
-          <div class="chat-data-title">${turn.card_title}</div>
-          ${dataRows}
+    <div class="fin-card">
+      <div class="fin-card-top">
+        <h5>Resumen financiero · Mayo</h5>
+        <span class="fin-pill">▲ Saludable</span>
+      </div>
+      <div class="fin-stats">
+        <div class="fin-stat">
+          <div class="l">Ingresos</div>
+          <div class="v">$847<small>K</small></div>
+          <div class="d">▲ 12.4% vs abril</div>
         </div>
-        <div class="chat-sources">${turn.sources.map(s => `<span class="chat-source mono">↗ ${s}</span>`).join('')}</div>
+        <div class="fin-stat">
+          <div class="l">Egresos</div>
+          <div class="v">$612<small>K</small></div>
+          <div class="d neg">▲ 4.1% vs abril</div>
+        </div>
+        <div class="fin-stat">
+          <div class="l">Margen neto</div>
+          <div class="v">27.7<small>%</small></div>
+          <div class="d">▲ 3.2 pp</div>
+        </div>
+      </div>
+
+      <div class="fin-bars">
+        <div class="fin-bars-top">
+          <h6>Ingresos vs egresos</h6>
+          <span>Últimos 6 meses</span>
+        </div>
+        <div class="bars-row">
+          <div class="bcol"><div class="b1" style="height:42%"></div><div class="b2" style="height:30%"></div><div class="lbl">Dic</div></div>
+          <div class="bcol"><div class="b1" style="height:48%"></div><div class="b2" style="height:36%"></div><div class="lbl">Ene</div></div>
+          <div class="bcol"><div class="b1" style="height:60%"></div><div class="b2" style="height:42%"></div><div class="lbl">Feb</div></div>
+          <div class="bcol"><div class="b1" style="height:55%"></div><div class="b2" style="height:40%"></div><div class="lbl">Mar</div></div>
+          <div class="bcol"><div class="b1" style="height:72%"></div><div class="b2" style="height:48%"></div><div class="lbl">Abr</div></div>
+          <div class="bcol"><div class="b1" style="height:88%"></div><div class="b2" style="height:62%"></div><div class="lbl">May</div></div>
+        </div>
+      </div>
+
+      <div class="fin-tx">
+        <div class="fin-tx-row">
+          <div class="ico in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2dd47e" stroke-width="2"><path d="M8 12V4M4 8l4-4 4 4"/></svg></div>
+          <div class="meta"><b>Venta lote #245 · 142 cerdos</b><span>San Pedro · hace 2h</span></div>
+          <div class="amt in">+$184,300</div>
+        </div>
+        <div class="fin-tx-row">
+          <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a" stroke-width="2"><path d="M8 4v8M4 8l4 4 4-4"/></svg></div>
+          <div class="meta"><b>Compra alimento balanceado</b><span>La Esperanza · ayer</span></div>
+          <div class="amt out">−$42,180</div>
+        </div>
+        <div class="fin-tx-row">
+          <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a" stroke-width="2"><path d="M8 4v8M4 8l4 4 4-4"/></svg></div>
+          <div class="meta"><b>Servicio veterinario</b><span>El Roble · 03/05</span></div>
+          <div class="amt out">−$8,600</div>
+        </div>
       </div>
     </div>
-  `;
-      document.querySelectorAll('#aiTabs .ai-tab').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-    }
+  </div>
+</section>
 
-    /* ══ CHARTS ════════════════════════════════════════════════ */
-    function lineSVG(w, h, accent, olive) {
-      const pad = 10, n = 12;
-      const xs = Array.from({ length: n }, (_, i) => pad + (i * (w - pad * 2)) / (n - 1));
-      const v1 = [22, 28, 34, 41, 49, 58, 66, 74, 81, 89, 96, 104], v2 = [8, 11, 15, 19, 24, 28, 33, 36, 38, 40, 42, 44];
-      const max = 110, y = v => h - pad - (v / max) * (h - pad * 2);
-      const path = vals => { let d = `M ${xs[0]} ${y(vals[0])}`; for (let i = 1; i < vals.length; i++) { const cx = (xs[i - 1] + xs[i]) / 2; d += ` Q ${cx} ${y(vals[i - 1])}, ${cx} ${(y(vals[i - 1]) + y(vals[i])) / 2} T ${xs[i]} ${y(vals[i])}`; } return d; };
-      const grid = [0, 1, 2, 3].map(i => `<line x1="${pad}" x2="${w - pad}" y1="${pad + i * ((h - pad * 2) / 3)}" y2="${pad + i * ((h - pad * 2) / 3)}" stroke="rgba(35,41,26,0.07)" stroke-width="1"/>`).join('');
-      const p1 = path(v1), p2 = path(v2);
-      return `${grid}<path d="${p1} L ${xs[n - 1]} ${h - pad} L ${xs[0]} ${h - pad} Z" fill="${accent}" opacity=".08"/><path d="${p2}" fill="none" stroke="${olive}" stroke-width="1.5" stroke-dasharray="3 3" opacity=".7"/><path d="${p1}" fill="none" stroke="${accent}" stroke-width="2" stroke-linecap="round"/>`;
-    }
+<!-- ══════════ ASISTENTE IA ══════════ -->
+<section class="section ai-section">
+  <div class="wrap ai-grid">
+    <div class="ai-chat">
+      <div class="ai-head">
+        <div class="ai-avatar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        </div>
+        <div>
+          <h5>Asistente PorcySys</h5>
+          <p>● En línea · responde en segundos</p>
+        </div>
+        <div class="menu">⋯</div>
+      </div>
+      <div class="ai-body">
+        <div class="msg me">¿Qué granja tuvo la mejor conversión alimenticia este mes?</div>
+        <div class="msg bot">
+          La mejor conversión la registró <b>Granja San Pedro</b> con un índice de <b>2.31</b>, un 6% por debajo del promedio general (2.45). Es el cuarto mes consecutivo que lidera.
+          <div class="mini-stat">
+            <div><b>2.31</b>Conversión</div>
+            <div><b>$28.40<span>/kg</span></b>Costo</div>
+          </div>
+        </div>
+        <div class="msg me">¿Y qué cerdas debería revisar por baja productividad?</div>
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="ai-input">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a7a96" stroke-width="1.6"><path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z"/></svg>
+        <input placeholder="Pregúntame sobre tus datos…" />
+        <button class="send">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 12l18-9-7 18-3-8-8-1z"/></svg>
+        </button>
+      </div>
+    </div>
 
-    function renderLineChart() {
-      const svg = document.getElementById('lineChart');
-      if (svg) svg.innerHTML = lineSVG(400, 170, '#5C7A3A', '#A87340');
-    }
+    <div>
+      <div class="section-eyebrow">Powered by AI</div>
+      <h2>PREGÚNTALE A TU<br/><span style="color:var(--pink)">GRANJA</span></h2>
+      <p class="lead">El asistente de IA de PorcySys conversa con tus datos en lenguaje natural. <b>Pregunta, compara y descubre patrones</b> sin abrir un solo reporte.</p>
 
-    function renderDonut() {
-      const svg = document.getElementById('donutChart');
-      const legend = document.getElementById('donutLegend');
-      if (!svg || !legend) return;
-      const size = 140, r = size / 2 - 12, c = 2 * Math.PI * r;
-      const colors = ['#5C7A3A', '#A87340', '#A8B97D', '#C99A6E'];
-      const vals = [58, 18, 14, 10];
-      const total = vals.reduce((a, v) => a + v, 0);
-      let off = 0, paths = '';
-      vals.forEach((v, i) => { const len = (v / total) * c; paths += `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${colors[i]}" stroke-width="14" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}"/>`; off += len; });
-      svg.innerHTML = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="rgba(35,41,26,0.07)" stroke-width="14"/>${paths}`;
-      const lbls = (LOCALES[lang] || {}).donut_legend || ['Alimento', 'Sanidad', 'M. obra', 'Otros'];
-      legend.innerHTML = vals.map((v, i) => `<div class="donut-row"><span class="donut-swatch" style="background:${colors[i]}"></span><span class="donut-row-label">${lbls[i]}</span><span class="donut-row-val mono">${v}%</span></div>`).join('');
-    }
+      <div class="ai-prompts">
+        <span>¿Cuántos lechones nacieron esta semana?</span>
+        <span>Compara mortalidad de mayo vs abril</span>
+        <span>¿Qué cerdas están en celo hoy?</span>
+        <span>Dame un resumen de la granja San Pedro</span>
+      </div>
 
-    function renderRepBars() {
-      const el = document.getElementById('repBars');
-      if (!el) return;
-      const rows = [{ l: 'A-04 · Galpón 2', v: 2.48, c: '#5C7A3A' }, { l: 'B-12 · Galpón 1', v: 2.71, c: '#5C7A3A' }, { l: 'C-08 · Galpón 3', v: 2.84, c: '#A87340' }, { l: 'D-02 · Galpón 2', v: 2.59, c: '#5C7A3A' }, { l: 'E-15 · Galpón 1', v: 2.95, c: '#A87340' }];
-      const max = Math.max(...rows.map(r => r.v)) * 1.1;
-      el.innerHTML = rows.map(r => `<div class="rbar-wrap"><div class="rbar-labels"><span>${r.l}</span><span class="mono">${r.v}</span></div><div class="rbar-track"><div class="rbar-fill" style="width:${(r.v / max) * 100}%;background:${r.c}"></div></div></div>`).join('');
-    }
+      <ul class="ai-features">
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z"/><circle cx="8.5" cy="12" r="1" fill="#ec1a5c"/><circle cx="12" cy="12" r="1" fill="#ec1a5c"/><circle cx="15.5" cy="12" r="1" fill="#ec1a5c"/></svg></div>
+          <div><b>Lenguaje natural</b><p>Habla con tu sistema como si fuera un veterinario o gerente. Sin filtros, sin queries.</p></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/><path d="M8 11h6M11 8v6"/></svg></div>
+          <div><b>Cruza datos al instante</b><p>Reproducción, sanidad, alimentación y finanzas, todo en una sola respuesta.</p></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M12 2l2.5 5 5.5.8-4 3.9 1 5.5L12 14.5 7 17.2l1-5.5-4-3.9 5.5-.8z"/></svg></div>
+          <div><b>Recomendaciones</b><p>Sugiere acciones: lotes a vender, cerdas a revisar, gastos a optimizar.</p></div>
+        </li>
+        <li>
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h10M7 16h7"/></svg></div>
+          <div><b>Reportes generados</b><p>Pídelo en chat y descárgalo como PDF o Excel listo para compartir.</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    /* ══ INIT ═══════════════════════════════════════════════════ */
-    document.addEventListener('DOMContentLoaded', async () => {
-      await loadLocales();
+<!-- ══════════ CTA STATS ══════════ -->
+<section style="padding:0 0 80px" id="precios">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div class="cta-left">
+        <div class="cta-circle">
+          <svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M9 18c0-4 3-7 7-7 5 0 7 4 7 7 0 4-3 7-7 7-2 0-3-.4-5-2-1 1-1.5 1.4-2.5 1-1-.4-.5-1.5 0-2 .5-.6.5-1.5.5-2z"/><circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/><path d="M20 19.5h2"/></svg>
+        </div>
+        <div class="cta-text">
+          <h3>ÚNETE A LAS GRANJAS<br/>QUE YA ESTÁN <span>CRECIENDO</span></h3>
+          <p>Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.</p>
+        </div>
+      </div>
+      <div class="cta-stat"><b>+500</b><span>Granjas activas</span></div>
+      <div class="cta-stat"><b>+120K</b><span>Cerdas gestionadas</span></div>
+      <div class="cta-stat"><b>+30%</b><span>Aumento promedio<br/>en rentabilidad</span></div>
+      <div class="cta-actions">
+        <button class="btn btn-primary">Solicitar Demo Gratis <span class="arr"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="2"><path d="M2 5h6M5 2l3 3-3 3"/></svg></span></button>
+        <small>Sin tarjeta de crédito · Sin compromiso</small>
+      </div>
+    </div>
+  </div>
+</section>
 
-      document.querySelectorAll('#langSw span').forEach(sp =>
-        sp.addEventListener('click', () => applyLang(sp.dataset.lang))
-      );
+<!-- ══════════ LOGOS ══════════ -->
+<section class="logos" style="padding:0 0 50px">
+  <div class="wrap">
+    <h6>Con la confianza de</h6>
+    <div class="logo-row">
+      <div class="l">GRANJA<br/>SAN PEDRO<small>EST. 1998</small></div>
+      <div class="l"><em>La Esperanza</em><small>Granja Porcina</small></div>
+      <div class="l">EL ROBLE<small>Granja</small></div>
+      <div class="l"><em>Los Pinos</em><small>Granja Porcina</small></div>
+      <div class="l">SANTA FE<small>Granja</small></div>
+      <div class="l">LA MONTAÑA<small>Granja Porcina</small></div>
+    </div>
+  </div>
+</section>
 
-      // Todos los botones de CTA principal llevan al formulario
-      document.querySelectorAll('[data-i18n="cta_schedule"]').forEach(btn =>
-        btn.addEventListener('click', () =>
-          document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' })
-        )
-      );
-      document.querySelectorAll('[data-mod]').forEach(btn =>
-        btn.addEventListener('click', () => renderModule(parseInt(btn.dataset.mod)))
-      );
-      document.querySelectorAll('#aiTabs .ai-tab').forEach(btn =>
-        btn.addEventListener('click', () => renderChat(parseInt(btn.dataset.turn)))
-      );
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="contacto">
+  <div class="wrap foot">
+    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M9 13l2 2 4-4"/></svg>Implementación rápida</div>
+    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 19c0-2 2-4 5-4"/></svg>Soporte técnico especializado</div>
+    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Actualizaciones constantes</div>
+    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Disponible 24/7</div>
+    <div class="foot-contact">
+      <div class="wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l5-1.4A10 10 0 1012 2zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.3-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2c.1.2 0 .4-.1.6l-.3.4c-.1.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg></div>
+      <div><small>¿Dudas? Escríbenos</small><b>+52 123 456 7890</b></div>
+    </div>
+  </div>
+</footer>
 
-      // Sección de planes
-      const pricingSection = document.getElementById('planes');
-      const pricingNavLink = document.querySelector('a[href="#planes"]');
-      if (!CONFIG.showPricing) {
-        if (pricingSection) pricingSection.style.display = 'none';
-        if (pricingNavLink) pricingNavLink.style.display = 'none';
-      }
-
-      // Formulario de contacto — Web3Forms
-      const form = document.getElementById('contactForm');
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const tr = LOCALES[lang] || {};
-          const btn = document.getElementById('formSubmit');
-          const btnText = document.getElementById('formBtnText');
-          const status = document.getElementById('formStatus');
-
-          btn.disabled = true;
-          btnText.textContent = tr.form_sending || 'Enviando…';
-          status.className = 'form-status';
-          status.textContent = '';
-
-          const data = new FormData(form);
-          data.append('access_key', CONFIG.web3formsKey);
-          data.append('subject', `PorcySys — Contacto desde la landing (${lang})`);
-          data.append('from_name', 'PorcySys Landing');
-
-          try {
-            const res = await fetch('https://api.web3forms.com/submit', {
-              method: 'POST',
-              body: data,
-            });
-            const json = await res.json();
-            if (json.success) {
-              status.className = 'form-status form-status--ok';
-              status.textContent = tr.form_ok || '¡Mensaje enviado! Te contactaremos pronto.';
-              form.reset();
-            } else {
-              throw new Error(json.message || 'error');
-            }
-          } catch {
-            status.className = 'form-status form-status--err';
-            status.textContent = tr.form_err || 'Ocurrió un error. Intenta de nuevo o escríbenos directamente.';
-          } finally {
-            btn.disabled = false;
-            btnText.textContent = tr.form_submit || 'Enviar mensaje →';
-          }
-        });
-      }
-
-      applyLang('ES');
-      renderLineChart();
-      renderRepBars();
-
-      // Hamburger menu
-      const hamburger = document.getElementById('navHamburger');
-      const drawer = document.getElementById('navDrawer');
-      hamburger.addEventListener('click', () => {
-        const open = drawer.classList.toggle('open');
-        hamburger.classList.toggle('open', open);
-        hamburger.setAttribute('aria-expanded', open);
-        drawer.setAttribute('aria-hidden', !open);
-      });
-      drawer.querySelectorAll('a, button').forEach(el =>
-        el.addEventListener('click', () => {
-          drawer.classList.remove('open');
-          hamburger.classList.remove('open');
-          hamburger.setAttribute('aria-expanded', false);
-          drawer.setAttribute('aria-hidden', true);
-        })
-      );
-    });
-  </script>
 </body>
-
 </html>
