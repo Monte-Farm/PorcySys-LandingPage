@@ -34,9 +34,22 @@
         <span data-lang="EN">EN</span>
         <span data-lang="PT">PT</span>
       </div>
-      <button class="btn-primary" data-i18n="cta_schedule">Agendar llamada →</button>
+      <button class="btn-primary nav-cta" data-i18n="cta_schedule">Agendar llamada →</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <!-- Mobile menu drawer -->
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <a href="#problema" data-i18n="nav_problema">Problema</a>
+    <a href="#allinone" data-i18n="nav_allinone">Todo en uno</a>
+    <a href="#agente" data-i18n="nav_agente">Agente IA</a>
+    <a href="#modulos" data-i18n="nav_modulos">Módulos</a>
+    <a href="#reportes" data-i18n="nav_reportes">Reportes</a>
+    <a href="#planes" data-i18n="nav_planes">Planes</a>
+    <button class="btn-primary lg" style="margin-top:8px;width:100%;justify-content:center" data-i18n="cta_schedule">Agendar llamada →</button>
+  </div>
 
   <!-- ══ HERO ══════════════════════════════════════════════════ -->
   <section class="hero">
@@ -568,6 +581,10 @@
       document.querySelectorAll('#langSw span').forEach(sp =>
         sp.classList.toggle('active', sp.dataset.lang === l)
       );
+      document.querySelectorAll('.nav-drawer [data-i18n]').forEach(el => {
+        const v = tr[el.dataset.i18n];
+        if (v !== undefined) el.textContent = v;
+      });
       renderModule(activeMod);
       renderChat(activeAI);
       renderDonut();
@@ -762,6 +779,24 @@
       applyLang('ES');
       renderLineChart();
       renderRepBars();
+
+      // Hamburger menu
+      const hamburger = document.getElementById('navHamburger');
+      const drawer = document.getElementById('navDrawer');
+      hamburger.addEventListener('click', () => {
+        const open = drawer.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        drawer.setAttribute('aria-hidden', !open);
+      });
+      drawer.querySelectorAll('a, button').forEach(el =>
+        el.addEventListener('click', () => {
+          drawer.classList.remove('open');
+          hamburger.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', false);
+          drawer.setAttribute('aria-hidden', true);
+        })
+      );
     });
   </script>
 </body>
