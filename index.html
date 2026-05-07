@@ -26,7 +26,8 @@
     --blue:#3b82f6;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
 
@@ -34,7 +35,7 @@
 
   /* ───── Nav ───── */
   .nav{position:sticky;top:0;z-index:30;background:rgba(12,6,18,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
-  .nav-inner{display:flex;align-items:center;gap:32px;padding:18px 0}
+  .nav-inner{display:flex;align-items:center;gap:20px;padding:14px 0}
   .logo{display:flex;align-items:center;gap:12px}
   .logo-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:radial-gradient(circle at 30% 30%, rgba(236,26,92,.4), transparent 70%)}
   .logo-mark svg{filter:drop-shadow(0 0 6px var(--pink-glow))}
@@ -43,24 +44,22 @@
   .logo-text b span{color:var(--pink)}
   .logo-text small{font-size:9px;letter-spacing:.32em;color:var(--ink-mute);margin-top:4px;font-weight:600}
 
-  .nav-links{display:flex;gap:36px;margin-left:48px}
-  .nav-links a{font-size:13px;font-weight:600;letter-spacing:.16em;color:var(--ink-dim);position:relative;padding:6px 0;text-transform:uppercase}
+  .nav-links{display:flex;gap:24px;margin-left:32px}
+  .nav-links a{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--ink-dim);position:relative;padding:6px 0;text-transform:uppercase;white-space:nowrap}
   .nav-links a.on{color:var(--ink)}
   .nav-links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--pink);border-radius:2px}
   .nav-cta{margin-left:auto}
 
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;font-family:Manrope,sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease;white-space:nowrap}
   .btn-primary{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;box-shadow:0 10px 30px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
   .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 34px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
   .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
   .btn-ghost:hover{border-color:var(--pink);color:var(--pink-2)}
-  .btn .arr{width:18px;height:18px;display:inline-grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.18)}
-  .btn .arr svg{display:block}
 
   /* ───── Hero ───── */
   .hero{position:relative;padding:60px 0 40px;overflow:hidden}
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 80% 30%, rgba(236,26,92,.18), transparent 60%);pointer-events:none}
-  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.45fr;gap:40px;align-items:center;position:relative}
   .eyebrow-rule{display:flex;align-items:center;gap:14px;color:var(--ink-mute);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
   .eyebrow-rule::before{content:"";width:48px;height:1px;background:var(--pink)}
   h1{font-family:Manrope,sans-serif;font-weight:800;font-size:68px;line-height:.98;letter-spacing:-.02em;margin:0 0 12px}
@@ -80,22 +79,7 @@
   .play{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line-2);display:grid;place-items:center}
 
   /* Hero image */
-  .hero-art{position:relative;aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:#1a0a14;isolation:isolate}
-  .hero-art .ring{position:absolute;inset:8%;border-radius:50%;border:2px solid var(--pink);box-shadow:0 0 40px var(--pink),inset 0 0 30px rgba(236,26,92,.2);z-index:2;pointer-events:none}
-  .hero-art .ring::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(236,26,92,.25);filter:blur(2px)}
-  .hero-art .sparks{position:absolute;inset:0;background:
-      radial-gradient(2px 2px at 20% 30%, var(--pink-2), transparent 60%),
-      radial-gradient(1px 1px at 70% 18%, #fff, transparent 60%),
-      radial-gradient(2px 2px at 86% 60%, var(--pink), transparent 60%),
-      radial-gradient(1px 1px at 32% 80%, #fff, transparent 60%);
-      opacity:.7;z-index:3}
-  .ph-pig{position:absolute;inset:0;display:grid;place-items:center;font-family:JetBrains Mono,monospace;font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.18em;
-    background:
-      repeating-linear-gradient(135deg, rgba(236,26,92,.06) 0 8px, transparent 8px 16px),
-      radial-gradient(70% 60% at 60% 50%, rgba(236,26,92,.18), transparent 70%),
-      linear-gradient(180deg,#1d0a18,#0c0612);
-    z-index:1}
-  .ph-pig span{padding:8px 12px;border:1px dashed rgba(255,255,255,.18);border-radius:6px;background:rgba(0,0,0,.35)}
+  .hero-art{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;isolation:isolate}
 
   .badge-card{position:absolute;right:18px;bottom:18px;background:linear-gradient(135deg, rgba(60,18,40,.9), rgba(20,8,28,.9));border:1px solid var(--line-2);border-radius:18px;padding:14px 20px 14px 14px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(8px);z-index:4;max-width:340px}
   .badge-card .ico{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle, rgba(236,26,92,.5), rgba(236,26,92,.1));display:grid;place-items:center;border:1px solid rgba(236,26,92,.4)}
@@ -166,15 +150,16 @@
   .phone .pbtn{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;font-size:9px;font-weight:700;padding:6px 0;border-radius:5px;text-align:center;margin-top:8px;letter-spacing:.06em}
 
   /* ───── Benefits ───── */
-  .benefits{background:linear-gradient(180deg,#100620,#0c0612);border:1px solid var(--line);border-radius:18px;padding:34px 0;display:grid;grid-template-columns:repeat(4,1fr) 1.1fr;align-items:center;overflow:hidden;position:relative}
-  .benefit{padding:0 22px;text-align:center;border-right:1px solid var(--line)}
+  .benefits{background:#080410;border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:repeat(4,1fr) 1.3fr;align-items:stretch;overflow:hidden;position:relative}
+  .benefit{padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
   .benefit:nth-last-child(2){border-right:0}
-  .b-ico{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;margin:0 auto 14px;background:rgba(236,26,92,.06);box-shadow:0 0 22px -6px var(--pink-glow), inset 0 0 12px rgba(236,26,92,.12)}
-  .benefit h4{font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.16em;margin:0 0 8px;text-transform:uppercase}
-  .benefit p{font-size:12px;color:var(--ink-dim);line-height:1.5;margin:0}
-  .benefit-art{position:relative;height:180px;border-radius:10px;margin-right:24px;overflow:hidden;background:#170820}
-  .benefit-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95) contrast(1.02)}
-  .benefit-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,6,18,.7) 0%,rgba(12,6,18,.15) 30%,transparent 60%);pointer-events:none}
+  .b-ico{width:70px;height:70px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;margin:0 auto 16px;background:rgba(236,26,92,.08);box-shadow:0 0 32px -4px var(--pink-glow), 0 0 60px -20px var(--pink-glow), inset 0 0 16px rgba(236,26,92,.15)}
+  .b-ico svg{filter:drop-shadow(0 0 6px var(--pink-glow))}
+  .benefit h4{font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.18em;margin:0 0 8px;text-transform:uppercase;color:var(--ink)}
+  .benefit p{font-size:11px;color:var(--ink-dim);line-height:1.55;margin:0}
+  .benefit-art{position:relative;min-height:200px;overflow:hidden;background:#170820}
+  .benefit-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1) contrast(1.05) brightness(.9)}
+  .benefit-art::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,4,16,1) 0%,rgba(8,4,16,.7) 30%,transparent 60%);pointer-events:none}
 
   /* ───── Financial section ───── */
   .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -256,18 +241,18 @@
   .ai-features li p{margin:0;font-size:13px;color:var(--ink-dim);line-height:1.5}
 
   /* ───── CTA Stats ───── */
-  .cta-banner{background:linear-gradient(135deg,#2a0a1f 0%, #1a0820 50%, #0e0617 100%);border:1px solid var(--line-2);border-radius:22px;padding:36px 40px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1.4fr;gap:30px;align-items:center;position:relative;overflow:hidden}
-  .cta-banner::before{content:"";position:absolute;left:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, var(--pink-soft), transparent 70%);pointer-events:none}
-  .cta-left{display:flex;align-items:center;gap:18px}
-  .cta-circle{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--pink);background:rgba(236,26,92,.06);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 0 24px -6px var(--pink-glow)}
-  .cta-text h3{font-family:Manrope,sans-serif;font-size:20px;margin:0 0 8px;line-height:1.1}
-  .cta-text h3 span{color:var(--pink)}
-  .cta-text p{margin:0;font-size:12px;color:var(--ink-dim);line-height:1.5}
-  .cta-stat{text-align:center}
-  .cta-stat b{display:block;font-family:Manrope,sans-serif;font-size:34px;font-weight:800;line-height:1}
-  .cta-stat span{display:block;margin-top:6px;font-size:10px;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
-  .cta-actions{text-align:right}
-  .cta-actions small{display:block;margin-top:10px;font-size:11px;color:var(--ink-mute)}
+  .cta-banner{background:linear-gradient(135deg,#2a0a1f 0%,#1a0820 50%,#0e0617 100%);border:1px solid var(--line-2);border-radius:22px;padding:52px 48px;text-align:center;position:relative;overflow:hidden}
+  .cta-banner::before{content:"";position:absolute;left:50%;top:-60px;transform:translateX(-50%);width:400px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(236,26,92,.18), transparent 70%);pointer-events:none}
+  .cta-banner h3{font-family:Manrope,sans-serif;font-size:36px;font-weight:800;margin:0 0 10px;line-height:1.1;position:relative}
+  .cta-banner h3 span{color:var(--pink)}
+  .cta-banner > p{font-size:15px;color:var(--ink-dim);margin:0 auto 40px;max-width:480px;line-height:1.6;position:relative}
+  .cta-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:36px;position:relative}
+  .cta-stat{text-align:center;padding:0 20px;border-right:1px solid var(--line)}
+  .cta-stat:last-child{border-right:0}
+  .cta-stat b{display:block;font-family:Manrope,sans-serif;font-size:44px;font-weight:800;line-height:1;color:var(--ink)}
+  .cta-stat span{display:block;margin-top:6px;font-size:11px;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
+  .cta-actions{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative}
+  .cta-actions small{font-size:11px;color:var(--ink-mute)}
 
   /* ───── Logos ───── */
   .logos h6{text-align:center;font-family:Manrope,sans-serif;letter-spacing:.32em;font-size:12px;color:var(--pink-2);margin:0 0 32px;text-transform:uppercase}
@@ -285,10 +270,99 @@
   .foot-contact b{font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.02em}
   .foot-contact small{display:block;font-size:11px;color:var(--ink-mute)}
 
+  /* ───── Contact ───── */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
+  .contact-form-card{background:linear-gradient(180deg,#170822,#0e0617);border:1px solid var(--line-2);border-radius:18px;padding:28px;box-shadow:0 30px 60px -30px rgba(236,26,92,.2)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .form-label{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--ink-dim);text-transform:uppercase}
+  .form-input{background:#11071a;border:1px solid var(--line-2);border-radius:8px;padding:11px 14px;color:var(--ink);font-size:14px;font-family:inherit;outline:0;transition:border-color .15s}
+  .form-input:focus{border-color:var(--pink)}
+  .form-input::placeholder{color:var(--ink-mute)}
+  select.form-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7a96' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+  textarea.form-input{resize:vertical;min-height:90px}
+
+  /* ───── Hamburger ───── */
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:transparent;border:1px solid var(--line-2);border-radius:8px;cursor:pointer;padding:8px;margin-left:auto}
+  .nav-hamburger span{display:block;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  .nav-drawer{display:none;flex-direction:column;gap:4px;padding:16px 20px 20px;border-top:1px solid var(--line);background:rgba(12,6,18,.97);backdrop-filter:blur(14px)}
+  .nav-drawer.open{display:flex}
+  .nav-drawer a{font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--ink-dim);padding:10px 0;border-bottom:1px solid var(--line);text-transform:uppercase}
+  .nav-drawer a:last-of-type{border-bottom:0}
+  .nav-drawer .btn{width:100%;justify-content:center;margin-top:12px}
+
   @media(max-width:1024px){
-    .hero-grid,.biz,.fin-grid,.ai-grid,.cta-banner{grid-template-columns:1fr}
+    .hero-grid,.biz,.fin-grid,.ai-grid,.contact-grid{grid-template-columns:1fr}
     .phone{position:static;margin:0 auto 18px}
     h1{font-size:54px}
+    .cta-banner{padding:40px 32px}
+    .cta-banner h3{font-size:28px}
+  }
+
+  @media(max-width:768px){
+    /* Nav */
+    .nav-links,.nav-cta{display:none}
+    .nav-hamburger{display:flex}
+
+    /* Hero */
+    .hero{padding:40px 0 30px}
+    h1{font-size:38px;line-height:1.05}
+    .hero-sub{font-size:15px;margin:16px 0 24px}
+    .feat-row{grid-template-columns:repeat(2,1fr);gap:14px;max-width:100%}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions .btn{justify-content:center}
+
+    /* Sections */
+    h2{font-size:30px}
+    .section{padding:60px 0}
+
+    /* Dashboard — hide phone, simplify */
+    .phone{display:none}
+    .dash{grid-template-columns:1fr;min-height:auto}
+    .dash-side{display:none}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .charts{grid-template-columns:1fr}
+
+    /* Benefits */
+    .benefits{grid-template-columns:1fr 1fr;padding:24px 0}
+    .benefit-art{display:none}
+
+    /* Financial bars */
+    .fin-stats{grid-template-columns:1fr 1fr}
+    .fin-stats .fin-stat:last-child{grid-column:1/-1}
+
+    /* CTA banner */
+    .cta-banner{padding:36px 24px}
+    .cta-banner h3{font-size:24px}
+    .cta-stats{grid-template-columns:1fr}
+    .cta-stat{border-right:0;border-bottom:1px solid var(--line);padding:16px 0}
+    .cta-stat:last-child{border-bottom:0}
+    .cta-stat b{font-size:36px}
+
+    /* Logos */
+    .logo-row{grid-template-columns:repeat(3,1fr);gap:16px}
+
+    /* Footer */
+    .foot{grid-template-columns:1fr 1fr;gap:16px}
+
+    /* Contact form */
+    .form-row{grid-template-columns:1fr}
+  }
+
+  @media(max-width:480px){
+    .wrap{padding:0 16px}
+    h1{font-size:32px}
+    h2{font-size:26px}
+    .benefits{grid-template-columns:1fr}
+    .logo-row{grid-template-columns:repeat(2,1fr)}
+    .fin-stats{grid-template-columns:1fr}
+    .fin-stats .fin-stat:last-child{grid-column:auto}
+    .foot{grid-template-columns:1fr}
+    .cta-banner{border-radius:14px}
   }
 </style>
 </head>
@@ -298,30 +372,38 @@
 <nav class="nav">
   <div class="wrap nav-inner">
     <div class="logo">
-      <div class="logo-mark">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M9 18c0-4 3-7 7-7 2 0 3.5.6 5 1.6.7-.5 1.6-.6 2.4-.4l.6-2.5 2 .8-1 2.6c.4.5.6 1.1.6 1.7 0 .8-.4 1.5-1 2 .2.6.4 1.3.4 2.2 0 4-3 7-7 7-2.5 0-3.5-.4-5.5-2-1.5 1.4-2 2-3.5 2-1.5 0-2-1-1-2 .6-.6 1-1.4 1-2.5 0-.5-.1-1.1-.3-1.7L9 18z" stroke="#ec1a5c" stroke-width="1.6" stroke-linejoin="round"/>
-          <circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/>
-          <path d="M20 19.5h2" stroke="#ec1a5c" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="logo-text"><b>PORCY<span>SYS</span></b><small>SISTEMA PORCINO</small></div>
+      <img src="assets/logo.png" alt="PorcySys" style="height:52px;width:auto;filter:invert(1);display:block" />
     </div>
     <div class="nav-links">
       <a href="#" class="on">Inicio</a>
       <a href="#funciones">Funciones</a>
       <a href="#beneficios">Beneficios</a>
+      <a href="#financiero">Financiero</a>
+      <a href="#asistente">Asistente IA</a>
       <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </div>
     <div class="nav-cta">
-      <button class="btn btn-primary">Solicitar Demo</button>
+      <a href="#contacto" class="btn btn-primary">Solicitar Demo</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#" onclick="closeMenu()">Inicio</a>
+    <a href="#funciones" onclick="closeMenu()">Funciones</a>
+    <a href="#beneficios" onclick="closeMenu()">Beneficios</a>
+    <a href="#financiero" onclick="closeMenu()">Financiero</a>
+    <a href="#asistente" onclick="closeMenu()">Asistente IA</a>
+    <a href="#precios" onclick="closeMenu()">Precios</a>
+    <a href="#contacto" onclick="closeMenu()">Contacto</a>
+    <a href="#contacto" class="btn btn-primary" onclick="closeMenu()">Solicitar Demo</a>
   </div>
 </nav>
 
 <!-- ══════════ HERO ══════════ -->
-<header class="hero">
+<header class="hero" id="hero">
   <div class="wrap hero-grid">
     <div>
       <h1>EL CONTROL TOTAL<br/>DE TU<span class="rule"></span><br/><span class="accent">GRANJA PORCINA</span></h1>
@@ -355,15 +437,13 @@
       </div>
 
       <div class="hero-actions">
-        <button class="btn btn-primary">Solicitar Demo Gratis <span class="arr"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="2"><path d="M2 5h6M5 2l3 3-3 3"/></svg></span></button>
-        <button class="btn btn-ghost"><span class="play"><svg width="10" height="12" viewBox="0 0 10 12" fill="#fff"><path d="M0 0v12l10-6z"/></svg></span> Ver video</button>
+        <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
+        <button class="btn btn-ghost">Ver video</button>
       </div>
     </div>
 
     <div class="hero-art">
-      <div class="ph-pig"><span>[ HERO PHOTO · pig portrait · 1:1 ]</span></div>
-      <div class="ring"></div>
-      <div class="sparks"></div>
+      <img src="assets/hero.png" alt="Granja porcina" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1" />
       <div class="badge-card">
         <div class="ico">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3d7a" stroke-width="1.8"><path d="M4 18l4-5 3 3 5-7 4 5"/><path d="M16 9h4v4"/></svg>
@@ -469,7 +549,7 @@
         <div class="phone-screen">
           <div class="nb"><span>9:41</span><span>● ● ●</span></div>
           <h6>Detalle de parición <span style="color:var(--ink-mute)">⋯</span></h6>
-          <div class="phone-img">[ pig photo ]</div>
+          <div class="phone-img"><img src="assets/pig-photo.avif" alt="Cerda" style="width:100%;height:100%;object-fit:cover;border-radius:6px" /></div>
           <div class="pb">Parición #1256</div>
           <div class="li"><span>Fecha</span><b>14/05/2024</b></div>
           <div class="li"><span>Cerda</span><b>0256</b></div>
@@ -514,10 +594,9 @@
 </section>
 
 <!-- ══════════ CONTROL FINANCIERO ══════════ -->
-<section class="section" style="padding-top:0">
+<section class="section" id="financiero" style="padding-top:0">
   <div class="wrap fin-grid">
     <div>
-      <div class="section-eyebrow">Nuevo módulo</div>
       <h2>CONTROL FINANCIERO<br/><span style="color:var(--pink)">INTEGRADO</span></h2>
       <p class="lead">Tus números productivos y financieros en la <b>misma plataforma</b>. Ingresos, gastos, costo por kilo, márgenes y proyecciones — sin hojas de cálculo, sin estimaciones.</p>
 
@@ -601,7 +680,7 @@
 </section>
 
 <!-- ══════════ ASISTENTE IA ══════════ -->
-<section class="section ai-section">
+<section class="section ai-section" id="asistente">
   <div class="wrap ai-grid">
     <div class="ai-chat">
       <div class="ai-head">
@@ -673,20 +752,15 @@
 <section style="padding:0 0 80px" id="precios">
   <div class="wrap">
     <div class="cta-banner">
-      <div class="cta-left">
-        <div class="cta-circle">
-          <svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M9 18c0-4 3-7 7-7 5 0 7 4 7 7 0 4-3 7-7 7-2 0-3-.4-5-2-1 1-1.5 1.4-2.5 1-1-.4-.5-1.5 0-2 .5-.6.5-1.5.5-2z"/><circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/><path d="M20 19.5h2"/></svg>
-        </div>
-        <div class="cta-text">
-          <h3>ÚNETE A LAS GRANJAS<br/>QUE YA ESTÁN <span>CRECIENDO</span></h3>
-          <p>Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.</p>
-        </div>
+      <h3>ÚNETE A LAS GRANJAS<br/>QUE YA ESTÁN <span>CRECIENDO</span></h3>
+      <p>Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.</p>
+      <div class="cta-stats">
+        <div class="cta-stat"><b>+500</b><span>Granjas activas</span></div>
+        <div class="cta-stat"><b>+120K</b><span>Cerdas gestionadas</span></div>
+        <div class="cta-stat"><b>+30%</b><span>Aumento en rentabilidad</span></div>
       </div>
-      <div class="cta-stat"><b>+500</b><span>Granjas activas</span></div>
-      <div class="cta-stat"><b>+120K</b><span>Cerdas gestionadas</span></div>
-      <div class="cta-stat"><b>+30%</b><span>Aumento promedio<br/>en rentabilidad</span></div>
       <div class="cta-actions">
-        <button class="btn btn-primary">Solicitar Demo Gratis <span class="arr"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="2"><path d="M2 5h6M5 2l3 3-3 3"/></svg></span></button>
+        <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
         <small>Sin tarjeta de crédito · Sin compromiso</small>
       </div>
     </div>
@@ -697,30 +771,131 @@
 <section class="logos" style="padding:0 0 50px">
   <div class="wrap">
     <h6>Con la confianza de</h6>
-    <div class="logo-row">
-      <div class="l">GRANJA<br/>SAN PEDRO<small>EST. 1998</small></div>
-      <div class="l"><em>La Esperanza</em><small>Granja Porcina</small></div>
-      <div class="l">EL ROBLE<small>Granja</small></div>
-      <div class="l"><em>Los Pinos</em><small>Granja Porcina</small></div>
-      <div class="l">SANTA FE<small>Granja</small></div>
-      <div class="l">LA MONTAÑA<small>Granja Porcina</small></div>
+    <div class="logo-row" style="grid-template-columns:1fr;justify-items:center">
+      <div class="l" style="font-size:22px;letter-spacing:.06em">K de Belo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACTO ══════════ -->
+<section class="section" id="contacto" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="section-eyebrow">Contacto</div>
+      <h2>TE LO MOSTRAMOS EN<br/><span style="color:var(--pink)">30 MINUTOS</span></h2>
+      <p style="font-size:15px;color:var(--ink-dim);margin:0 auto;max-width:480px;line-height:1.6">Demo personalizada con datos similares a los de tu granja. Sin presión.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h3 style="font-family:Manrope,sans-serif;font-size:26px;font-weight:800;margin:0 0 16px;line-height:1.2">¿Hablamos sobre<br/><em style="color:var(--pink);font-style:normal">tu operación?</em></h3>
+        <p style="font-size:14px;color:var(--ink-dim);line-height:1.6;margin:0 0 28px">Cuéntanos sobre tu operación y te mostramos cómo PorcySys se adapta a tu granja.</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Demo personalizada sin costo
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Atención personalizada en cada paso
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Sin compromiso de compra
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="f_name">Nombre</label>
+              <input class="form-input" id="f_name" name="name" type="text" required placeholder="Tu nombre" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="f_email">Correo electrónico</label>
+              <input class="form-input" id="f_email" name="email" type="email" required placeholder="tu@correo.com" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_farm">Nombre de la granja o empresa</label>
+            <input class="form-input" id="f_farm" name="farm" type="text" placeholder="Granja San Pedro" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_size">Tamaño de operación</label>
+            <select class="form-input" id="f_size" name="size">
+              <option value="">Selecciona una opción</option>
+              <option value="small">Pequeño (10–100 cerdas)</option>
+              <option value="medium">Mediano (100–500 cerdas)</option>
+              <option value="large">Grande (500+ cerdas)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f_msg">Mensaje <span style="color:var(--ink-mute);font-size:11px">(opcional)</span></label>
+            <textarea class="form-input" id="f_msg" name="message" rows="3" placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
+          </div>
+          <div id="formStatus" style="font-size:13px;margin-bottom:8px;min-height:20px"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enviar mensaje →</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══════════ FOOTER ══════════ -->
-<footer id="contacto">
-  <div class="wrap foot">
+<footer>
+  <div class="wrap foot" style="grid-template-columns:repeat(4,auto);justify-content:start">
     <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M9 13l2 2 4-4"/></svg>Implementación rápida</div>
     <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 19c0-2 2-4 5-4"/></svg>Soporte técnico especializado</div>
     <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Actualizaciones constantes</div>
     <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Disponible 24/7</div>
-    <div class="foot-contact">
-      <div class="wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l5-1.4A10 10 0 1012 2zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.3-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2c.1.2 0 .4-.1.6l-.3.4c-.1.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg></div>
-      <div><small>¿Dudas? Escríbenos</small><b>+52 123 456 7890</b></div>
-    </div>
   </div>
 </footer>
 
+<script>
+  // Hamburger
+  const btn = document.getElementById('navHamburger');
+  const drawer = document.getElementById('navDrawer');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+  function closeMenu() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+
+  // Active nav indicator via IntersectionObserver
+  const sections = document.querySelectorAll('section[id], header.hero');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const sectionMap = {
+    'hero': '#',
+    'funciones': '#funciones',
+    'beneficios': '#beneficios',
+    'financiero': '#financiero',
+    'asistente': '#asistente',
+    'precios': '#precios',
+    'contacto': '#contacto',
+  };
+
+  function setActive(id) {
+    const href = sectionMap[id] || '#' + id;
+    navLinks.forEach(a => {
+      const isActive = a.getAttribute('href') === href;
+      a.classList.toggle('on', isActive);
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id || 'hero';
+        setActive(id);
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+  // Observe hero header too
+  const heroEl = document.querySelector('header.hero');
+  if (heroEl) observer.observe(heroEl);
+</script>
 </body>
 </html>
