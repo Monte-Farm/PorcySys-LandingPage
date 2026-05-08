@@ -1,901 +1,2547 @@
 <!doctype html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8" />
-<title>PorcySys — Sistema Porcino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --bg:#0c0612;
-    --bg-2:#15091a;
-    --surface:#1a0c22;
-    --surface-2:#22102c;
-    --line:#2a1638;
-    --line-2:#3a1f4a;
-    --ink:#f4eef6;
-    --ink-dim:#b9a9c4;
-    --ink-mute:#8a7a96;
-    --pink:#ec1a5c;
-    --pink-2:#ff3d7a;
-    --pink-glow:rgba(236,26,92,.45);
-    --pink-soft:rgba(236,26,92,.12);
-    --green:#2dd47e;
-    --blue:#3b82f6;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  <meta charset="utf-8" />
+  <title>PorcySys — Sistema Porcino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0612;
+      --bg-2: #15091a;
+      --surface: #1a0c22;
+      --surface-2: #22102c;
+      --line: #2a1638;
+      --line-2: #3a1f4a;
+      --ink: #f4eef6;
+      --ink-dim: #b9a9c4;
+      --ink-mute: #8a7a96;
+      --pink: #ec1a5c;
+      --pink-2: #ff3d7a;
+      --pink-glow: rgba(236, 26, 92, .45);
+      --pink-soft: rgba(236, 26, 92, .12);
+      --green: #2dd47e;
+      --blue: #3b82f6;
+    }
 
-  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+    * {
+      box-sizing: border-box
+    }
 
-  /* ───── Nav ───── */
-  .nav{position:sticky;top:0;z-index:30;background:rgba(12,6,18,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
-  .nav-inner{display:flex;align-items:center;gap:20px;padding:14px 0}
-  .logo{display:flex;align-items:center;gap:12px}
-  .logo-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:radial-gradient(circle at 30% 30%, rgba(236,26,92,.4), transparent 70%)}
-  .logo-mark svg{filter:drop-shadow(0 0 6px var(--pink-glow))}
-  .logo-text{display:flex;flex-direction:column;line-height:1}
-  .logo-text b{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em}
-  .logo-text b span{color:var(--pink)}
-  .logo-text small{font-size:9px;letter-spacing:.32em;color:var(--ink-mute);margin-top:4px;font-weight:600}
+    html {
+      scroll-behavior: smooth
+    }
 
-  .nav-links{display:flex;gap:24px;margin-left:32px}
-  .nav-links a{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--ink-dim);position:relative;padding:6px 0;text-transform:uppercase;white-space:nowrap}
-  .nav-links a.on{color:var(--ink)}
-  .nav-links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--pink);border-radius:2px}
-  .nav-cta{margin-left:auto}
+    html,
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
 
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;font-family:Manrope,sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease;white-space:nowrap}
-  .btn-primary{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;box-shadow:0 10px 30px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 34px -8px var(--pink-glow), inset 0 1px 0 rgba(255,255,255,.18)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
-  .btn-ghost:hover{border-color:var(--pink);color:var(--pink-2)}
+    a {
+      color: inherit;
+      text-decoration: none
+    }
 
-  /* ───── Hero ───── */
-  .hero{position:relative;padding:60px 0 40px;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 80% 30%, rgba(236,26,92,.18), transparent 60%);pointer-events:none}
-  .hero-grid{display:grid;grid-template-columns:1fr 1.45fr;gap:40px;align-items:center;position:relative}
-  .eyebrow-rule{display:flex;align-items:center;gap:14px;color:var(--ink-mute);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
-  .eyebrow-rule::before{content:"";width:48px;height:1px;background:var(--pink)}
-  h1{font-family:Manrope,sans-serif;font-weight:800;font-size:68px;line-height:.98;letter-spacing:-.02em;margin:0 0 12px}
-  h1 .accent{color:var(--pink);text-shadow:0 0 30px rgba(236,26,92,.4)}
-  h1 .rule{display:inline-block;width:64px;height:3px;background:var(--pink);vertical-align:middle;margin:0 0 18px 14px;border-radius:2px}
-  .hero-sub{font-size:18px;line-height:1.55;color:var(--ink-dim);max-width:520px;margin:24px 0 36px}
-  .hero-sub b{color:var(--ink);font-weight:600}
-  .hero-sub .em{color:var(--pink-2);font-weight:600}
+    img {
+      max-width: 100%;
+      display: block
+    }
 
-  .feat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:560px;margin:30px 0 36px}
-  .feat{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-  .feat-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:rgba(236,26,92,.08);border:1px solid rgba(236,26,92,.18)}
-  .feat-icon svg{filter:drop-shadow(0 0 4px var(--pink-glow))}
-  .feat-label{font-family:Manrope,sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;color:var(--ink);line-height:1.25;text-transform:uppercase}
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px
+    }
 
-  .hero-actions{display:flex;gap:14px;align-items:center}
-  .play{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line-2);display:grid;place-items:center}
+    /* ───── Nav ───── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(12, 6, 18, .78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, .04)
+    }
 
-  /* Hero image */
-  .hero-art{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;isolation:isolate}
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 0
+    }
 
-  .badge-card{position:absolute;right:18px;bottom:18px;background:linear-gradient(135deg, rgba(60,18,40,.9), rgba(20,8,28,.9));border:1px solid var(--line-2);border-radius:18px;padding:14px 20px 14px 14px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(8px);z-index:4;max-width:340px}
-  .badge-card .ico{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle, rgba(236,26,92,.5), rgba(236,26,92,.1));display:grid;place-items:center;border:1px solid rgba(236,26,92,.4)}
-  .badge-card h4{font-family:Manrope,sans-serif;font-size:14px;margin:0 0 2px;letter-spacing:.04em;line-height:1.2}
-  .badge-card p{margin:0;font-size:10px;color:var(--pink-2);letter-spacing:.18em;font-weight:700;text-transform:uppercase}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
 
-  /* ───── Sections ───── */
-  .section{padding:90px 0;position:relative}
-  .section-eyebrow{font-family:Manrope,sans-serif;font-weight:700;font-size:11px;letter-spacing:.32em;color:var(--pink);text-transform:uppercase;margin-bottom:10px}
-  h2{font-family:Manrope,sans-serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.01em;margin:0 0 18px}
-  .lead{font-size:15px;color:var(--ink-dim);line-height:1.6;max-width:420px}
-  .lead b{color:var(--ink);font-weight:600}
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, rgba(236, 26, 92, .4), transparent 70%)
+    }
 
-  .biz{display:grid;grid-template-columns:.9fr 1.3fr;gap:60px;align-items:center}
-  .checks{margin:30px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
-  .checks li{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-dim)}
-  .check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;flex:0 0 auto;background:rgba(236,26,92,.08)}
+    .logo-mark svg {
+      filter: drop-shadow(0 0 6px var(--pink-glow))
+    }
 
-  /* Dashboard mockup */
-  .dash-stage{position:relative}
-  .laptop{position:relative;background:linear-gradient(180deg,#1a0d24,#0e0617);border:1px solid var(--line-2);border-radius:14px 14px 18px 18px;padding:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
-  .laptop::after{content:"";display:block;height:14px;margin:10px -28px -22px;background:linear-gradient(180deg,#1a0d24,#0a040f);border-radius:0 0 22px 22px;border:1px solid var(--line);border-top:0}
-  .dash{background:#0e0617;border-radius:8px;overflow:hidden;display:grid;grid-template-columns:170px 1fr;min-height:380px;border:1px solid var(--line)}
-  .dash-side{background:#11071a;border-right:1px solid var(--line);padding:14px 12px;display:flex;flex-direction:column;gap:14px}
-  .dash-logo{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
-  .dash-logo svg{filter:drop-shadow(0 0 4px var(--pink-glow))}
-  .dash-logo b{font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.04em}
-  .dash-logo b span{color:var(--pink)}
-  .dash-nav{display:flex;flex-direction:column;gap:2px}
-  .dash-nav a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--ink-dim)}
-  .dash-nav a.on{background:rgba(236,26,92,.12);color:#fff;border-left:2px solid var(--pink)}
-  .dash-nav .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1
+    }
 
-  .dash-main{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
-  .dash-top{display:flex;justify-content:space-between;align-items:center}
-  .dash-top h5{font-size:11px;margin:0;letter-spacing:.1em;color:var(--ink-dim);text-transform:uppercase}
-  .dash-top .who{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--ink-mute)}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .kpi{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:8px 10px}
-  .kpi-l{font-size:8px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
-  .kpi-v{font-family:Manrope,sans-serif;font-size:18px;font-weight:700}
-  .kpi-d{font-size:8px;color:var(--green);float:right;margin-top:-13px}
-  .charts{display:grid;grid-template-columns:1.6fr 1fr;gap:8px}
-  .card{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:10px}
-  .card h6{font-size:9px;margin:0 0 8px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase}
-  .chart-line{position:relative;height:96px}
-  .chart-line svg{width:100%;height:100%}
-  .donut{display:flex;align-items:center;gap:10px}
-  .donut svg{flex:0 0 auto}
-  .legend{display:flex;flex-direction:column;gap:4px;font-size:8px;color:var(--ink-dim);width:100%}
-  .legend .row{display:flex;align-items:center;gap:5px;justify-content:space-between}
-  .legend .row .l{display:flex;align-items:center;gap:5px}
-  .legend .sw{width:7px;height:7px;border-radius:2px}
-  .top-table{background:#150a1e;border:1px solid var(--line);border-radius:6px;padding:10px}
-  .top-table .row{display:grid;grid-template-columns:90px 1fr 28px;gap:8px;align-items:center;padding:3px 0;font-size:9px;color:var(--ink-dim)}
-  .bar{height:5px;background:#241432;border-radius:3px;overflow:hidden}
-  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink-2))}
+    .logo-text b {
+      font-family: Manrope, sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: .02em
+    }
 
-  /* Phone */
-  .phone{position:absolute;left:-50px;top:60px;width:188px;background:#0c0612;border:6px solid #1c0e26;border-radius:24px;padding:8px;box-shadow:0 25px 40px -10px rgba(0,0,0,.7);z-index:2}
-  .phone-screen{background:#11071a;border-radius:16px;overflow:hidden;padding:10px;border:1px solid var(--line)}
-  .phone .nb{display:flex;justify-content:space-between;font-size:7px;color:var(--ink-mute);margin-bottom:6px}
-  .phone h6{font-size:10px;margin:0 0 6px;display:flex;align-items:center;justify-content:space-between}
-  .phone-img{aspect-ratio:16/10;border-radius:6px;background:repeating-linear-gradient(135deg,rgba(236,26,92,.1) 0 6px,transparent 6px 12px),#2a1230;display:grid;place-items:center;color:rgba(255,255,255,.4);font-size:8px;font-family:JetBrains Mono,monospace;margin-bottom:8px}
-  .phone .pb{font-size:8px;font-weight:700;margin-bottom:6px}
-  .phone .li{display:flex;justify-content:space-between;font-size:8px;padding:3px 0;border-bottom:1px dashed var(--line);color:var(--ink-dim)}
-  .phone .li b{color:var(--ink);font-weight:600}
-  .phone .pbtn{background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;font-size:9px;font-weight:700;padding:6px 0;border-radius:5px;text-align:center;margin-top:8px;letter-spacing:.06em}
+    .logo-text b span {
+      color: var(--pink)
+    }
 
-  /* ───── Benefits ───── */
-  .benefits{background:#080410;border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:repeat(4,1fr) 1.3fr;align-items:stretch;overflow:hidden;position:relative}
-  .benefit{padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
-  .benefit:nth-last-child(2){border-right:0}
-  .b-ico{width:70px;height:70px;border-radius:50%;border:1.5px solid var(--pink);display:grid;place-items:center;margin:0 auto 16px;background:rgba(236,26,92,.08);box-shadow:0 0 32px -4px var(--pink-glow), 0 0 60px -20px var(--pink-glow), inset 0 0 16px rgba(236,26,92,.15)}
-  .b-ico svg{filter:drop-shadow(0 0 6px var(--pink-glow))}
-  .benefit h4{font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.18em;margin:0 0 8px;text-transform:uppercase;color:var(--ink)}
-  .benefit p{font-size:11px;color:var(--ink-dim);line-height:1.55;margin:0}
-  .benefit-art{position:relative;min-height:200px;overflow:hidden;background:#170820}
-  .benefit-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1) contrast(1.05) brightness(.9)}
-  .benefit-art::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,4,16,1) 0%,rgba(8,4,16,.7) 30%,transparent 60%);pointer-events:none}
+    .logo-text small {
+      font-size: 9px;
+      letter-spacing: .32em;
+      color: var(--ink-mute);
+      margin-top: 4px;
+      font-weight: 600
+    }
 
-  /* ───── Financial section ───── */
-  .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .fin-card{background:linear-gradient(180deg,#170822,#0e0617);border:1px solid var(--line-2);border-radius:18px;padding:24px;box-shadow:0 30px 60px -30px rgba(236,26,92,.3)}
-  .fin-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-  .fin-card-top h5{font-family:Manrope,sans-serif;font-size:14px;margin:0;letter-spacing:.04em}
-  .fin-pill{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--green);background:rgba(45,212,126,.12);padding:4px 10px;border-radius:999px;text-transform:uppercase}
-  .fin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-  .fin-stat{background:#11071a;border:1px solid var(--line);border-radius:10px;padding:12px}
-  .fin-stat .l{font-size:10px;color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-  .fin-stat .v{font-family:Manrope,sans-serif;font-size:22px;font-weight:700}
-  .fin-stat .v small{font-size:13px;color:var(--ink-dim);margin-left:2px;font-weight:500}
-  .fin-stat .d{font-size:10px;color:var(--green);font-weight:600;margin-top:2px}
-  .fin-stat .d.neg{color:var(--pink-2)}
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      margin-left: 32px
+    }
 
-  .fin-bars{background:#11071a;border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
-  .fin-bars-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
-  .fin-bars-top h6{font-size:11px;margin:0;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
-  .fin-bars-top span{font-size:10px;color:var(--ink-mute)}
-  .bars-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;height:90px;align-items:end}
-  .bcol{display:flex;flex-direction:column;gap:2px;align-items:center;height:100%;justify-content:flex-end}
-  .bcol .b1{width:100%;background:linear-gradient(180deg,var(--pink-2),var(--pink));border-radius:3px 3px 0 0}
-  .bcol .b2{width:100%;background:rgba(255,255,255,.16);border-radius:3px 3px 0 0}
-  .bcol .lbl{font-size:9px;color:var(--ink-mute);margin-top:6px}
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--ink-dim);
+      position: relative;
+      padding: 6px 0;
+      text-transform: uppercase;
+      white-space: nowrap
+    }
 
-  .fin-tx{display:flex;flex-direction:column;gap:8px}
-  .fin-tx-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12px}
-  .fin-tx-row:last-child{border:0}
-  .fin-tx-row .ico{width:32px;height:32px;border-radius:8px;background:rgba(236,26,92,.1);display:grid;place-items:center;flex:0 0 auto}
-  .fin-tx-row .ico.in{background:rgba(45,212,126,.12)}
-  .fin-tx-row .meta{flex:1;display:flex;flex-direction:column;gap:2px}
-  .fin-tx-row .meta b{font-size:12px;font-weight:600;color:var(--ink)}
-  .fin-tx-row .meta span{font-size:10px;color:var(--ink-mute)}
-  .fin-tx-row .amt{font-family:Manrope,sans-serif;font-weight:700;font-size:13px}
-  .fin-tx-row .amt.in{color:var(--green)}
-  .fin-tx-row .amt.out{color:var(--pink-2)}
+    .nav-links a.on {
+      color: var(--ink)
+    }
 
-  .fin-features{margin:30px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .fin-features li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink-dim);line-height:1.4}
-  .fin-features li b{color:var(--ink);font-weight:600;display:block;font-size:13px;margin-bottom:2px}
+    .nav-links a.on::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      background: var(--pink);
+      border-radius: 2px
+    }
 
-  /* ───── AI Assistant ───── */
-  .ai-section{background:radial-gradient(80% 60% at 30% 50%, rgba(236,26,92,.12), transparent 60%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-  .ai-chat{background:#0e0617;border:1px solid var(--line-2);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(236,26,92,.4)}
-  .ai-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:#170822}
-  .ai-avatar{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--pink-2),var(--pink) 60%, #5a0a23);display:grid;place-items:center;box-shadow:0 0 18px var(--pink-glow);position:relative}
-  .ai-avatar::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--green);bottom:0;right:0;border:2px solid #170822}
-  .ai-head h5{font-family:Manrope,sans-serif;font-size:14px;margin:0;letter-spacing:.02em}
-  .ai-head p{margin:0;font-size:10px;color:var(--green);letter-spacing:.1em;font-weight:600;text-transform:uppercase}
-  .ai-head .menu{margin-left:auto;color:var(--ink-mute);font-size:18px;letter-spacing:.1em}
-  .ai-body{padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-height:340px}
-  .msg{max-width:85%;font-size:13px;line-height:1.5;padding:12px 14px;border-radius:14px}
-  .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--pink-2));color:#fff;border-bottom-right-radius:4px;box-shadow:0 8px 22px -8px var(--pink-glow)}
-  .msg.bot{align-self:flex-start;background:#170822;color:var(--ink);border:1px solid var(--line-2);border-bottom-left-radius:4px}
-  .msg.bot .mini-stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2)}
-  .msg.bot .mini-stat div{font-size:11px;color:var(--ink-dim)}
-  .msg.bot .mini-stat b{display:block;font-family:Manrope,sans-serif;font-size:18px;color:var(--ink);font-weight:700;margin-bottom:2px}
-  .msg.bot .mini-stat b span{color:var(--green);font-size:11px;margin-left:4px;font-weight:600}
-  .typing{align-self:flex-start;display:flex;align-items:center;gap:6px;padding:12px 14px;background:#170822;border:1px solid var(--line-2);border-radius:14px;border-bottom-left-radius:4px}
-  .typing span{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:bp 1.2s infinite}
-  .typing span:nth-child(2){animation-delay:.2s}
-  .typing span:nth-child(3){animation-delay:.4s}
-  @keyframes bp{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+    .nav-cta {
+      margin-left: auto
+    }
 
-  .ai-input{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line);background:#11071a}
-  .ai-input input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-size:13px;font-family:inherit;padding:8px}
-  .ai-input input::placeholder{color:var(--ink-mute)}
-  .send{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-2));display:grid;place-items:center;border:0;cursor:pointer;box-shadow:0 6px 18px -4px var(--pink-glow)}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: 0;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease;
+      white-space: nowrap
+    }
 
-  .ai-prompts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .ai-prompts span{font-size:11px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-dim);background:rgba(236,26,92,.04)}
-  .ai-prompts span::before{content:"❝ ";color:var(--pink-2)}
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      color: #fff;
+      box-shadow: 0 10px 30px -8px var(--pink-glow), inset 0 1px 0 rgba(255, 255, 255, .18)
+    }
 
-  .ai-features{margin-top:30px;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px}
-  .ai-features li{display:flex;gap:14px;align-items:flex-start}
-  .ai-features li .ico{width:42px;height:42px;border-radius:10px;background:rgba(236,26,92,.1);border:1px solid rgba(236,26,92,.2);display:grid;place-items:center;flex:0 0 auto}
-  .ai-features li b{display:block;font-family:Manrope,sans-serif;font-size:14px;font-weight:700;margin-bottom:4px}
-  .ai-features li p{margin:0;font-size:13px;color:var(--ink-dim);line-height:1.5}
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px -8px var(--pink-glow), inset 0 1px 0 rgba(255, 255, 255, .18)
+    }
 
-  /* ───── CTA Stats ───── */
-  .cta-banner{background:linear-gradient(135deg,#2a0a1f 0%,#1a0820 50%,#0e0617 100%);border:1px solid var(--line-2);border-radius:22px;padding:52px 48px;text-align:center;position:relative;overflow:hidden}
-  .cta-banner::before{content:"";position:absolute;left:50%;top:-60px;transform:translateX(-50%);width:400px;height:300px;border-radius:50%;background:radial-gradient(circle, rgba(236,26,92,.18), transparent 70%);pointer-events:none}
-  .cta-banner h3{font-family:Manrope,sans-serif;font-size:36px;font-weight:800;margin:0 0 10px;line-height:1.1;position:relative}
-  .cta-banner h3 span{color:var(--pink)}
-  .cta-banner > p{font-size:15px;color:var(--ink-dim);margin:0 auto 40px;max-width:480px;line-height:1.6;position:relative}
-  .cta-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:36px;position:relative}
-  .cta-stat{text-align:center;padding:0 20px;border-right:1px solid var(--line)}
-  .cta-stat:last-child{border-right:0}
-  .cta-stat b{display:block;font-family:Manrope,sans-serif;font-size:44px;font-weight:800;line-height:1;color:var(--ink)}
-  .cta-stat span{display:block;margin-top:6px;font-size:11px;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
-  .cta-actions{display:flex;flex-direction:column;align-items:center;gap:10px;position:relative}
-  .cta-actions small{font-size:11px;color:var(--ink-mute)}
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-2)
+    }
 
-  /* ───── Logos ───── */
-  .logos h6{text-align:center;font-family:Manrope,sans-serif;letter-spacing:.32em;font-size:12px;color:var(--pink-2);margin:0 0 32px;text-transform:uppercase}
-  .logo-row{display:grid;grid-template-columns:repeat(6,1fr);gap:30px;align-items:center}
-  .logo-row .l{height:64px;display:grid;place-items:center;color:rgba(255,255,255,.55);font-family:Manrope,sans-serif;font-weight:700;font-size:14px;text-align:center;line-height:1.1;letter-spacing:.04em}
-  .logo-row .l small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:9px;color:rgba(255,255,255,.35);letter-spacing:.16em;margin-top:4px;text-transform:uppercase}
-  .logo-row .l em{font-style:italic;font-family:'Manrope',serif;font-weight:600}
+    .btn-ghost:hover {
+      border-color: var(--pink);
+      color: var(--pink-2)
+    }
 
-  /* ───── Footer ───── */
-  .foot{border-top:1px solid var(--line);padding:20px 0 30px;display:grid;grid-template-columns:repeat(4,auto) 1fr;gap:30px;align-items:center;font-size:13px;color:var(--ink-dim)}
-  .foot-item{display:flex;align-items:center;gap:8px}
-  .foot-item svg{filter:drop-shadow(0 0 3px var(--pink-glow))}
-  .foot-contact{justify-self:end;display:flex;align-items:center;gap:10px}
-  .foot-contact .wa{width:38px;height:38px;border-radius:50%;background:#25d366;display:grid;place-items:center}
-  .foot-contact b{font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:var(--ink);letter-spacing:.02em}
-  .foot-contact small{display:block;font-size:11px;color:var(--ink-mute)}
+    /* ───── Hero ───── */
+    .hero {
+      position: relative;
+      padding: 60px 0 40px;
+      overflow: hidden
+    }
 
-  /* ───── Contact ───── */
-  .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
-  .contact-form-card{background:linear-gradient(180deg,#170822,#0e0617);border:1px solid var(--line-2);border-radius:18px;padding:28px;box-shadow:0 30px 60px -30px rgba(236,26,92,.2)}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-  .form-label{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--ink-dim);text-transform:uppercase}
-  .form-input{background:#11071a;border:1px solid var(--line-2);border-radius:8px;padding:11px 14px;color:var(--ink);font-size:14px;font-family:inherit;outline:0;transition:border-color .15s}
-  .form-input:focus{border-color:var(--pink)}
-  .form-input::placeholder{color:var(--ink-mute)}
-  select.form-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7a96' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-  textarea.form-input{resize:vertical;min-height:90px}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 60% at 80% 30%, rgba(236, 26, 92, .18), transparent 60%);
+      pointer-events: none
+    }
 
-  /* ───── Hamburger ───── */
-  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:transparent;border:1px solid var(--line-2);border-radius:8px;cursor:pointer;padding:8px;margin-left:auto}
-  .nav-hamburger span{display:block;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
-  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .nav-hamburger.open span:nth-child(2){opacity:0}
-  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      gap: 40px;
+      align-items: center;
+      position: relative
+    }
 
-  .nav-drawer{display:none;flex-direction:column;gap:4px;padding:16px 20px 20px;border-top:1px solid var(--line);background:rgba(12,6,18,.97);backdrop-filter:blur(14px)}
-  .nav-drawer.open{display:flex}
-  .nav-drawer a{font-size:14px;font-weight:600;letter-spacing:.12em;color:var(--ink-dim);padding:10px 0;border-bottom:1px solid var(--line);text-transform:uppercase}
-  .nav-drawer a:last-of-type{border-bottom:0}
-  .nav-drawer .btn{width:100%;justify-content:center;margin-top:12px}
+    .eyebrow-rule {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--ink-mute);
+      font-size: 12px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      margin-bottom: 18px
+    }
 
-  @media(max-width:1024px){
-    .hero-grid,.biz,.fin-grid,.ai-grid,.contact-grid{grid-template-columns:1fr}
-    .phone{position:static;margin:0 auto 18px}
-    h1{font-size:54px}
-    .cta-banner{padding:40px 32px}
-    .cta-banner h3{font-size:28px}
-  }
+    .eyebrow-rule::before {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: var(--pink)
+    }
 
-  @media(max-width:768px){
-    /* Nav */
-    .nav-links,.nav-cta{display:none}
-    .nav-hamburger{display:flex}
+    h1 {
+      font-family: Manrope, sans-serif;
+      font-weight: 800;
+      font-size: 68px;
+      line-height: .98;
+      letter-spacing: -.02em;
+      margin: 0 0 12px
+    }
 
-    /* Hero */
-    .hero{padding:40px 0 30px}
-    h1{font-size:38px;line-height:1.05}
-    .hero-sub{font-size:15px;margin:16px 0 24px}
-    .feat-row{grid-template-columns:repeat(2,1fr);gap:14px;max-width:100%}
-    .hero-actions{flex-direction:column;align-items:stretch}
-    .hero-actions .btn{justify-content:center}
+    h1 .accent {
+      color: var(--pink);
+      text-shadow: 0 0 30px rgba(236, 26, 92, .4)
+    }
 
-    /* Sections */
-    h2{font-size:30px}
-    .section{padding:60px 0}
+    h1 .rule {
+      display: inline-block;
+      width: 64px;
+      height: 3px;
+      background: var(--pink);
+      vertical-align: middle;
+      margin: 0 0 18px 14px;
+      border-radius: 2px
+    }
 
-    /* Dashboard — hide phone, simplify */
-    .phone{display:none}
-    .dash{grid-template-columns:1fr;min-height:auto}
-    .dash-side{display:none}
-    .kpis{grid-template-columns:repeat(2,1fr)}
-    .charts{grid-template-columns:1fr}
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-dim);
+      max-width: 520px;
+      margin: 24px 0 36px
+    }
 
-    /* Benefits */
-    .benefits{grid-template-columns:1fr 1fr;padding:24px 0}
-    .benefit-art{display:none}
+    .hero-sub b {
+      color: var(--ink);
+      font-weight: 600
+    }
 
-    /* Financial bars */
-    .fin-stats{grid-template-columns:1fr 1fr}
-    .fin-stats .fin-stat:last-child{grid-column:1/-1}
+    .hero-sub .em {
+      color: var(--pink-2);
+      font-weight: 600
+    }
 
-    /* CTA banner */
-    .cta-banner{padding:36px 24px}
-    .cta-banner h3{font-size:24px}
-    .cta-stats{grid-template-columns:1fr}
-    .cta-stat{border-right:0;border-bottom:1px solid var(--line);padding:16px 0}
-    .cta-stat:last-child{border-bottom:0}
-    .cta-stat b{font-size:36px}
+    .feat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      max-width: 560px;
+      margin: 30px 0 36px
+    }
 
-    /* Logos */
-    .logo-row{grid-template-columns:repeat(3,1fr);gap:16px}
+    .feat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px
+    }
 
-    /* Footer */
-    .foot{grid-template-columns:1fr 1fr;gap:16px}
+    .feat-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(236, 26, 92, .08);
+      border: 1px solid rgba(236, 26, 92, .18)
+    }
 
-    /* Contact form */
-    .form-row{grid-template-columns:1fr}
-  }
+    .feat-icon svg {
+      filter: drop-shadow(0 0 4px var(--pink-glow))
+    }
 
-  @media(max-width:480px){
-    .wrap{padding:0 16px}
-    h1{font-size:32px}
-    h2{font-size:26px}
-    .benefits{grid-template-columns:1fr}
-    .logo-row{grid-template-columns:repeat(2,1fr)}
-    .fin-stats{grid-template-columns:1fr}
-    .fin-stats .fin-stat:last-child{grid-column:auto}
-    .foot{grid-template-columns:1fr}
-    .cta-banner{border-radius:14px}
-  }
-</style>
+    .feat-label {
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .14em;
+      color: var(--ink);
+      line-height: 1.25;
+      text-transform: uppercase
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center
+    }
+
+    .play {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--line-2);
+      display: grid;
+      place-items: center
+    }
+
+    /* Hero image */
+    .hero-art {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 20px;
+      overflow: hidden;
+      isolation: isolate
+    }
+
+    .badge-card {
+      position: absolute;
+      right: 18px;
+      bottom: 150px;
+      background: linear-gradient(135deg, rgba(60, 18, 40, .9), rgba(20, 8, 28, .9));
+      border: 1px solid var(--line-2);
+      border-radius: 18px;
+      padding: 14px 20px 14px 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(8px);
+      z-index: 4;
+      max-width: 340px
+    }
+
+    .badge-card .ico {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236, 26, 92, .5), rgba(236, 26, 92, .1));
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(236, 26, 92, .4)
+    }
+
+    .badge-card h4 {
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      margin: 0 0 2px;
+      letter-spacing: .04em;
+      line-height: 1.2
+    }
+
+    .badge-card p {
+      margin: 0;
+      font-size: 10px;
+      color: var(--pink-2);
+      letter-spacing: .18em;
+      font-weight: 700;
+      text-transform: uppercase
+    }
+
+    /* ───── Sections ───── */
+    .section {
+      padding: 90px 0;
+      position: relative
+    }
+
+    .section-eyebrow {
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .32em;
+      color: var(--pink);
+      text-transform: uppercase;
+      margin-bottom: 10px
+    }
+
+    h2 {
+      font-family: Manrope, sans-serif;
+      font-weight: 800;
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -.01em;
+      margin: 0 0 18px
+    }
+
+    .lead {
+      font-size: 15px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+      max-width: 420px
+    }
+
+    .lead b {
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    .biz {
+      display: grid;
+      grid-template-columns: .9fr 1.3fr;
+      gap: 60px;
+      align-items: center
+    }
+
+    .checks {
+      margin: 30px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .checks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--ink-dim)
+    }
+
+    .check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--pink);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: rgba(236, 26, 92, .08)
+    }
+
+    /* Dashboard mockup */
+    .dash-stage {
+      position: relative
+    }
+
+    .mockup-img {
+      width: 100%;
+      height: auto;
+      display: block
+    }
+
+    .dash-side {
+      background: #11071a;
+      border-right: 1px solid var(--line);
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .dash-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .dash-logo svg {
+      filter: drop-shadow(0 0 4px var(--pink-glow))
+    }
+
+    .dash-logo b {
+      font-family: Manrope, sans-serif;
+      font-size: 13px;
+      letter-spacing: .04em
+    }
+
+    .dash-logo b span {
+      color: var(--pink)
+    }
+
+    .dash-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .dash-nav a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--ink-dim)
+    }
+
+    .dash-nav a.on {
+      background: rgba(236, 26, 92, .12);
+      color: #fff;
+      border-left: 2px solid var(--pink)
+    }
+
+    .dash-nav .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: .6
+    }
+
+    .dash-main {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .dash-top h5 {
+      font-size: 11px;
+      margin: 0;
+      letter-spacing: .1em;
+      color: var(--ink-dim);
+      text-transform: uppercase
+    }
+
+    .dash-top .who {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--ink-mute)
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px
+    }
+
+    .kpi {
+      background: #150a1e;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px
+    }
+
+    .kpi-l {
+      font-size: 8px;
+      color: var(--ink-mute);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 3px
+    }
+
+    .kpi-v {
+      font-family: Manrope, sans-serif;
+      font-size: 18px;
+      font-weight: 700
+    }
+
+    .kpi-d {
+      font-size: 8px;
+      color: var(--green);
+      float: right;
+      margin-top: -13px
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 8px
+    }
+
+    .card {
+      background: #150a1e;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px
+    }
+
+    .card h6 {
+      font-size: 9px;
+      margin: 0 0 8px;
+      color: var(--ink-dim);
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    .chart-line {
+      position: relative;
+      height: 96px
+    }
+
+    .chart-line svg {
+      width: 100%;
+      height: 100%
+    }
+
+    .donut {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .donut svg {
+      flex: 0 0 auto
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 8px;
+      color: var(--ink-dim);
+      width: 100%
+    }
+
+    .legend .row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: space-between
+    }
+
+    .legend .row .l {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .legend .sw {
+      width: 7px;
+      height: 7px;
+      border-radius: 2px
+    }
+
+    .top-table {
+      background: #150a1e;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px
+    }
+
+    .top-table .row {
+      display: grid;
+      grid-template-columns: 90px 1fr 28px;
+      gap: 8px;
+      align-items: center;
+      padding: 3px 0;
+      font-size: 9px;
+      color: var(--ink-dim)
+    }
+
+    .bar {
+      height: 5px;
+      background: #241432;
+      border-radius: 3px;
+      overflow: hidden
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--pink-2))
+    }
+
+    /* Phone */
+    .phone {
+      position: absolute;
+      left: -50px;
+      top: 60px;
+      width: 188px;
+      background: #0c0612;
+      border: 6px solid #1c0e26;
+      border-radius: 24px;
+      padding: 8px;
+      box-shadow: 0 25px 40px -10px rgba(0, 0, 0, .7);
+      z-index: 2
+    }
+
+    .phone-screen {
+      background: #11071a;
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 10px;
+      border: 1px solid var(--line)
+    }
+
+    .phone .nb {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7px;
+      color: var(--ink-mute);
+      margin-bottom: 6px
+    }
+
+    .phone h6 {
+      font-size: 10px;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .phone-img {
+      aspect-ratio: 16/10;
+      border-radius: 6px;
+      background: repeating-linear-gradient(135deg, rgba(236, 26, 92, .1) 0 6px, transparent 6px 12px), #2a1230;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, .4);
+      font-size: 8px;
+      font-family: JetBrains Mono, monospace;
+      margin-bottom: 8px
+    }
+
+    .phone .pb {
+      font-size: 8px;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+
+    .phone .li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--line);
+      color: var(--ink-dim)
+    }
+
+    .phone .li b {
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    .phone .pbtn {
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 6px 0;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 8px;
+      letter-spacing: .06em
+    }
+
+    /* ───── Benefits ───── */
+    .benefits {
+      background: #080410;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) 1.3fr;
+      align-items: stretch;
+      overflow: hidden;
+      position: relative
+    }
+
+    .benefit {
+      padding: 28px 20px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .benefit:nth-last-child(2) {
+      border-right: 0
+    }
+
+    .b-ico {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 1.5px solid var(--pink);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      background: rgba(236, 26, 92, .08);
+      box-shadow: 0 0 32px -4px var(--pink-glow), 0 0 60px -20px var(--pink-glow), inset 0 0 16px rgba(236, 26, 92, .15)
+    }
+
+    .b-ico svg {
+      filter: drop-shadow(0 0 6px var(--pink-glow))
+    }
+
+    .benefit h4 {
+      font-family: Manrope, sans-serif;
+      font-size: 12px;
+      letter-spacing: .18em;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      color: var(--ink)
+    }
+
+    .benefit p {
+      font-size: 11px;
+      color: var(--ink-dim);
+      line-height: 1.55;
+      margin: 0
+    }
+
+    .benefit-art {
+      position: relative;
+      min-height: 200px;
+      overflow: hidden;
+      background: #170820
+    }
+
+    .benefit-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1) contrast(1.05) brightness(.9)
+    }
+
+    .benefit-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(8, 4, 16, 1) 0%, rgba(8, 4, 16, .7) 30%, transparent 60%);
+      pointer-events: none
+    }
+
+    /* ───── Financial section ───── */
+    .fin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center
+    }
+
+    .fin-card {
+      background: linear-gradient(180deg, #170822, #0e0617);
+      border: 1px solid var(--line-2);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 30px 60px -30px rgba(236, 26, 92, .3)
+    }
+
+    .fin-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px
+    }
+
+    .fin-card-top h5 {
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      margin: 0;
+      letter-spacing: .04em
+    }
+
+    .fin-pill {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      color: var(--green);
+      background: rgba(45, 212, 126, .12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase
+    }
+
+    .fin-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px
+    }
+
+    .fin-stat {
+      background: #11071a;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px
+    }
+
+    .fin-stat .l {
+      font-size: 10px;
+      color: var(--ink-mute);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 6px
+    }
+
+    .fin-stat .v {
+      font-family: Manrope, sans-serif;
+      font-size: 22px;
+      font-weight: 700
+    }
+
+    .fin-stat .v small {
+      font-size: 13px;
+      color: var(--ink-dim);
+      margin-left: 2px;
+      font-weight: 500
+    }
+
+    .fin-stat .d {
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 600;
+      margin-top: 2px
+    }
+
+    .fin-stat .d.neg {
+      color: var(--pink-2)
+    }
+
+    .fin-bars {
+      background: #11071a;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px
+    }
+
+    .fin-bars-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px
+    }
+
+    .fin-bars-top h6 {
+      font-size: 11px;
+      margin: 0;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-dim)
+    }
+
+    .fin-bars-top span {
+      font-size: 10px;
+      color: var(--ink-mute)
+    }
+
+    .bars-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      height: 90px;
+      align-items: end
+    }
+
+    .bcol {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end
+    }
+
+    .bcol .b1 {
+      width: 100%;
+      background: linear-gradient(180deg, var(--pink-2), var(--pink));
+      border-radius: 3px 3px 0 0
+    }
+
+    .bcol .b2 {
+      width: 100%;
+      background: rgba(255, 255, 255, .16);
+      border-radius: 3px 3px 0 0
+    }
+
+    .bcol .lbl {
+      font-size: 9px;
+      color: var(--ink-mute);
+      margin-top: 6px
+    }
+
+    .fin-tx {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .fin-tx-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 12px
+    }
+
+    .fin-tx-row:last-child {
+      border: 0
+    }
+
+    .fin-tx-row .ico {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(236, 26, 92, .1);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto
+    }
+
+    .fin-tx-row .ico.in {
+      background: rgba(45, 212, 126, .12)
+    }
+
+    .fin-tx-row .meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .fin-tx-row .meta b {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .fin-tx-row .meta span {
+      font-size: 10px;
+      color: var(--ink-mute)
+    }
+
+    .fin-tx-row .amt {
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 13px
+    }
+
+    .fin-tx-row .amt.in {
+      color: var(--green)
+    }
+
+    .fin-tx-row .amt.out {
+      color: var(--pink-2)
+    }
+
+    .fin-features {
+      margin: 30px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .fin-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.4
+    }
+
+    .fin-features li b {
+      color: var(--ink);
+      font-weight: 600;
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px
+    }
+
+    /* ───── AI Assistant ───── */
+    .ai-section {
+      background: radial-gradient(80% 60% at 30% 50%, rgba(236, 26, 92, .12), transparent 60%);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center
+    }
+
+    .ai-chat {
+      background: #0e0617;
+      border: 1px solid var(--line-2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -30px rgba(236, 26, 92, .4)
+    }
+
+    .ai-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #170822
+    }
+
+    .ai-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--pink-2), var(--pink) 60%, #5a0a23);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 18px var(--pink-glow);
+      position: relative
+    }
+
+    .ai-avatar::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      bottom: 0;
+      right: 0;
+      border: 2px solid #170822
+    }
+
+    .ai-head h5 {
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      margin: 0;
+      letter-spacing: .02em
+    }
+
+    .ai-head p {
+      margin: 0;
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: .1em;
+      font-weight: 600;
+      text-transform: uppercase
+    }
+
+    .ai-head .menu {
+      margin-left: auto;
+      color: var(--ink-mute);
+      font-size: 18px;
+      letter-spacing: .1em
+    }
+
+    .ai-body {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 340px
+    }
+
+    .msg {
+      max-width: 85%;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 12px 14px;
+      border-radius: 14px
+    }
+
+    .msg.me {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 8px 22px -8px var(--pink-glow)
+    }
+
+    .msg.bot {
+      align-self: flex-start;
+      background: #170822;
+      color: var(--ink);
+      border: 1px solid var(--line-2);
+      border-bottom-left-radius: 4px
+    }
+
+    .msg.bot .mini-stat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line-2)
+    }
+
+    .msg.bot .mini-stat div {
+      font-size: 11px;
+      color: var(--ink-dim)
+    }
+
+    .msg.bot .mini-stat b {
+      display: block;
+      font-family: Manrope, sans-serif;
+      font-size: 18px;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 2px
+    }
+
+    .msg.bot .mini-stat b span {
+      color: var(--green);
+      font-size: 11px;
+      margin-left: 4px;
+      font-weight: 600
+    }
+
+    .typing {
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 14px;
+      background: #170822;
+      border: 1px solid var(--line-2);
+      border-radius: 14px;
+      border-bottom-left-radius: 4px
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--pink);
+      animation: bp 1.2s infinite
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: .2s
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: .4s
+    }
+
+    @keyframes bp {
+
+      0%,
+      80%,
+      100% {
+        opacity: .25;
+        transform: translateY(0)
+      }
+
+      40% {
+        opacity: 1;
+        transform: translateY(-3px)
+      }
+    }
+
+    .ai-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-top: 1px solid var(--line);
+      background: #11071a
+    }
+
+    .ai-input input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      color: var(--ink);
+      font-size: 13px;
+      font-family: inherit;
+      padding: 8px
+    }
+
+    .ai-input input::placeholder {
+      color: var(--ink-mute)
+    }
+
+    .send {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      display: grid;
+      place-items: center;
+      border: 0;
+      cursor: pointer;
+      box-shadow: 0 6px 18px -4px var(--pink-glow)
+    }
+
+    .ai-prompts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px
+    }
+
+    .ai-prompts span {
+      font-size: 11px;
+      padding: 6px 12px;
+      border: 1px solid var(--line-2);
+      border-radius: 999px;
+      color: var(--ink-dim);
+      background: rgba(236, 26, 92, .04)
+    }
+
+    .ai-prompts span::before {
+      content: "❝ ";
+      color: var(--pink-2)
+    }
+
+    .ai-features {
+      margin-top: 30px;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px
+    }
+
+    .ai-features li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start
+    }
+
+    .ai-features li .ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(236, 26, 92, .1);
+      border: 1px solid rgba(236, 26, 92, .2);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto
+    }
+
+    .ai-features li b {
+      display: block;
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .ai-features li p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.5
+    }
+
+    /* ───── CTA Stats ───── */
+    .cta-banner {
+      background: linear-gradient(135deg, #2a0a1f 0%, #1a0820 50%, #0e0617 100%);
+      border: 1px solid var(--line-2);
+      border-radius: 22px;
+      padding: 52px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta-banner::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -60px;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236, 26, 92, .18), transparent 70%);
+      pointer-events: none
+    }
+
+    .cta-banner h3 {
+      font-family: Manrope, sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      margin: 0 0 10px;
+      line-height: 1.1;
+      position: relative
+    }
+
+    .cta-banner h3 span {
+      color: var(--pink)
+    }
+
+    .cta-banner>p {
+      font-size: 15px;
+      color: var(--ink-dim);
+      margin: 0 auto 40px;
+      max-width: 480px;
+      line-height: 1.6;
+      position: relative
+    }
+
+    .cta-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-bottom: 36px;
+      position: relative
+    }
+
+    .cta-stat {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid var(--line)
+    }
+
+    .cta-stat:last-child {
+      border-right: 0
+    }
+
+    .cta-stat b {
+      display: block;
+      font-family: Manrope, sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink)
+    }
+
+    .cta-stat span {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      letter-spacing: .16em;
+      color: var(--ink-mute);
+      text-transform: uppercase
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: relative
+    }
+
+    .cta-actions small {
+      font-size: 11px;
+      color: var(--ink-mute)
+    }
+
+    /* ───── Logos ───── */
+    .logos h6 {
+      text-align: center;
+      font-family: Manrope, sans-serif;
+      letter-spacing: .32em;
+      font-size: 12px;
+      color: var(--pink-2);
+      margin: 0 0 32px;
+      text-transform: uppercase
+    }
+
+    .logo-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 30px;
+      align-items: center
+    }
+
+    .logo-row .l {
+      height: 64px;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, .55);
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: .04em
+    }
+
+    .logo-row .l small {
+      display: block;
+      font-family: Inter, sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      color: rgba(255, 255, 255, .35);
+      letter-spacing: .16em;
+      margin-top: 4px;
+      text-transform: uppercase
+    }
+
+    .logo-row .l em {
+      font-style: italic;
+      font-family: 'Manrope', serif;
+      font-weight: 600
+    }
+
+    /* ───── Footer ───── */
+    .foot {
+      border-top: 1px solid var(--line);
+      padding: 20px 0 30px;
+      display: grid;
+      grid-template-columns: repeat(4, auto) 1fr;
+      gap: 30px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--ink-dim)
+    }
+
+    .foot-item {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .foot-item svg {
+      filter: drop-shadow(0 0 3px var(--pink-glow))
+    }
+
+    .foot-contact {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .foot-contact .wa {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #25d366;
+      display: grid;
+      place-items: center
+    }
+
+    .foot-contact b {
+      font-family: Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: .02em
+    }
+
+    .foot-contact small {
+      display: block;
+      font-size: 11px;
+      color: var(--ink-mute)
+    }
+
+    /* ───── Contact ───── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start
+    }
+
+    .contact-form-card {
+      background: linear-gradient(180deg, #170822, #0e0617);
+      border: 1px solid var(--line-2);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 30px 60px -30px rgba(236, 26, 92, .2)
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--ink-dim);
+      text-transform: uppercase
+    }
+
+    .form-input {
+      background: #11071a;
+      border: 1px solid var(--line-2);
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: var(--ink);
+      font-size: 14px;
+      font-family: inherit;
+      outline: 0;
+      transition: border-color .15s
+    }
+
+    .form-input:focus {
+      border-color: var(--pink)
+    }
+
+    .form-input::placeholder {
+      color: var(--ink-mute)
+    }
+
+    select.form-input {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7a96' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 90px
+    }
+
+    /* ───── Hamburger ───── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: 1px solid var(--line-2);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: auto
+    }
+
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg)
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg)
+    }
+
+    .nav-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--line);
+      background: rgba(12, 6, 18, .97);
+      backdrop-filter: blur(14px)
+    }
+
+    .nav-drawer.open {
+      display: flex
+    }
+
+    .nav-drawer a {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      color: var(--ink-dim);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      text-transform: uppercase
+    }
+
+    .nav-drawer a:last-of-type {
+      border-bottom: 0
+    }
+
+    .nav-drawer .btn {
+      width: 100%;
+      justify-content: center;
+      margin-top: 12px
+    }
+
+    @media(max-width:1024px) {
+
+      .hero-grid,
+      .biz,
+      .fin-grid,
+      .ai-grid,
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+
+      .phone {
+        position: static;
+        margin: 0 auto 18px
+      }
+
+      h1 {
+        font-size: 54px
+      }
+
+      .cta-banner {
+        padding: 40px 32px
+      }
+
+      .cta-banner h3 {
+        font-size: 28px
+      }
+    }
+
+    @media(max-width:768px) {
+
+      /* Nav */
+      .nav-links,
+      .nav-cta {
+        display: none
+      }
+
+      .nav-hamburger {
+        display: flex
+      }
+
+      /* Hero */
+      .hero {
+        padding: 40px 0 30px
+      }
+
+      h1 {
+        font-size: 38px;
+        line-height: 1.05
+      }
+
+      .hero-sub {
+        font-size: 15px;
+        margin: 16px 0 24px
+      }
+
+      .feat-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        max-width: 100%
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch
+      }
+
+      .hero-actions .btn {
+        justify-content: center
+      }
+
+      /* Sections */
+      h2 {
+        font-size: 30px
+      }
+
+      .section {
+        padding: 60px 0
+      }
+
+      /* Dashboard — hide phone, simplify */
+      .phone {
+        display: none
+      }
+
+      .dash {
+        grid-template-columns: 1fr;
+        min-height: auto
+      }
+
+      .dash-side {
+        display: none
+      }
+
+      .kpis {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .charts {
+        grid-template-columns: 1fr
+      }
+
+      /* Benefits */
+      .benefits {
+        grid-template-columns: 1fr 1fr;
+        padding: 24px 0
+      }
+
+      .benefit-art {
+        display: none
+      }
+
+      /* Financial bars */
+      .fin-stats {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .fin-stats .fin-stat:last-child {
+        grid-column: 1/-1
+      }
+
+      /* CTA banner */
+      .cta-banner {
+        padding: 36px 24px
+      }
+
+      .cta-banner h3 {
+        font-size: 24px
+      }
+
+      .cta-stats {
+        grid-template-columns: 1fr
+      }
+
+      .cta-stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 16px 0
+      }
+
+      .cta-stat:last-child {
+        border-bottom: 0
+      }
+
+      .cta-stat b {
+        font-size: 36px
+      }
+
+      /* Logos */
+      .logo-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px
+      }
+
+      /* Footer */
+      .foot {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px
+      }
+
+      /* Contact form */
+      .form-row {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:480px) {
+      .wrap {
+        padding: 0 16px
+      }
+
+      h1 {
+        font-size: 32px
+      }
+
+      h2 {
+        font-size: 26px
+      }
+
+      .benefits {
+        grid-template-columns: 1fr
+      }
+
+      .logo-row {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .fin-stats {
+        grid-template-columns: 1fr
+      }
+
+      .fin-stats .fin-stat:last-child {
+        grid-column: auto
+      }
+
+      .foot {
+        grid-template-columns: 1fr
+      }
+
+      .cta-banner {
+        border-radius: 14px
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ══════════ NAV ══════════ -->
-<nav class="nav">
-  <div class="wrap nav-inner">
-    <div class="logo">
-      <img src="assets/logo.png" alt="PorcySys" style="height:52px;width:auto;filter:invert(1);display:block" />
+  <!-- ══════════ NAV ══════════ -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="logo">
+        <img src="assets/logo.png" alt="PorcySys" style="height:52px;width:auto;filter:invert(1);display:block" />
+      </div>
+      <div class="nav-links">
+        <a href="#" class="on">Inicio</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#financiero">Financiero</a>
+        <a href="#asistente">Asistente IA</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#contacto" class="btn btn-primary">Solicitar Demo</a>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav-links">
-      <a href="#" class="on">Inicio</a>
-      <a href="#funciones">Funciones</a>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#financiero">Financiero</a>
-      <a href="#asistente">Asistente IA</a>
-      <a href="#precios">Precios</a>
-      <a href="#contacto">Contacto</a>
+    <div class="nav-drawer" id="navDrawer">
+      <a href="#" onclick="closeMenu()">Inicio</a>
+      <a href="#funciones" onclick="closeMenu()">Funciones</a>
+      <a href="#beneficios" onclick="closeMenu()">Beneficios</a>
+      <a href="#financiero" onclick="closeMenu()">Financiero</a>
+      <a href="#asistente" onclick="closeMenu()">Asistente IA</a>
+      <a href="#precios" onclick="closeMenu()">Precios</a>
+      <a href="#contacto" onclick="closeMenu()">Contacto</a>
+      <a href="#contacto" class="btn btn-primary" onclick="closeMenu()">Solicitar Demo</a>
     </div>
-    <div class="nav-cta">
-      <a href="#contacto" class="btn btn-primary">Solicitar Demo</a>
-    </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="nav-drawer" id="navDrawer">
-    <a href="#" onclick="closeMenu()">Inicio</a>
-    <a href="#funciones" onclick="closeMenu()">Funciones</a>
-    <a href="#beneficios" onclick="closeMenu()">Beneficios</a>
-    <a href="#financiero" onclick="closeMenu()">Financiero</a>
-    <a href="#asistente" onclick="closeMenu()">Asistente IA</a>
-    <a href="#precios" onclick="closeMenu()">Precios</a>
-    <a href="#contacto" onclick="closeMenu()">Contacto</a>
-    <a href="#contacto" class="btn btn-primary" onclick="closeMenu()">Solicitar Demo</a>
-  </div>
-</nav>
+  </nav>
 
-<!-- ══════════ HERO ══════════ -->
-<header class="hero" id="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>EL CONTROL TOTAL<br/>DE TU<span class="rule"></span><br/><span class="accent">GRANJA PORCINA</span></h1>
-      <p class="hero-sub">Software inteligente para una producción más <span class="em">eficiente</span>, <span class="em">rentable</span> y <span class="em">sostenible</span>.</p>
+  <!-- ══════════ HERO ══════════ -->
+  <header class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>EL CONTROL TOTAL<br />DE TU<span class="rule"></span><br /><span class="accent">GRANJA PORCINA</span></h1>
+        <p class="hero-sub">Software inteligente para una producción más <span class="em">eficiente</span>, <span
+            class="em">rentable</span> y <span class="em">sostenible</span>.</p>
 
-      <div class="feat-row">
-        <div class="feat">
-          <div class="feat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><circle cx="12" cy="14" r="1.4" fill="#ec1a5c"/></svg>
+        <div class="feat-row">
+          <div class="feat">
+            <div class="feat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6">
+                <rect x="4" y="5" width="16" height="15" rx="2" />
+                <path d="M8 3v4M16 3v4M4 10h16" />
+                <circle cx="12" cy="14" r="1.4" fill="#ec1a5c" />
+              </svg>
+            </div>
+            <div class="feat-label">Control<br />Total</div>
           </div>
-          <div class="feat-label">Control<br/>Total</div>
+          <div class="feat">
+            <div class="feat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6">
+                <path d="M4 4v16h16" />
+                <path d="M7 14l4-4 3 3 5-6" />
+                <circle cx="11" cy="10" r="1.2" fill="#ec1a5c" />
+              </svg>
+            </div>
+            <div class="feat-label">Decisiones<br />Inteligentes</div>
+          </div>
+          <div class="feat">
+            <div class="feat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6">
+                <circle cx="12" cy="13" r="6" />
+                <path d="M12 7V5M10 5h4" />
+                <path d="M9 13l2 2 4-4" />
+              </svg>
+            </div>
+            <div class="feat-label">Más<br />Rentabilidad</div>
+          </div>
+          <div class="feat">
+            <div class="feat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6">
+                <path
+                  d="M5 14c0-3.5 3-6.5 7-6.5 1.5 0 2.6.4 3.6 1l1-1 .5 2.4c.6.5 1 1.2 1 2 0 .5-.2 1-.5 1.4.2.5.4 1 .4 1.7 0 3-2.5 5.5-5.5 5.5-1.6 0-2.4-.3-3.5-1.2-.8.7-1.3 1.2-2 1.2-.6 0-.9-.5-.5-1 .3-.4.5-.8.5-1.5 0-.4-.1-.8-.2-1.1L5 14z" />
+                <circle cx="14" cy="13" r=".7" fill="#ec1a5c" />
+              </svg>
+            </div>
+            <div class="feat-label">Bienestar<br />Animal</div>
+          </div>
         </div>
-        <div class="feat">
-          <div class="feat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M4 4v16h16"/><path d="M7 14l4-4 3 3 5-6"/><circle cx="11" cy="10" r="1.2" fill="#ec1a5c"/></svg>
-          </div>
-          <div class="feat-label">Decisiones<br/>Inteligentes</div>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M12 7V5M10 5h4"/><path d="M9 13l2 2 4-4"/></svg>
-          </div>
-          <div class="feat-label">Más<br/>Rentabilidad</div>
-        </div>
-        <div class="feat">
-          <div class="feat-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M5 14c0-3.5 3-6.5 7-6.5 1.5 0 2.6.4 3.6 1l1-1 .5 2.4c.6.5 1 1.2 1 2 0 .5-.2 1-.5 1.4.2.5.4 1 .4 1.7 0 3-2.5 5.5-5.5 5.5-1.6 0-2.4-.3-3.5-1.2-.8.7-1.3 1.2-2 1.2-.6 0-.9-.5-.5-1 .3-.4.5-.8.5-1.5 0-.4-.1-.8-.2-1.1L5 14z"/><circle cx="14" cy="13" r=".7" fill="#ec1a5c"/></svg>
-          </div>
-          <div class="feat-label">Bienestar<br/>Animal</div>
+
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
+          <button class="btn btn-ghost">Ver video</button>
         </div>
       </div>
 
-      <div class="hero-actions">
-        <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
-        <button class="btn btn-ghost">Ver video</button>
+      <div class="hero-art">
+        <img src="assets/hero.png" alt="Granja porcina"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1" />
+        <div class="badge-card">
+          <div class="ico">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3d7a" stroke-width="1.8">
+              <path d="M4 18l4-5 3 3 5-7 4 5" />
+              <path d="M16 9h4v4" />
+            </svg>
+          </div>
+          <div>
+            <h4>MÁS CONTROL<br />MEJORES RESULTADOS</h4>
+            <p>Granjas más rentables</p>
+          </div>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="hero-art">
-      <img src="assets/hero.png" alt="Granja porcina" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1" />
-      <div class="badge-card">
-        <div class="ico">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3d7a" stroke-width="1.8"><path d="M4 18l4-5 3 3 5-7 4 5"/><path d="M16 9h4v4"/></svg>
+  <!-- ══════════ TODO TU NEGOCIO ══════════ -->
+  <section class="section" id="funciones" style="padding-top:40px;border-top:1px solid var(--line)">
+    <div class="wrap biz">
+      <div>
+        <div class="section-eyebrow">Todo tu negocio</div>
+        <h2>EN UN SOLO SISTEMA</h2>
+        <p class="lead">Registra, analiza y toma decisiones en tiempo real desde cualquier lugar. <b>Ahorra tiempo,
+            reduce costos</b> y lleva tu granja al siguiente nivel.</p>
+        <ul class="checks">
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Gestión reproductiva</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Control de producción</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Alimentación y consumos</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Sanidad y tratamientos</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span><span>Reportes y análisis en tiempo real<br/><small style="color:var(--ink-mute);font-size:12px;font-weight:400">Más de 25 reportes listos para exportar en PDF</small></span></li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Múltiples granjas en una sola plataforma</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Personalización de reportes en base de necesidades del cliente</li>
+          <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c"
+                stroke-width="1.8">
+                <path d="M2 5l2 2 4-4" />
+              </svg></span>Manual de usuario integrado</li>
+        </ul>
+      </div>
+
+      <div class="dash-stage">
+        <img src="assets/mockup.png" alt="PorcySys en laptop y teléfono" class="mockup-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ BENEFITS ══════════ -->
+  <section style="padding:0 0 90px" id="beneficios">
+    <div class="wrap">
+      <div class="benefits">
+        <div class="benefit">
+          <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+              stroke-width="1.6">
+              <path d="M7 18a4 4 0 010-8 5 5 0 019.5-1A4.5 4.5 0 0117 18H7z" />
+              <path d="M11 13v3M9 13h4" stroke-linecap="round" />
+              <circle cx="12" cy="12" r="1" fill="#ec1a5c" />
+            </svg></div>
+          <h4>Accede desde<br />cualquier lugar</h4>
+          <p>Tu información siempre contigo en la nube.</p>
         </div>
-        <div>
-          <h4>MÁS CONTROL<br/>MEJORES RESULTADOS</h4>
-          <p>Granjas más rentables</p>
+        <div class="benefit">
+          <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+              stroke-width="1.6">
+              <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" />
+              <path d="M9 12l2 2 4-4" stroke-linecap="round" />
+            </svg></div>
+          <h4>Datos seguros</h4>
+          <p>Protegemos tu información con altos estándares de seguridad.</p>
+        </div>
+        <div class="benefit">
+          <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+              stroke-width="1.6">
+              <circle cx="12" cy="13" r="8" />
+              <path d="M12 9v4l2 2M9 3h6" />
+            </svg></div>
+          <h4>Ahorra tiempo</h4>
+          <p>Automatiza procesos y enfócate en hacer crecer tu negocio.</p>
+        </div>
+        <div class="benefit">
+          <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+              stroke-width="1.6">
+              <path d="M3 19h18M5 19v-6M9 19V9M13 19v-3M17 19V6" />
+              <path d="M5 9l4-3 4 3 4-5" />
+            </svg></div>
+          <h4>Más rentabilidad</h4>
+          <p>Decisiones basadas en datos para maximizar tus resultados.</p>
+        </div>
+        <div class="benefit-art"><img src="assets/piglets.jpeg" alt="Lechones en granja" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTROL FINANCIERO ══════════ -->
+  <section class="section" id="financiero" style="padding-top:0">
+    <div class="wrap fin-grid">
+      <div>
+        <h2>CONTROL FINANCIERO<br /><span style="color:var(--pink)">INTEGRADO</span></h2>
+        <p class="lead">Tus números productivos y financieros en la <b>misma plataforma</b>. Ingresos, gastos, costo por
+          kilo, márgenes y proyecciones — sin hojas de cálculo, sin estimaciones.</p>
+
+        <ul class="fin-features">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"
+              style="flex:0 0 auto;margin-top:2px">
+              <path d="M3 7h18v12H3z" />
+              <path d="M3 11h18M7 15h3" />
+            </svg>
+            <div><b>Ingresos & egresos</b>Registra ventas, alimento, mano de obra y servicios por granja.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"
+              style="flex:0 0 auto;margin-top:2px">
+              <path d="M4 20l5-7 4 4 7-9" />
+              <path d="M14 8h6v6" />
+            </svg>
+            <div><b>Costo por kilo</b>Calcula automáticamente el costo real de producción por animal y lote.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"
+              style="flex:0 0 auto;margin-top:2px">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            <div><b>Flujo de caja</b>Proyecciones a 30, 60 y 90 días con alertas de liquidez.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"
+              style="flex:0 0 auto;margin-top:2px">
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <path d="M8 12h8M8 8h5M8 16h6" />
+            </svg>
+            <div><b>Reportes contables</b>Exporta a Excel o conecta con tu software de contabilidad.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fin-card">
+        <div class="fin-card-top">
+          <h5>Resumen financiero · Mayo</h5>
+          <span class="fin-pill">▲ Saludable</span>
+        </div>
+        <div class="fin-stats">
+          <div class="fin-stat">
+            <div class="l">Ingresos</div>
+            <div class="v">$847<small>K</small></div>
+            <div class="d">▲ 12.4% vs abril</div>
+          </div>
+          <div class="fin-stat">
+            <div class="l">Egresos</div>
+            <div class="v">$612<small>K</small></div>
+            <div class="d neg">▲ 4.1% vs abril</div>
+          </div>
+          <div class="fin-stat">
+            <div class="l">Margen neto</div>
+            <div class="v">27.7<small>%</small></div>
+            <div class="d">▲ 3.2 pp</div>
+          </div>
+        </div>
+
+        <div class="fin-bars">
+          <div class="fin-bars-top">
+            <h6>Ingresos vs egresos</h6>
+            <span>Últimos 6 meses</span>
+          </div>
+          <div class="bars-row">
+            <div class="bcol">
+              <div class="b1" style="height:42%"></div>
+              <div class="b2" style="height:30%"></div>
+              <div class="lbl">Dic</div>
+            </div>
+            <div class="bcol">
+              <div class="b1" style="height:48%"></div>
+              <div class="b2" style="height:36%"></div>
+              <div class="lbl">Ene</div>
+            </div>
+            <div class="bcol">
+              <div class="b1" style="height:60%"></div>
+              <div class="b2" style="height:42%"></div>
+              <div class="lbl">Feb</div>
+            </div>
+            <div class="bcol">
+              <div class="b1" style="height:55%"></div>
+              <div class="b2" style="height:40%"></div>
+              <div class="lbl">Mar</div>
+            </div>
+            <div class="bcol">
+              <div class="b1" style="height:72%"></div>
+              <div class="b2" style="height:48%"></div>
+              <div class="lbl">Abr</div>
+            </div>
+            <div class="bcol">
+              <div class="b1" style="height:88%"></div>
+              <div class="b2" style="height:62%"></div>
+              <div class="lbl">May</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fin-tx">
+          <div class="fin-tx-row">
+            <div class="ico in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2dd47e"
+                stroke-width="2">
+                <path d="M8 12V4M4 8l4-4 4 4" />
+              </svg></div>
+            <div class="meta"><b>Venta lote #245 · 142 cerdos</b><span>San Pedro · hace 2h</span></div>
+            <div class="amt in">+$184,300</div>
+          </div>
+          <div class="fin-tx-row">
+            <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a"
+                stroke-width="2">
+                <path d="M8 4v8M4 8l4 4 4-4" />
+              </svg></div>
+            <div class="meta"><b>Compra alimento balanceado</b><span>La Esperanza · ayer</span></div>
+            <div class="amt out">−$42,180</div>
+          </div>
+          <div class="fin-tx-row">
+            <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a"
+                stroke-width="2">
+                <path d="M8 4v8M4 8l4 4 4-4" />
+              </svg></div>
+            <div class="meta"><b>Servicio veterinario</b><span>El Roble · 03/05</span></div>
+            <div class="amt out">−$8,600</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </section>
 
-<!-- ══════════ TODO TU NEGOCIO ══════════ -->
-<section class="section" id="funciones">
-  <div class="wrap biz">
-    <div>
-      <div class="section-eyebrow">Todo tu negocio</div>
-      <h2>EN UN SOLO SISTEMA</h2>
-      <p class="lead">Registra, analiza y toma decisiones en tiempo real desde cualquier lugar. <b>Ahorra tiempo, reduce costos</b> y lleva tu granja al siguiente nivel.</p>
-      <ul class="checks">
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Gestión reproductiva</li>
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Control de producción</li>
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Alimentación y consumos</li>
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Sanidad y tratamientos</li>
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Reportes y análisis en tiempo real</li>
-        <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#ec1a5c" stroke-width="1.8"><path d="M2 5l2 2 4-4"/></svg></span>Múltiples granjas en una sola plataforma</li>
-      </ul>
+  <!-- ══════════ ASISTENTE IA ══════════ -->
+  <section class="section ai-section" id="asistente">
+    <div class="wrap ai-grid">
+      <div class="ai-chat">
+        <div class="ai-head">
+          <div class="ai-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+            </svg>
+          </div>
+          <div>
+            <h5>Asistente PorcySys</h5>
+            <p>● En línea · responde en segundos</p>
+          </div>
+          <div class="menu">⋯</div>
+        </div>
+        <div class="ai-body">
+          <div class="msg me">¿Qué granja tuvo la mejor conversión alimenticia este mes?</div>
+          <div class="msg bot">
+            La mejor conversión la registró <b>Granja San Pedro</b> con un índice de <b>2.31</b>, un 6% por debajo del
+            promedio general (2.45). Es el cuarto mes consecutivo que lidera.
+            <div class="mini-stat">
+              <div><b>2.31</b>Conversión</div>
+              <div><b>$28.40<span>/kg</span></b>Costo</div>
+            </div>
+          </div>
+          <div class="msg me">¿Y qué cerdas debería revisar por baja productividad?</div>
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+        <div class="ai-input">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a7a96" stroke-width="1.6">
+            <path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z" />
+          </svg>
+          <input placeholder="Pregúntame sobre tus datos…" />
+          <button class="send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+              <path d="M3 12l18-9-7 18-3-8-8-1z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-eyebrow">Inteligencia artificial integrada en el sistema</div>
+        <h2>PREGÚNTALE A TU<br /><span style="color:var(--pink)">GRANJA</span></h2>
+        <p class="lead">El asistente de IA de PorcySys conversa con tus datos en lenguaje natural. <b>Pregunta, compara
+            y descubre patrones</b> sin abrir un solo reporte.</p>
+
+        <div class="ai-prompts">
+          <span>¿Cuántos lechones nacieron esta semana?</span>
+          <span>Compara mortalidad de mayo vs abril</span>
+          <span>¿Qué cerdas están en celo hoy?</span>
+          <span>Dame un resumen de la granja San Pedro</span>
+        </div>
+
+        <ul class="ai-features">
+          <li>
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+                stroke-width="1.6">
+                <path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z" />
+                <circle cx="8.5" cy="12" r="1" fill="#ec1a5c" />
+                <circle cx="12" cy="12" r="1" fill="#ec1a5c" />
+                <circle cx="15.5" cy="12" r="1" fill="#ec1a5c" />
+              </svg></div>
+            <div><b>Lenguaje natural</b>
+              <p>Habla con tu sistema como si fuera un veterinario o gerente. Sin filtros, sin queries.</p>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+                stroke-width="1.6">
+                <circle cx="11" cy="11" r="6" />
+                <path d="M16 16l5 5" />
+                <path d="M8 11h6M11 8v6" />
+              </svg></div>
+            <div><b>Cruza datos al instante</b>
+              <p>Reproducción, sanidad, alimentación y finanzas, todo en una sola respuesta.</p>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+                stroke-width="1.6">
+                <path d="M12 2l2.5 5 5.5.8-4 3.9 1 5.5L12 14.5 7 17.2l1-5.5-4-3.9 5.5-.8z" />
+              </svg></div>
+            <div><b>Recomendaciones</b>
+              <p>Sugiere acciones: lotes a vender, cerdas a revisar, gastos a optimizar.</p>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+                stroke-width="1.6">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M7 9h4M7 13h10M7 16h7" />
+              </svg></div>
+            <div><b>Reportes generados</b>
+              <p>Pídelo en chat y descárgalo como PDF o Excel listo para compartir.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+  </section>
 
-    <div class="dash-stage">
-      <div class="laptop">
-        <div class="dash">
-          <aside class="dash-side">
-            <div class="dash-logo">
-              <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M9 18c0-4 3-7 7-7 5 0 7 4 7 7 0 4-3 7-7 7-2 0-3-.4-5-2-1 1-1.5 1.4-2.5 1-1-.4-.5-1.5 0-2 .5-.6.5-1.5.5-2z"/><circle cx="20" cy="16.5" r="1" fill="#ec1a5c"/></svg>
-              <b>PORCY<span>SYS</span></b>
+  <!-- ══════════ CTA STATS ══════════ -->
+  <section style="padding:60px 0 80px" id="precios">
+    <div class="wrap">
+      <div class="cta-banner">
+        <h3>ÚNETE A LAS GRANJAS<br />QUE YA ESTÁN <span>CRECIENDO</span></h3>
+        <p>Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.</p>
+        <div class="cta-stats">
+          <div class="cta-stat"><b>+500</b><span>Granjas activas</span></div>
+          <div class="cta-stat"><b>+120K</b><span>Cerdas gestionadas</span></div>
+          <div class="cta-stat"><b>+30%</b><span>Aumento en rentabilidad</span></div>
+        </div>
+        <div class="cta-actions">
+          <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
+          <small>Sin tarjeta de crédito · Sin compromiso</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ LOGOS ══════════ -->
+  <section class="logos" style="padding:0 0 50px">
+    <div class="wrap">
+      <h6>Con la confianza de</h6>
+      <div class="logo-row" style="grid-template-columns:1fr;justify-items:center">
+        <div class="l" style="font-size:22px;letter-spacing:.06em">K de Belo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACTO ══════════ -->
+  <section class="section" id="contacto" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:48px">
+        <div class="section-eyebrow">Contacto</div>
+        <h2>TE LO MOSTRAMOS EN<br /><span style="color:var(--pink)">30 MINUTOS</span></h2>
+        <p style="font-size:15px;color:var(--ink-dim);margin:0 auto;max-width:480px;line-height:1.6">Demo personalizada
+          con datos similares a los de tu granja. Sin presión.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h3 style="font-family:Manrope,sans-serif;font-size:26px;font-weight:800;margin:0 0 16px;line-height:1.2">
+            ¿Hablamos sobre<br /><em style="color:var(--pink);font-style:normal">tu operación?</em></h3>
+          <p style="font-size:14px;color:var(--ink-dim);line-height:1.6;margin:0 0 28px">Cuéntanos sobre tu operación y
+            te mostramos cómo PorcySys se adapta a tu granja.</p>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+              <span
+                style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Demo
+              personalizada sin costo
             </div>
-            <nav class="dash-nav">
-              <a class="on"><span class="dot" style="color:#ec1a5c"></span>Inicio</a>
-              <a><span class="dot"></span>Reproducción</a>
-              <a><span class="dot"></span>Producción</a>
-              <a><span class="dot"></span>Alimentación</a>
-              <a><span class="dot"></span>Sanidad</a>
-              <a><span class="dot"></span>Reportes</a>
-              <a><span class="dot"></span>Inventario</a>
-              <a><span class="dot"></span>Configuración</a>
-            </nav>
-          </aside>
-          <div class="dash-main">
-            <div class="dash-top">
-              <h5>Resumen general</h5>
-              <span class="who">⚙️ 🔔 ⌂ &nbsp; Bienvenido</span>
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+              <span
+                style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Atención
+              personalizada en cada paso
             </div>
-            <div class="kpis">
-              <div class="kpi"><div class="kpi-l">Cerdas totales</div><div class="kpi-v">1,250</div></div>
-              <div class="kpi"><div class="kpi-l">Lechones nacidos</div><div class="kpi-v">3,856</div></div>
-              <div class="kpi"><div class="kpi-l">Conversión alimenticia</div><div class="kpi-v">2.45</div></div>
-              <div class="kpi"><div class="kpi-l">Mortalidad</div><div class="kpi-v">4.2%</div><div class="kpi-d">-0.6%</div></div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
+              <span
+                style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Sin
+              compromiso de compra
             </div>
-            <div class="charts">
-              <div class="card">
-                <h6>Producción por semana</h6>
-                <div class="chart-line">
-                  <svg viewBox="0 0 320 100" preserveAspectRatio="none">
-                    <defs><linearGradient id="lg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ec1a5c" stop-opacity=".4"/><stop offset="1" stop-color="#ec1a5c" stop-opacity="0"/></linearGradient></defs>
-                    <g stroke="#2a1638" stroke-width=".5"><line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="50" x2="320" y2="50"/><line x1="0" y1="80" x2="320" y2="80"/></g>
-                    <path d="M0 70 L25 60 L50 65 L75 50 L100 55 L125 35 L150 45 L175 25 L200 40 L225 30 L250 50 L275 38 L300 28 L320 30 L320 100 L0 100 Z" fill="url(#lg)"/>
-                    <path d="M0 70 L25 60 L50 65 L75 50 L100 55 L125 35 L150 45 L175 25 L200 40 L225 30 L250 50 L275 38 L300 28 L320 30" fill="none" stroke="#ec1a5c" stroke-width="2"/>
-                  </svg>
-                </div>
+          </div>
+        </div>
+        <div class="contact-form-card">
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="f_name">Nombre</label>
+                <input class="form-input" id="f_name" name="name" type="text" required placeholder="Tu nombre" />
               </div>
-              <div class="card">
-                <h6>Estado de pariciones</h6>
-                <div class="donut">
-                  <svg width="68" height="68" viewBox="0 0 36 36">
-                    <circle cx="18" cy="18" r="14" fill="none" stroke="#241432" stroke-width="6"/>
-                    <circle cx="18" cy="18" r="14" fill="none" stroke="#ec1a5c" stroke-width="6" stroke-dasharray="58 100" transform="rotate(-90 18 18)"/>
-                    <circle cx="18" cy="18" r="14" fill="none" stroke="#3b82f6" stroke-width="6" stroke-dasharray="22 100" stroke-dashoffset="-58" transform="rotate(-90 18 18)"/>
-                    <circle cx="18" cy="18" r="14" fill="none" stroke="#ff3d7a" stroke-width="6" stroke-dasharray="6 100" stroke-dashoffset="-80" transform="rotate(-90 18 18)"/>
-                  </svg>
-                  <div class="legend">
-                    <div class="row"><span class="l"><span class="sw" style="background:#ec1a5c"></span>Confirmadas</span><b>66%</b></div>
-                    <div class="row"><span class="l"><span class="sw" style="background:#3b82f6"></span>En gestación</span><b>25%</b></div>
-                    <div class="row"><span class="l"><span class="sw" style="background:#ff3d7a"></span>Por confirmar</span><b>7%</b></div>
-                  </div>
-                </div>
+              <div class="form-field">
+                <label class="form-label" for="f_email">Correo electrónico</label>
+                <input class="form-input" id="f_email" name="email" type="email" required placeholder="tu@correo.com" />
               </div>
             </div>
-            <div class="top-table">
-              <h6 style="font-size:9px;margin:0 0 6px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase">Top 5 granjas por productividad</h6>
-              <div class="row"><span>Granja San Pedro</span><div class="bar"><i style="width:95%"></i></div><span>95%</span></div>
-              <div class="row"><span>Granja La Esperanza</span><div class="bar"><i style="width:89%"></i></div><span>89%</span></div>
-              <div class="row"><span>Granja El Roble</span><div class="bar"><i style="width:85%"></i></div><span>85%</span></div>
-              <div class="row"><span>Granja Los Pinos</span><div class="bar"><i style="width:82%"></i></div><span>82%</span></div>
-              <div class="row"><span>Granja Santa Fe</span><div class="bar"><i style="width:78%"></i></div><span>78%</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="nb"><span>9:41</span><span>● ● ●</span></div>
-          <h6>Detalle de parición <span style="color:var(--ink-mute)">⋯</span></h6>
-          <div class="phone-img"><img src="assets/pig-photo.avif" alt="Cerda" style="width:100%;height:100%;object-fit:cover;border-radius:6px" /></div>
-          <div class="pb">Parición #1256</div>
-          <div class="li"><span>Fecha</span><b>14/05/2024</b></div>
-          <div class="li"><span>Cerda</span><b>0256</b></div>
-          <div class="li"><span>Lechones nacidos</span><b>14</b></div>
-          <div class="li"><span>Lechones vivos</span><b>13</b></div>
-          <div class="li"><span>Mortalidad</span><b>1 (7%)</b></div>
-          <div class="li"><span>Peso promedio</span><b>1,45 kg</b></div>
-          <div class="pbtn">VER DETALLES</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ BENEFITS ══════════ -->
-<section style="padding:0 0 90px" id="beneficios">
-  <div class="wrap">
-    <div class="benefits">
-      <div class="benefit">
-        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M7 18a4 4 0 010-8 5 5 0 019.5-1A4.5 4.5 0 0117 18H7z"/><path d="M11 13v3M9 13h4" stroke-linecap="round"/><circle cx="12" cy="12" r="1" fill="#ec1a5c"/></svg></div>
-        <h4>Accede desde<br/>cualquier lugar</h4>
-        <p>Tu información siempre contigo en la nube.</p>
-      </div>
-      <div class="benefit">
-        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg></div>
-        <h4>Datos seguros</h4>
-        <p>Protegemos tu información con altos estándares de seguridad.</p>
-      </div>
-      <div class="benefit">
-        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 3h6"/></svg></div>
-        <h4>Ahorra tiempo</h4>
-        <p>Automatiza procesos y enfócate en hacer crecer tu negocio.</p>
-      </div>
-      <div class="benefit">
-        <div class="b-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M3 19h18M5 19v-6M9 19V9M13 19v-3M17 19V6"/><path d="M5 9l4-3 4 3 4-5"/></svg></div>
-        <h4>Más rentabilidad</h4>
-        <p>Decisiones basadas en datos para maximizar tus resultados.</p>
-      </div>
-      <div class="benefit-art"><img src="assets/piglets.jpeg" alt="Lechones en granja" /></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CONTROL FINANCIERO ══════════ -->
-<section class="section" id="financiero" style="padding-top:0">
-  <div class="wrap fin-grid">
-    <div>
-      <h2>CONTROL FINANCIERO<br/><span style="color:var(--pink)">INTEGRADO</span></h2>
-      <p class="lead">Tus números productivos y financieros en la <b>misma plataforma</b>. Ingresos, gastos, costo por kilo, márgenes y proyecciones — sin hojas de cálculo, sin estimaciones.</p>
-
-      <ul class="fin-features">
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h3"/></svg>
-          <div><b>Ingresos & egresos</b>Registra ventas, alimento, mano de obra y servicios por granja.</div>
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><path d="M4 20l5-7 4 4 7-9"/><path d="M14 8h6v6"/></svg>
-          <div><b>Costo por kilo</b>Calcula automáticamente el costo real de producción por animal y lote.</div>
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <div><b>Flujo de caja</b>Proyecciones a 30, 60 y 90 días con alertas de liquidez.</div>
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6" style="flex:0 0 auto;margin-top:2px"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M8 8h5M8 16h6"/></svg>
-          <div><b>Reportes contables</b>Exporta a Excel o conecta con tu software de contabilidad.</div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="fin-card">
-      <div class="fin-card-top">
-        <h5>Resumen financiero · Mayo</h5>
-        <span class="fin-pill">▲ Saludable</span>
-      </div>
-      <div class="fin-stats">
-        <div class="fin-stat">
-          <div class="l">Ingresos</div>
-          <div class="v">$847<small>K</small></div>
-          <div class="d">▲ 12.4% vs abril</div>
-        </div>
-        <div class="fin-stat">
-          <div class="l">Egresos</div>
-          <div class="v">$612<small>K</small></div>
-          <div class="d neg">▲ 4.1% vs abril</div>
-        </div>
-        <div class="fin-stat">
-          <div class="l">Margen neto</div>
-          <div class="v">27.7<small>%</small></div>
-          <div class="d">▲ 3.2 pp</div>
-        </div>
-      </div>
-
-      <div class="fin-bars">
-        <div class="fin-bars-top">
-          <h6>Ingresos vs egresos</h6>
-          <span>Últimos 6 meses</span>
-        </div>
-        <div class="bars-row">
-          <div class="bcol"><div class="b1" style="height:42%"></div><div class="b2" style="height:30%"></div><div class="lbl">Dic</div></div>
-          <div class="bcol"><div class="b1" style="height:48%"></div><div class="b2" style="height:36%"></div><div class="lbl">Ene</div></div>
-          <div class="bcol"><div class="b1" style="height:60%"></div><div class="b2" style="height:42%"></div><div class="lbl">Feb</div></div>
-          <div class="bcol"><div class="b1" style="height:55%"></div><div class="b2" style="height:40%"></div><div class="lbl">Mar</div></div>
-          <div class="bcol"><div class="b1" style="height:72%"></div><div class="b2" style="height:48%"></div><div class="lbl">Abr</div></div>
-          <div class="bcol"><div class="b1" style="height:88%"></div><div class="b2" style="height:62%"></div><div class="lbl">May</div></div>
-        </div>
-      </div>
-
-      <div class="fin-tx">
-        <div class="fin-tx-row">
-          <div class="ico in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2dd47e" stroke-width="2"><path d="M8 12V4M4 8l4-4 4 4"/></svg></div>
-          <div class="meta"><b>Venta lote #245 · 142 cerdos</b><span>San Pedro · hace 2h</span></div>
-          <div class="amt in">+$184,300</div>
-        </div>
-        <div class="fin-tx-row">
-          <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a" stroke-width="2"><path d="M8 4v8M4 8l4 4 4-4"/></svg></div>
-          <div class="meta"><b>Compra alimento balanceado</b><span>La Esperanza · ayer</span></div>
-          <div class="amt out">−$42,180</div>
-        </div>
-        <div class="fin-tx-row">
-          <div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#ff3d7a" stroke-width="2"><path d="M8 4v8M4 8l4 4 4-4"/></svg></div>
-          <div class="meta"><b>Servicio veterinario</b><span>El Roble · 03/05</span></div>
-          <div class="amt out">−$8,600</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ ASISTENTE IA ══════════ -->
-<section class="section ai-section" id="asistente">
-  <div class="wrap ai-grid">
-    <div class="ai-chat">
-      <div class="ai-head">
-        <div class="ai-avatar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
-        </div>
-        <div>
-          <h5>Asistente PorcySys</h5>
-          <p>● En línea · responde en segundos</p>
-        </div>
-        <div class="menu">⋯</div>
-      </div>
-      <div class="ai-body">
-        <div class="msg me">¿Qué granja tuvo la mejor conversión alimenticia este mes?</div>
-        <div class="msg bot">
-          La mejor conversión la registró <b>Granja San Pedro</b> con un índice de <b>2.31</b>, un 6% por debajo del promedio general (2.45). Es el cuarto mes consecutivo que lidera.
-          <div class="mini-stat">
-            <div><b>2.31</b>Conversión</div>
-            <div><b>$28.40<span>/kg</span></b>Costo</div>
-          </div>
-        </div>
-        <div class="msg me">¿Y qué cerdas debería revisar por baja productividad?</div>
-        <div class="typing"><span></span><span></span><span></span></div>
-      </div>
-      <div class="ai-input">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a7a96" stroke-width="1.6"><path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z"/></svg>
-        <input placeholder="Pregúntame sobre tus datos…" />
-        <button class="send">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 12l18-9-7 18-3-8-8-1z"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div>
-      <div class="section-eyebrow">Powered by AI</div>
-      <h2>PREGÚNTALE A TU<br/><span style="color:var(--pink)">GRANJA</span></h2>
-      <p class="lead">El asistente de IA de PorcySys conversa con tus datos en lenguaje natural. <b>Pregunta, compara y descubre patrones</b> sin abrir un solo reporte.</p>
-
-      <div class="ai-prompts">
-        <span>¿Cuántos lechones nacieron esta semana?</span>
-        <span>Compara mortalidad de mayo vs abril</span>
-        <span>¿Qué cerdas están en celo hoy?</span>
-        <span>Dame un resumen de la granja San Pedro</span>
-      </div>
-
-      <ul class="ai-features">
-        <li>
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M21 12c0 5-4 9-9 9-1.5 0-3-.4-4.2-1L3 21l1-4.8C3.4 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9z"/><circle cx="8.5" cy="12" r="1" fill="#ec1a5c"/><circle cx="12" cy="12" r="1" fill="#ec1a5c"/><circle cx="15.5" cy="12" r="1" fill="#ec1a5c"/></svg></div>
-          <div><b>Lenguaje natural</b><p>Habla con tu sistema como si fuera un veterinario o gerente. Sin filtros, sin queries.</p></div>
-        </li>
-        <li>
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/><path d="M8 11h6M11 8v6"/></svg></div>
-          <div><b>Cruza datos al instante</b><p>Reproducción, sanidad, alimentación y finanzas, todo en una sola respuesta.</p></div>
-        </li>
-        <li>
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><path d="M12 2l2.5 5 5.5.8-4 3.9 1 5.5L12 14.5 7 17.2l1-5.5-4-3.9 5.5-.8z"/></svg></div>
-          <div><b>Recomendaciones</b><p>Sugiere acciones: lotes a vender, cerdas a revisar, gastos a optimizar.</p></div>
-        </li>
-        <li>
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h10M7 16h7"/></svg></div>
-          <div><b>Reportes generados</b><p>Pídelo en chat y descárgalo como PDF o Excel listo para compartir.</p></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CTA STATS ══════════ -->
-<section style="padding:0 0 80px" id="precios">
-  <div class="wrap">
-    <div class="cta-banner">
-      <h3>ÚNETE A LAS GRANJAS<br/>QUE YA ESTÁN <span>CRECIENDO</span></h3>
-      <p>Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.</p>
-      <div class="cta-stats">
-        <div class="cta-stat"><b>+500</b><span>Granjas activas</span></div>
-        <div class="cta-stat"><b>+120K</b><span>Cerdas gestionadas</span></div>
-        <div class="cta-stat"><b>+30%</b><span>Aumento en rentabilidad</span></div>
-      </div>
-      <div class="cta-actions">
-        <a href="#contacto" class="btn btn-primary">Solicitar Demo Gratis →</a>
-        <small>Sin tarjeta de crédito · Sin compromiso</small>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ LOGOS ══════════ -->
-<section class="logos" style="padding:0 0 50px">
-  <div class="wrap">
-    <h6>Con la confianza de</h6>
-    <div class="logo-row" style="grid-template-columns:1fr;justify-items:center">
-      <div class="l" style="font-size:22px;letter-spacing:.06em">K de Belo</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CONTACTO ══════════ -->
-<section class="section" id="contacto" style="border-top:1px solid var(--line)">
-  <div class="wrap">
-    <div style="text-align:center;margin-bottom:48px">
-      <div class="section-eyebrow">Contacto</div>
-      <h2>TE LO MOSTRAMOS EN<br/><span style="color:var(--pink)">30 MINUTOS</span></h2>
-      <p style="font-size:15px;color:var(--ink-dim);margin:0 auto;max-width:480px;line-height:1.6">Demo personalizada con datos similares a los de tu granja. Sin presión.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-left">
-        <h3 style="font-family:Manrope,sans-serif;font-size:26px;font-weight:800;margin:0 0 16px;line-height:1.2">¿Hablamos sobre<br/><em style="color:var(--pink);font-style:normal">tu operación?</em></h3>
-        <p style="font-size:14px;color:var(--ink-dim);line-height:1.6;margin:0 0 28px">Cuéntanos sobre tu operación y te mostramos cómo PorcySys se adapta a tu granja.</p>
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
-            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Demo personalizada sin costo
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
-            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Atención personalizada en cada paso
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-dim)">
-            <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span>Sin compromiso de compra
-          </div>
-        </div>
-      </div>
-      <div class="contact-form-card">
-        <form id="contactForm" novalidate>
-          <div class="form-row">
             <div class="form-field">
-              <label class="form-label" for="f_name">Nombre</label>
-              <input class="form-input" id="f_name" name="name" type="text" required placeholder="Tu nombre" />
+              <label class="form-label" for="f_farm">Nombre de la granja o empresa</label>
+              <input class="form-input" id="f_farm" name="farm" type="text" placeholder="Granja San Pedro" />
             </div>
             <div class="form-field">
-              <label class="form-label" for="f_email">Correo electrónico</label>
-              <input class="form-input" id="f_email" name="email" type="email" required placeholder="tu@correo.com" />
+              <label class="form-label" for="f_size">Tamaño de operación</label>
+              <select class="form-input" id="f_size" name="size">
+                <option value="">Selecciona una opción</option>
+                <option value="small">Pequeño (10–100 cerdas)</option>
+                <option value="medium">Mediano (100–500 cerdas)</option>
+                <option value="large">Grande (500+ cerdas)</option>
+              </select>
             </div>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_farm">Nombre de la granja o empresa</label>
-            <input class="form-input" id="f_farm" name="farm" type="text" placeholder="Granja San Pedro" />
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_size">Tamaño de operación</label>
-            <select class="form-input" id="f_size" name="size">
-              <option value="">Selecciona una opción</option>
-              <option value="small">Pequeño (10–100 cerdas)</option>
-              <option value="medium">Mediano (100–500 cerdas)</option>
-              <option value="large">Grande (500+ cerdas)</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="f_msg">Mensaje <span style="color:var(--ink-mute);font-size:11px">(opcional)</span></label>
-            <textarea class="form-input" id="f_msg" name="message" rows="3" placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
-          </div>
-          <div id="formStatus" style="font-size:13px;margin-bottom:8px;min-height:20px"></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enviar mensaje →</button>
-        </form>
+            <div class="form-field">
+              <label class="form-label" for="f_msg">Mensaje <span
+                  style="color:var(--ink-mute);font-size:11px">(opcional)</span></label>
+              <textarea class="form-input" id="f_msg" name="message" rows="3"
+                placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
+            </div>
+            <div id="formStatus" style="font-size:13px;margin-bottom:8px;min-height:20px"></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enviar mensaje
+              →</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════ FOOTER ══════════ -->
-<footer>
-  <div class="wrap foot" style="grid-template-columns:repeat(4,auto);justify-content:start">
-    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M9 13l2 2 4-4"/></svg>Implementación rápida</div>
-    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 19c0-2 2-4 5-4"/></svg>Soporte técnico especializado</div>
-    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Actualizaciones constantes</div>
-    <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Disponible 24/7</div>
-  </div>
-</footer>
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="wrap foot" style="grid-template-columns:repeat(4,auto);justify-content:start">
+      <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+          stroke-width="1.6">
+          <rect x="4" y="5" width="16" height="15" rx="2" />
+          <path d="M8 3v4M16 3v4M9 13l2 2 4-4" />
+        </svg>Implementación rápida</div>
+      <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+          stroke-width="1.6">
+          <circle cx="9" cy="8" r="3" />
+          <circle cx="17" cy="9" r="2" />
+          <path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 19c0-2 2-4 5-4" />
+        </svg>Soporte técnico especializado</div>
+      <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+          stroke-width="1.6">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8v4l3 2" />
+        </svg>Actualizaciones constantes</div>
+      <div class="foot-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ec1a5c"
+          stroke-width="1.6">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </svg>Disponible 24/7</div>
+    </div>
+  </footer>
 
-<script>
-  // Hamburger
-  const btn = document.getElementById('navHamburger');
-  const drawer = document.getElementById('navDrawer');
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    drawer.classList.toggle('open');
-  });
-  function closeMenu() {
-    btn.classList.remove('open');
-    drawer.classList.remove('open');
-  }
-
-  // Active nav indicator via IntersectionObserver
-  const sections = document.querySelectorAll('section[id], header.hero');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  const sectionMap = {
-    'hero': '#',
-    'funciones': '#funciones',
-    'beneficios': '#beneficios',
-    'financiero': '#financiero',
-    'asistente': '#asistente',
-    'precios': '#precios',
-    'contacto': '#contacto',
-  };
-
-  function setActive(id) {
-    const href = sectionMap[id] || '#' + id;
-    navLinks.forEach(a => {
-      const isActive = a.getAttribute('href') === href;
-      a.classList.toggle('on', isActive);
+  <script>
+    // Hamburger
+    const btn = document.getElementById('navHamburger');
+    const drawer = document.getElementById('navDrawer');
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      drawer.classList.toggle('open');
     });
-  }
+    function closeMenu() {
+      btn.classList.remove('open');
+      drawer.classList.remove('open');
+    }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id || 'hero';
-        setActive(id);
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    // Active nav indicator via IntersectionObserver
+    const sections = document.querySelectorAll('section[id], header.hero');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
-  // Observe hero header too
-  const heroEl = document.querySelector('header.hero');
-  if (heroEl) observer.observe(heroEl);
-</script>
+    const sectionMap = {
+      'hero': '#',
+      'funciones': '#funciones',
+      'beneficios': '#beneficios',
+      'financiero': '#financiero',
+      'asistente': '#asistente',
+      'precios': '#precios',
+      'contacto': '#contacto',
+    };
+
+    function setActive(id) {
+      const href = sectionMap[id] || '#' + id;
+      navLinks.forEach(a => {
+        const isActive = a.getAttribute('href') === href;
+        a.classList.toggle('on', isActive);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id || 'hero';
+          setActive(id);
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+    // Observe hero header too
+    const heroEl = document.querySelector('header.hero');
+    if (heroEl) observer.observe(heroEl);
+  </script>
 </body>
+
 </html>
