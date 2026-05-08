@@ -147,6 +147,47 @@ img {
   margin-left: auto
 }
 
+/* ───── Lang Switcher ───── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-mute);
+  font-family: Manrope, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  line-height: 1;
+}
+
+.lang-btn:hover {
+  color: var(--ink);
+}
+
+.lang-btn.active {
+  background: var(--pink);
+  color: #fff;
+}
+
+.lang-switcher-drawer {
+  margin: 8px 0;
+  align-self: flex-start;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
