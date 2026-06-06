@@ -31,7 +31,8 @@
         <a href="#contacto" data-i18n="nav_contacto">Contacto</a>
       </div>
       <div class="nav-cta">
-        <a href="#contacto" class="btn btn-primary" data-i18n="nav_cta_demo">Solicitar Demo</a>
+        <!-- DEMO_URL: reemplazar "#" con el enlace real del demo -->
+        <a href="https://demo.porcysys.com/login" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="nav_cta_demo">Probar Demo</a>
       </div>
       <div class="lang-switcher">
         <button class="lang-btn active" data-lang="es">ES</button>
@@ -55,7 +56,7 @@
         <button class="lang-btn" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="pt">PT</button>
       </div>
-      <a href="#contacto" class="btn btn-primary" onclick="closeMenu()" data-i18n="nav_cta_demo">Solicitar Demo</a>
+      <a href="https://demo.porcysys.com/login" target="_blank" rel="noopener noreferrer" class="btn btn-primary" onclick="closeMenu()" data-i18n="nav_cta_demo">Probar Demo</a>
     </div>
   </nav>
 
@@ -112,7 +113,7 @@
         </div>
 
         <div class="hero-actions">
-          <a href="#contacto" class="btn btn-primary" data-i18n="hero_cta">Solicitar Demo Gratis →</a>
+          <a href="https://demo.porcysys.com/login" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="hero_cta">Probar Demo →</a>
           <button class="btn btn-ghost" data-i18n="hero_video">Ver video</button>
         </div>
       </div>
@@ -495,7 +496,7 @@
           <div class="cta-stat"><b>+30%</b><span data-i18n="cta_stat3">Aumento en rentabilidad</span></div>
         </div>
         <div class="cta-actions">
-          <a href="#contacto" class="btn btn-primary" data-i18n="cta_btn">Solicitar Demo Gratis →</a>
+          <a href="https://demo.porcysys.com/login" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-i18n="cta_btn">Probar Demo →</a>
           <small data-i18n="cta_note">Sin tarjeta de crédito · Sin compromiso</small>
         </div>
       </div>
@@ -543,6 +544,24 @@
               <span
                 style="width:8px;height:8px;border-radius:50%;background:var(--pink);flex:0 0 auto;box-shadow:0 0 10px var(--pink-glow)"></span><span
                 data-i18n="contact_feat3">Sin compromiso de compra</span>
+            </div>
+          </div>
+
+          <!-- Contactos directos -->
+          <div style="margin-top:32px;border-top:1px solid var(--line);padding-top:24px">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 16px" data-i18n="contact_direct">Contacto directo</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:38px;height:38px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:15px">👤</div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--ink)">Daniel Paxtian</div>
+                  <a href="https://wa.me/529848073096" target="_blank" rel="noopener noreferrer"
+                    style="font-size:13px;color:var(--pink);text-decoration:none;display:flex;align-items:center;gap:5px;margin-top:2px">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    +52 984 807 3096
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -624,12 +643,12 @@
       es: {
         nav_inicio: "Inicio", nav_funciones: "Funciones", nav_beneficios: "Beneficios",
         nav_financiero: "Financiero", nav_asistente: "Asistente IA", nav_precios: "Precios",
-        nav_contacto: "Contacto", nav_cta_demo: "Solicitar Demo",
+        nav_contacto: "Contacto", nav_cta_demo: "Probar Demo",
         hero_h1: 'EL CONTROL TOTAL<br />DE TU<span class="rule"></span><br /><span class="accent">GRANJA PORCINA</span>',
         hero_sub: 'Software inteligente para una producción más <span class="em">eficiente</span>, <span class="em">rentable</span> y <span class="em">sostenible</span>.',
         feat1_label: "Control<br />Total", feat2_label: "Decisiones<br />Inteligentes",
         feat3_label: "Más<br />Rentabilidad", feat4_label: "Bienestar<br />Animal",
-        hero_cta: "Solicitar Demo Gratis →", hero_video: "Ver video",
+        hero_cta: "Probar Demo →", hero_video: "Ver video",
         badge_title: "MÁS CONTROL<br />MEJORES RESULTADOS", badge_sub: "Granjas más rentables",
         biz_eyebrow: "Todo tu negocio", biz_h2: "EN UN SOLO SISTEMA",
         biz_lead: "Registra, analiza y toma decisiones en tiempo real desde cualquier lugar. <b>Ahorra tiempo, reduce costos</b> y lleva tu granja al siguiente nivel.",
@@ -674,7 +693,7 @@
         cta_h3: 'ÚNETE A LAS GRANJAS<br />QUE YA ESTÁN <span>CRECIENDO</span>',
         cta_desc: "Más de 500 granjas confían en PorcySys para llevar su producción al siguiente nivel.",
         cta_stat1: "Granjas activas", cta_stat2: "Cerdas gestionadas", cta_stat3: "Aumento en rentabilidad",
-        cta_btn: "Solicitar Demo Gratis →", cta_note: "Sin tarjeta de crédito · Sin compromiso",
+        cta_btn: "Probar Demo →", cta_note: "Sin tarjeta de crédito · Sin compromiso",
         logos_label: "Con la confianza de",
         contact_eyebrow: "Contacto",
         contact_h2: 'TE LO MOSTRAMOS EN<br /><span style="color:var(--pink)">30 MINUTOS</span>',
@@ -682,7 +701,7 @@
         contact_h3: '¿Hablamos sobre<br /><em style="color:var(--pink);font-style:normal">tu operación?</em>',
         contact_p: "Cuéntanos sobre tu operación y te mostramos cómo PorcySys se adapta a tu granja.",
         contact_feat1: "Demo personalizada sin costo", contact_feat2: "Atención personalizada en cada paso",
-        contact_feat3: "Sin compromiso de compra",
+        contact_feat3: "Sin compromiso de compra", contact_direct: "Contacto directo",
         form_label_name: "Nombre", form_ph_name: "Tu nombre",
         form_label_email: "Correo electrónico", form_ph_email: "tu@correo.com",
         form_label_farm: "Nombre de la granja o empresa", form_ph_farm: "Granja San Pedro",
@@ -697,12 +716,12 @@
       en: {
         nav_inicio: "Home", nav_funciones: "Features", nav_beneficios: "Benefits",
         nav_financiero: "Financial", nav_asistente: "AI Assistant", nav_precios: "Pricing",
-        nav_contacto: "Contact", nav_cta_demo: "Request Demo",
+        nav_contacto: "Contact", nav_cta_demo: "Try Demo",
         hero_h1: 'TOTAL CONTROL<br />OF YOUR<span class="rule"></span><br /><span class="accent">PIG FARM</span>',
         hero_sub: 'Smart software for a more <span class="em">efficient</span>, <span class="em">profitable</span> and <span class="em">sustainable</span> production.',
         feat1_label: "Full<br />Control", feat2_label: "Smart<br />Decisions",
         feat3_label: "More<br />Profitability", feat4_label: "Animal<br />Welfare",
-        hero_cta: "Request Free Demo →", hero_video: "Watch video",
+        hero_cta: "Try Demo →", hero_video: "Watch video",
         badge_title: "MORE CONTROL<br />BETTER RESULTS", badge_sub: "More profitable farms",
         biz_eyebrow: "Your entire business", biz_h2: "IN ONE SINGLE SYSTEM",
         biz_lead: "Record, analyze and make real-time decisions from anywhere. <b>Save time, reduce costs</b> and take your farm to the next level.",
@@ -747,7 +766,7 @@
         cta_h3: 'JOIN THE FARMS<br />THAT ARE ALREADY <span>GROWING</span>',
         cta_desc: "Over 500 farms trust PorcySys to take their production to the next level.",
         cta_stat1: "Active farms", cta_stat2: "Managed sows", cta_stat3: "Profitability increase",
-        cta_btn: "Request Free Demo →", cta_note: "No credit card · No commitment",
+        cta_btn: "Try Demo →", cta_note: "No credit card · No commitment",
         logos_label: "Trusted by",
         contact_eyebrow: "Contact",
         contact_h2: 'WE\'LL SHOW YOU IN<br /><span style="color:var(--pink)">30 MINUTES</span>',
@@ -755,7 +774,7 @@
         contact_h3: 'Let\'s talk about<br /><em style="color:var(--pink);font-style:normal">your operation?</em>',
         contact_p: "Tell us about your operation and we'll show you how PorcySys fits your farm.",
         contact_feat1: "Free personalized demo", contact_feat2: "Personalized support at every step",
-        contact_feat3: "No purchase commitment",
+        contact_feat3: "No purchase commitment", contact_direct: "Direct contact",
         form_label_name: "Name", form_ph_name: "Your name",
         form_label_email: "Email address", form_ph_email: "you@email.com",
         form_label_farm: "Farm or company name", form_ph_farm: "San Pedro Farm",
@@ -770,12 +789,12 @@
       pt: {
         nav_inicio: "Início", nav_funciones: "Funcionalidades", nav_beneficios: "Benefícios",
         nav_financiero: "Financeiro", nav_asistente: "Assistente IA", nav_precios: "Preços",
-        nav_contacto: "Contato", nav_cta_demo: "Solicitar Demo",
+        nav_contacto: "Contato", nav_cta_demo: "Experimentar Demo",
         hero_h1: 'CONTROLE TOTAL<br />DA SUA<span class="rule"></span><br /><span class="accent">GRANJA SUÍNA</span>',
         hero_sub: 'Software inteligente para uma produção mais <span class="em">eficiente</span>, <span class="em">rentável</span> e <span class="em">sustentável</span>.',
         feat1_label: "Controle<br />Total", feat2_label: "Decisões<br />Inteligentes",
         feat3_label: "Mais<br />Rentabilidade", feat4_label: "Bem-estar<br />Animal",
-        hero_cta: "Solicitar Demo Grátis →", hero_video: "Ver vídeo",
+        hero_cta: "Experimentar Demo →", hero_video: "Ver vídeo",
         badge_title: "MAIS CONTROLE<br />MELHORES RESULTADOS", badge_sub: "Granjas mais rentáveis",
         biz_eyebrow: "Seu negócio inteiro", biz_h2: "EM UM SÓ SISTEMA",
         biz_lead: "Registre, analise e tome decisões em tempo real de qualquer lugar. <b>Economize tempo, reduza custos</b> e leve sua granja ao próximo nível.",
@@ -820,7 +839,7 @@
         cta_h3: 'JUNTE-SE ÀS GRANJAS<br />QUE JÁ ESTÃO <span>CRESCENDO</span>',
         cta_desc: "Mais de 500 granjas confiam na PorcySys para levar sua produção ao próximo nível.",
         cta_stat1: "Granjas ativas", cta_stat2: "Matrizes gerenciadas", cta_stat3: "Aumento de rentabilidade",
-        cta_btn: "Solicitar Demo Grátis →", cta_note: "Sem cartão de crédito · Sem compromisso",
+        cta_btn: "Experimentar Demo →", cta_note: "Sem cartão de crédito · Sem compromisso",
         logos_label: "Com a confiança de",
         contact_eyebrow: "Contato",
         contact_h2: 'MOSTRAMOS EM<br /><span style="color:var(--pink)">30 MINUTOS</span>',
@@ -828,7 +847,7 @@
         contact_h3: 'Vamos falar sobre<br /><em style="color:var(--pink);font-style:normal">sua operação?</em>',
         contact_p: "Conte-nos sobre sua operação e mostramos como a PorcySys se adapta à sua granja.",
         contact_feat1: "Demo personalizada sem custo", contact_feat2: "Suporte personalizado em cada etapa",
-        contact_feat3: "Sem compromisso de compra",
+        contact_feat3: "Sem compromisso de compra", contact_direct: "Contato direto",
         form_label_name: "Nome", form_ph_name: "Seu nome",
         form_label_email: "E-mail", form_ph_email: "voce@email.com",
         form_label_farm: "Nome da granja ou empresa", form_ph_farm: "Granja São Pedro",
