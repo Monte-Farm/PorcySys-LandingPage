@@ -1598,6 +1598,185 @@ h2 {
   color: var(--ink-mute)
 }
 
+/* ───── Pricing ───── */
+.pricing-section {
+  background: radial-gradient(70% 50% at 50% 0%, rgba(236, 26, 92, .1), transparent 60%);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.pricing-card {
+  background: linear-gradient(180deg, #170822, #0e0617);
+  border: 1px solid var(--line-2);
+  border-radius: 20px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color .2s, box-shadow .2s;
+  position: relative;
+}
+
+.pricing-card:hover {
+  border-color: rgba(236, 26, 92, .4);
+  box-shadow: 0 20px 50px -20px rgba(236, 26, 92, .25);
+}
+
+.pricing-featured {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 1px rgba(236, 26, 92, .3), 0 30px 60px -20px rgba(236, 26, 92, .4);
+  background: linear-gradient(180deg, #2a0e1e, #170822, #0e0617);
+}
+
+.pricing-badge {
+  font-family: Manrope, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pink), var(--pink-2));
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.pricing-name {
+  font-family: Manrope, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.pricing-desc {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.pricing-features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 20px;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.pricing-features li .pf-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(236, 26, 92, .1);
+  border: 1px solid rgba(236, 26, 92, .3);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.pricing-features li .pf-check svg {
+  display: block;
+}
+
+.pricing-features li.pf-disabled {
+  opacity: .4;
+}
+
+.pf-check.pf-no {
+  background: rgba(138, 122, 150, .08);
+  border-color: rgba(138, 122, 150, .25);
+}
+
+.pf-asterisk {
+  color: var(--pink);
+  font-weight: 700;
+}
+
+.pricing-note {
+  font-size: 11px;
+  color: var(--ink-mute);
+  margin: 0;
+  padding-top: 4px;
+}
+
+.pricing-cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.pricing-custom {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(236, 26, 92, .08), rgba(236, 26, 92, .03));
+  border: 1px solid rgba(236, 26, 92, .25);
+  border-radius: 16px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.pricing-custom-name {
+  font-family: Manrope, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.pricing-custom-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  max-width: 540px;
+}
+
+@media(max-width:1024px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+}
+
+@media(max-width:480px) {
+  .pricing-card {
+    padding: 24px 20px;
+  }
+
+  .pricing-custom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .pricing-custom .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ───── Contact ───── */
 .contact-grid {
   display: grid;
