@@ -1777,6 +1777,81 @@ h2 {
   }
 }
 
+/* ───── Pricing toggle & price block ───── */
+.pricing-toggle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.pricing-toggle {
+  display: flex;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.pricing-toggle button {
+  border: none;
+  background: transparent;
+  color: var(--ink-dim);
+  font-family: Manrope, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  line-height: 1;
+}
+
+.pricing-toggle button.active {
+  background: var(--pink);
+  color: #fff;
+}
+
+.toggle-save-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pink);
+  background: rgba(236,26,92,.1);
+  border: 1px solid rgba(236,26,92,.3);
+  border-radius: 999px;
+  padding: 4px 10px;
+  letter-spacing: .03em;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  line-height: 1;
+}
+
+.price-amount {
+  font-family: Manrope, sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -.03em;
+  transition: opacity .15s;
+}
+
+.price-period {
+  font-size: 14px;
+  color: var(--ink-dim);
+  padding-bottom: 8px;
+}
+
+.price-annual-note {
+  font-size: 11px;
+  color: var(--ink-mute);
+  margin: -8px 0 0;
+}
+
 /* ───── Contact ───── */
 .contact-grid {
   display: grid;
