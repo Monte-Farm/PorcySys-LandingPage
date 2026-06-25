@@ -1847,9 +1847,10 @@ h2 {
 }
 
 .price-annual-note {
-  font-size: 11px;
-  color: var(--ink-mute);
-  margin: -8px 0 0;
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin: -4px 0 4px;
+  font-weight: 500;
 }
 
 /* ───── Contact ───── */
